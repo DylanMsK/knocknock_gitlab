@@ -147,7 +147,7 @@ export default {
 <style scoped>
 .signup-font {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 72px;
+  font-size: 60px;
   font-weight: 900;
 }
 .Noto-Sans-KR {
@@ -169,8 +169,8 @@ export default {
   position: absolute;
   bottom: 12px;
 }
-.login-font > .v-btn__content {
+.login-font {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 }
 </style>

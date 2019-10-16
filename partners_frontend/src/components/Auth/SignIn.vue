@@ -64,7 +64,7 @@ export default {
   position: absolute;
   bottom: 12px;
 }
-.signup-font > .v-btn__content {
+.signup-font {
   font-weight: 600;
   font-size: 16px;
 }
