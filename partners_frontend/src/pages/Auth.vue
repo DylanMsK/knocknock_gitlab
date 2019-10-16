@@ -19,7 +19,7 @@ export default {
     SignUp
   },
   computed: {
-    ...mapState("auth", ["signUpToggle"])
+    ...mapState('auth', ['signUpToggle'])
   }
 }
 </script>

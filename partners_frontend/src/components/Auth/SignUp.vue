@@ -73,9 +73,10 @@
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import { mapMutations } from 'vuex'
+
 export default {
-  data() {
-    return  {
+  data () {
+    return {
       partnerName: '',
       email: '',
       password: '',
@@ -101,7 +102,7 @@ export default {
     }
   },
   computed: {
-    partnerNameErrors() {
+    partnerNameErrors () {
       const errors = []
       if (!this.$v.partnerName.$dirty) {
         return errors
@@ -109,16 +110,16 @@ export default {
       !this.$v.partnerName.required && errors.push('대표자명을 입력해주세요.')
       return errors
     },
-    emailErrors() {
+    emailErrors () {
       const errors = []
-        if (!this.$v.email.$dirty) {
-          return errors
-        };
-        !this.$v.email.required && errors.push('이메일을 작성해주세요.')
-        !this.$v.email.email && errors.push('이메일 형식으로 작성해주세요.')
+      if (!this.$v.email.$dirty) {
         return errors
+      };
+      !this.$v.email.required && errors.push('이메일을 작성해주세요.')
+      !this.$v.email.email && errors.push('이메일 형식으로 작성해주세요.')
+      return errors
     },
-    passwordErrors() {
+    passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) {
         return errors
@@ -127,7 +128,7 @@ export default {
       !this.$v.password.minLength && errors.push('비밀번호는 최소 6자리 이상입니다.')
       return errors
     },
-    passwordCheckErrors() {
+    passwordCheckErrors () {
       const errors = []
       if (!this.$v.passwordCheck.$dirty) {
         return errors
