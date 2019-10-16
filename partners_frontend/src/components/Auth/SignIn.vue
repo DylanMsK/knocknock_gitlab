@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <p class="login-font mb-0">낰낰</p>
+      <p class="login-font mb-0">낰낰 <span>파트너</span></p>
     </v-col>
     <v-col cols="12">
       <v-text-field
@@ -24,7 +24,7 @@
       <v-btn class="Noto-Sans-KR" x-large color="primary">로그인 하기</v-btn>
     </v-col>
     <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
-      <span class="px-3">낰낰의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
+      <span class="px-3">낰낰 파트너의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
     </v-col>
   </v-row>
 </template>
@@ -44,6 +44,9 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 72px;
   font-weight: 900;
+}
+.login-font > span {
+  font-size: 40px;
 }
 .Noto-Sans-KR {
   font-family: 'Noto Sans KR', sans-serif;

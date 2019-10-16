@@ -62,7 +62,7 @@
       </v-row>
       <v-row>
         <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
-          <span class="px-3">낰낰의 계정이 있으신가요?</span><v-btn class="login-font" color="primary" text @click="onOff()">로그인</v-btn>
+          <span class="px-3">낰낰 파트너의 계정이 있으신가요?</span><v-btn class="login-font" color="primary" text @click="onOff()">로그인</v-btn>
         </v-col>
       </v-row>
     </v-container>
