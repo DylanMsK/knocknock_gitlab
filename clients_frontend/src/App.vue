@@ -1,8 +1,6 @@
 <template>
-  <v-app class="white-bg">
-    <v-container class="nanum-gothic-coding">
-      <router-view />
-    </v-container>
+  <v-app class="white-bg nanum-gothic-coding">
+    <router-view />
   </v-app>
 </template>
 
