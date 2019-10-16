@@ -23,8 +23,8 @@
     <v-col class="center pt-0" cols="12">
       <v-btn class="Noto-Sans-KR" x-large color="primary">로그인 하기</v-btn>
     </v-col>
-    <v-col class="Noto-Sans-KR center bottom-position fill-width">
-      낰낰의 계정이 없으신가요?<a class="bold-signup-font px-3">회원가입</a>
+    <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
+      <span class="px-3">낰낰의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text>회원가입</v-btn>
     </v-col>
   </v-row>
 </template>
@@ -48,11 +48,17 @@ export default {
   display: flex;
   justify-content: center;
 }
+.center-also-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .bottom-position {
   position: absolute;
   bottom: 12px;
 }
-.bold-signup-font {
+.signup-font > .v-btn__content {
   font-weight: 600;
+  font-size: 16px;
 }
 </style>
