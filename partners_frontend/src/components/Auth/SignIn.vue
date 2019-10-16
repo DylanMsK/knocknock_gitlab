@@ -24,18 +24,22 @@
       <v-btn class="Noto-Sans-KR" x-large color="primary">로그인 하기</v-btn>
     </v-col>
     <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
-      <span class="px-3">낰낰의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text>회원가입</v-btn>
+      <span class="px-3">낰낰의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
-  
+  methods: {
+    ...mapMutations('auth', ['onOff'])
+  }
 }
 </script>
 
-<style>
+<style scoped>
 .login-font {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 72px;
