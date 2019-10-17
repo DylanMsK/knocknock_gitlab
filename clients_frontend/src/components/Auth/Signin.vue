@@ -73,6 +73,7 @@
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators'
 import { mapMutations } from 'vuex'
+import router from '../../router'
 
 export default {
   mixins: [validationMixin],
@@ -105,6 +106,7 @@ export default {
   },
   methods: {
     ...mapMutations('toggle', ['toggleSignup']),
+    ...mapMutations('toggle', ['toggleNavDrawer']),
     openSignup () {
       this.$v.$reset()
       this.email = ''
@@ -113,6 +115,10 @@ export default {
     },
     signin () {
       this.$v.$touch()
+      if (this.$v.$invalid) {
+        router.push({ name: 'main' })
+        this.toggleNavDrawer(true)
+      } else {}
     }
   }
 }

@@ -1,10 +1,14 @@
 const state = {
-  signupShow: false
+  signupShow: false,
+  navDrawerShow: true
 }
 
 const mutations = {
   toggleSignup (state, toggle) {
     state.signupShow = toggle
+  },
+  toggleNavDrawer (state, toggle) {
+    state.navDrawerShow = toggle
   }
 }
 
