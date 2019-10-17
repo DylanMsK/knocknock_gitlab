@@ -2,7 +2,7 @@
   <v-row
     class="justify-center">
     <v-col cols="11">
-      <p class="font-weight-700 font-size-50">낰낰</p>
+      <p class="font-weight-700 font-size-40">낰낰</p>
       <v-text-field
         v-model="email"
         outlined
@@ -107,6 +107,8 @@ export default {
   methods: {
     ...mapMutations('toggle', ['toggleSignup']),
     ...mapMutations('toggle', ['toggleNavDrawer']),
+    // 백엔드 연결하면 삭제할 것
+    ...mapMutations('toggle', ['toggleUserInfo']),
     openSignup () {
       this.$v.$reset()
       this.email = ''
@@ -118,6 +120,8 @@ export default {
       if (this.$v.$invalid) {
         router.push({ name: 'main' })
         this.toggleNavDrawer(true)
+        // 백엔드 연결하면 삭제할 것
+        this.toggleUserInfo(true)
       } else {}
     }
   }
@@ -131,8 +135,8 @@ export default {
 .font-size-20 {
   font-size: 20px !important;
 }
-.font-size-50 {
-  font-size: 50px;
+.font-size-40 {
+  font-size: 40px;
 }
 .hr-light {
   border: 0.5px solid rgba(0, 0, 0, 0.2);
