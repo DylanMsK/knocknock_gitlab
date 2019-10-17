@@ -110,6 +110,7 @@ export default {
   },
   methods: {
     goTo (path) {
+      this.drawer = false
       router.push({ name: path })
     }
   }
