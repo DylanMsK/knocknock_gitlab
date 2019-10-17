@@ -11,7 +11,7 @@
 <script>
 import Header from '@/components/common/Header'
 import Nav from '@/components/common/NavigationDrawer'
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',

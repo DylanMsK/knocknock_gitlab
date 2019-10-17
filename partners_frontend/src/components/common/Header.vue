@@ -4,6 +4,8 @@
       <v-app-bar-nav-icon
         @click="drawerOnOff()"
       ></v-app-bar-nav-icon>
+      <v-spacer></v-spacer>
+      <div class="user-text">유저이름</div>
     </v-app-bar>
   </div>
 </template>
@@ -22,4 +24,8 @@ export default {
 </script>
 
 <style scoped>
+.user-text {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+}
 </style>

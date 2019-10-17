@@ -25,7 +25,7 @@ export default {
     ...mapMutations('drawer', ['headerOnOff']),
     ...mapMutations('drawer', ['headerInit'])
   },
-  created() {
+  created () {
     this.headerInit()
   },
   beforeDestroy: function () {

@@ -21,7 +21,7 @@
       ></v-text-field>
     </v-col>
     <v-col class="center pt-0" cols="12">
-      <v-btn class="Noto-Sans-KR" x-large color="primary" @click="goto()">로그인 하기</v-btn>
+      <v-btn class="Noto-Sans-KR" x-large color="primary" @click="goTo()">로그인 하기</v-btn>
     </v-col>
     <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
       <span class="px-3">낰낰 파트너의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
@@ -36,8 +36,8 @@ import router from '../../router'
 export default {
   methods: {
     ...mapMutations('auth', ['onOff']),
-    goto() {
-      router.push('/main')
+    goTo () {
+      router.push('/store')
     }
   }
 }
