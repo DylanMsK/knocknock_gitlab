@@ -11,7 +11,7 @@ const mutations = {
     state.headerToggle = !state.headerToggle
   },
   headerInit (state) {
-    state.headerToggle = true
+    state.headerToggle = false
   }
 }
 

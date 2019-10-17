@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Header
-      v-if="!headerToggle"
+      v-if="headerToggle"
     />
     <Nav/>
     <router-view/>
