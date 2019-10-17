@@ -1,0 +1,68 @@
+<template>
+  <v-row>
+    <v-col cols="12">
+      <p class="login-font mb-0">낰낰</p>
+    </v-col>
+    <v-col cols="12">
+      <v-text-field
+        class="Noto-Sans-KR"
+        label="이메일"
+        outlined
+        rounded
+        clearable
+      ></v-text-field>
+      <v-text-field
+        class="Noto-Sans-KR"
+        label="비밀번호"
+        type="password"
+        outlined
+        rounded
+        clearable
+      ></v-text-field>
+    </v-col>
+    <v-col class="center pt-0" cols="12">
+      <v-btn class="Noto-Sans-KR" x-large color="primary">로그인 하기</v-btn>
+    </v-col>
+    <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
+      <span class="px-3">낰낰의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
+    </v-col>
+  </v-row>
+</template>
+
+<script>
+import { mapMutations } from 'vuex'
+
+export default {
+  methods: {
+    ...mapMutations('auth', ['onOff'])
+  }
+}
+</script>
+
+<style scoped>
+.login-font {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+}
+.Noto-Sans-KR {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.center-also-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-position {
+  position: absolute;
+  bottom: 12px;
+}
+.signup-font > .v-btn__content {
+  font-weight: 600;
+  font-size: 16px;
+}
+</style>
