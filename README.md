@@ -7,7 +7,7 @@
 
 
 ### JIRA
-[링크]()
+[링크](https://jira.ssafy.com/secure/RapidBoard.jspa?rapidView=1301&projectKey=S1P1151009)
 
 
 ### Trello
