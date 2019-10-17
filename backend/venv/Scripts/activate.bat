@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=C:\Users\multicampus\Desktop\바탕화면\s1p1151009\backend\venv"
+set "VIRTUAL_ENV=C:\Users\multicampus\Documents\GitHub\s1p1151009\backend\venv"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
