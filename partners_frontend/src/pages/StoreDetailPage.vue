@@ -5,6 +5,7 @@
       <v-rating
         class="pr-3"
         v-model="rating"
+        readonly
         dense
         background-color="grey lighten-1"
         half-increments
