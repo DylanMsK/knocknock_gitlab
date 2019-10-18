@@ -18,12 +18,12 @@
         <div class="pa-1 menu-text">영업장</div>
       </v-col>
       <v-col class="menu-inner block-two" cols="4">
-        <div class="pa-3"><v-icon class="icon">fas fa-user-alt</v-icon></div>
-        <div class="pa-1 menu-text">프로필</div>
-      </v-col>
-      <v-col class="menu-inner block-three" cols="4">
         <div class="pa-3"><v-icon class="icon">fas fa-comments</v-icon></div>
         <div class="pa-1 menu-text">리뷰 관리</div>
+      </v-col>
+      <v-col class="menu-inner block-three" cols="4">
+        <div class="pa-3"><v-icon class="icon">fas fa-user-alt</v-icon></div>
+        <div class="pa-1 menu-text">프로필</div>
       </v-col>
     </div>
     <!-- <div class="flex">
