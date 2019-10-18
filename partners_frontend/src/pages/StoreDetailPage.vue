@@ -20,22 +20,59 @@
     </v-col>
     <v-col class="section-none py-1">
     </v-col>
-    <v-col cols="12 section-menu section-menu-layout">
-      <v-col>정보</v-col>
-      <v-col class="section-menu-center">메뉴</v-col>
-      <v-col>설정</v-col>
+    <v-col cols="12 pa-0 section-menu section-menu-layout">
+      <v-col v-bind:style="[infoToggle ? choicedMenu : justMenu]" @click="changeToggle('info')">정보</v-col>
+      <v-col v-bind:style="[menuToggle ? choicedMenu : justMenu]" @click="changeToggle('menu')" class="section-menu-center">메뉴</v-col>
+      <v-col v-bind:style="[settingToggle ? choicedMenu : justMenu]" @click="changeToggle('setting')">설정</v-col>
     </v-col>
+    <InfoDetail v-show="infoToggle"/>
+    <MenuDetail v-show="menuToggle"/>
+    <SettingDetail v-show="settingToggle"/>
   </div>
 </template>
 
 <script>
+import InfoDetail from '../components/Detail/infoDetail'
+import MenuDetail from '../components/Detail/menuDetail'
+import SettingDetail from '../components/Detail/settingDetail'
+
 export default {
+  components: {
+    InfoDetail,
+    MenuDetail,
+    SettingDetail
+  },
   data () {
     return {
       rating: 3.7,
-      infoToggle: false,
+      infoToggle: true,
       menuToggle: false,
-      settingToggle: false
+      settingToggle: false,
+      choicedMenu: {
+        fontWeight: 700,
+        fontSize: '18px'
+      },
+      justMenu: {
+        borderBottom: 'solid 1px #dfdfdf',
+        fontSize: '16px'
+      }
+    }
+  },
+  methods: {
+    changeToggle(check) {
+      if (check === 'info') {
+        this.infoToggle = true
+        this.menuToggle = false
+        this.settingToggle = false
+      } else if (check === 'menu') {
+        this.infoToggle = false
+        this.menuToggle = true
+        this.settingToggle = false
+      } else {
+        this.infoToggle = false
+        this.menuToggle = false
+        this.settingToggle = true
+      }
     }
   }
 }
@@ -60,8 +97,6 @@ export default {
   height: 4rem;
 }
 .section-notice-layout {
-  border-top: solid 1px #dfdfdf;
-  border-bottom: solid 1px #dfdfdf;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +108,6 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
 }
 .section-menu-layout {
-  border-bottom: solid 1px #dfdfdf;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +116,8 @@ export default {
 .section-menu-layout > div {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 .section-menu-center {
   border-left: solid 1px #dfdfdf;

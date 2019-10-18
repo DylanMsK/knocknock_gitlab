@@ -64,6 +64,7 @@ export default {
   methods: {
     ...mapMutations('drawer', ['drawerOnOff']),
     goToStore () {
+      this.drawerOnOff()
       router.push('/store')
     }
   }
