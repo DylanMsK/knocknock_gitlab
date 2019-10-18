@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',      # accounts
+    'django.contrib.gis',
+    'rest_framework',                   # rest_framework
+    'accounts.apps.AccountsConfig',     # accounts
     'stores.apps.StoresConfig',         # stores
 ]
 
@@ -77,9 +79,10 @@ WSGI_APPLICATION = 'KNOCKKNOCK.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+         'NAME': 'geodjango',
+         'USER': 'geo',
+    },
 }
 
 
@@ -105,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
