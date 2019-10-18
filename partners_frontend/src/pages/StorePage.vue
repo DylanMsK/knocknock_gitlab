@@ -11,7 +11,7 @@
         </div>
         <div class="section-detail-layout pb-1">
           <v-icon class="pr-2" color="yellow darken-1" small>fas fa-star</v-icon>
-          <span class="section-detail-rating pr-1">4.7</span><span class="section-detail-rating-count">(+10)</span>
+          <span class="section-detail-rating pr-1">3.7</span><span class="section-detail-rating-count">(+10)</span>
         </div>
         <div class="section-detail-layout">
           <span class="section-detail-new-comment pr-1">새로 등록된 댓글</span><span class="section-detail-new-comment-count pl-1">5</span>
