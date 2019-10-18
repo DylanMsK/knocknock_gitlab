@@ -2,7 +2,7 @@
   <div class="fill-height">
     <v-col cols="12" class="store-title">영업장 관리</v-col>
     <v-col class="info-text pt-0">사진을 눌러서 <span class="open-text">영업 중 </span>/<span class="close-text"> 영업 마감</span>을 관리하세요.</v-col>
-    <v-col cols="12" class="section-top">
+    <v-col cols="12" class="section-top" @click="goToDetail()">
       <v-col cols="4" class="pa-0"><v-img class="close-img" src="../assets/image/test.jpg"></v-img></v-col>
       <v-col cols="8" class="pa-0 section-font">
         <div class="section-title section-title-layout pb-2">
@@ -54,8 +54,14 @@
 </template>
 
 <script>
+import router from '../router'
+
 export default {
-  
+  methods: {
+    goToDetail () {
+      router.push('/store/storenumber')
+    }
+  }
 }
 </script>
 
@@ -140,7 +146,7 @@ export default {
 .section-detail-rating {
   font-size: 13px;
 }
-.section-detail-rating-count { 
+.section-detail-rating-count {
   font-size: 13px;
   color: #c1c1c1;
   font-weight: 500;
