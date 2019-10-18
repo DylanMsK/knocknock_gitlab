@@ -3,13 +3,16 @@ import VueRouter from 'vue-router'
 
 import authPage from '../pages/AuthPage'
 import storePage from '../pages/StorePage'
+import storeDetailPage from '../pages/StoreDetailPage'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: authPage, name: 'authPage' },
-    { path: '/store', component: storePage, name: 'storePage' }
+    { path: '/store', component: storePage, name: 'storePage' },
+    { path: '/store/storenumber', component: storeDetailPage, name: 'storeDetailPage' }
   ]
 })
 
