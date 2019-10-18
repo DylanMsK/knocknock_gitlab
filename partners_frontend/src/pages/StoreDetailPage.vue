@@ -23,31 +23,31 @@
     <v-col cols="12 pa-0 section-menu section-menu-layout">
       <v-col v-bind:style="[infoToggle ? choicedMenu : justMenu]" @click="changeToggle('info')">정보</v-col>
       <v-col v-bind:style="[menuToggle ? choicedMenu : justMenu]" @click="changeToggle('menu')" class="section-menu-center">메뉴</v-col>
-      <v-col v-bind:style="[settingToggle ? choicedMenu : justMenu]" @click="changeToggle('setting')">설정</v-col>
+      <v-col v-bind:style="[reviewToggle ? choicedMenu : justMenu]" @click="changeToggle('review')">리뷰</v-col>
     </v-col>
     <InfoDetail v-show="infoToggle"/>
     <MenuDetail v-show="menuToggle"/>
-    <SettingDetail v-show="settingToggle"/>
+    <reviewDetail v-show="reviewToggle"/>
   </div>
 </template>
 
 <script>
 import InfoDetail from '../components/Detail/infoDetail'
 import MenuDetail from '../components/Detail/menuDetail'
-import SettingDetail from '../components/Detail/settingDetail'
+import reviewDetail from '../components/Detail/reviewDetail'
 
 export default {
   components: {
     InfoDetail,
     MenuDetail,
-    SettingDetail
+    reviewDetail
   },
   data () {
     return {
       rating: 3.7,
       infoToggle: true,
       menuToggle: false,
-      settingToggle: false,
+      reviewToggle: false,
       choicedMenu: {
         fontWeight: 700,
         fontSize: '18px'
@@ -63,15 +63,15 @@ export default {
       if (check === 'info') {
         this.infoToggle = true
         this.menuToggle = false
-        this.settingToggle = false
+        this.reviewToggle = false
       } else if (check === 'menu') {
         this.infoToggle = false
         this.menuToggle = true
-        this.settingToggle = false
+        this.reviewToggle = false
       } else {
         this.infoToggle = false
         this.menuToggle = false
-        this.settingToggle = true
+        this.reviewToggle = true
       }
     }
   }
