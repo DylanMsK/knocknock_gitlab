@@ -16,10 +16,10 @@ export default {
     Signup
   },
   mounted () {
-    this.toggleNavDrawer(false)
+    this.toggleHeader(false)
   },
   methods: {
-    ...mapMutations('toggle', ['toggleNavDrawer'])
+    ...mapMutations('toggle', ['toggleHeader'])
   }
 }
 </script>

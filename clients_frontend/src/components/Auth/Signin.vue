@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     ...mapMutations('toggle', ['toggleSignup']),
-    ...mapMutations('toggle', ['toggleNavDrawer']),
+    ...mapMutations('toggle', ['toggleHeader']),
     // 백엔드 연결하면 삭제할 것
     ...mapMutations('toggle', ['toggleUserInfo']),
     openSignup () {
@@ -119,7 +119,7 @@ export default {
       this.$v.$touch()
       if (this.$v.$invalid) {
         router.push({ name: 'main' })
-        this.toggleNavDrawer(true)
+        this.toggleHeader(true)
         // 백엔드 연결하면 삭제할 것
         this.toggleUserInfo(true)
       } else {}

@@ -1,15 +1,19 @@
 <template>
-  <v-app class="white-bg nanum-gothic-coding">
-  <NavigationDrawer />
-    <router-view />
+  <v-app class="white-bg">
+  	<Header />
+	<NavigationDrawer />
+    <router-view class="mt-13" />
   </v-app>
 </template>
 
 <script>
+import Header from './components/Common/Header'
 import NavigationDrawer from './components/Common/NavigationDrawer'
+
 export default {
   components: {
-    NavigationDrawer
+	Header,
+	NavigationDrawer
   }
 }
 </script>
@@ -18,7 +22,7 @@ export default {
 .white-bg {
   background-color: white !important;
 }
-.nanum-gothic-coding {
-  font-family: 'Nanum Gothic Coding', monospace !important;
+.mt-13 {
+  margin-top: 56px;
 }
 </style>

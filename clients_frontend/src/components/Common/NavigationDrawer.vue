@@ -1,11 +1,5 @@
 <template>
-  <div v-if="toggleNavDrawer">
-    <!-- App bar -->
-    <v-app-bar flat>
-      <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
-    </v-app-bar>
-
-    <!-- Navigation Drawer -->
+  <div>
     <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -15,7 +9,7 @@
       <v-list-item>
         <v-btn
           icon
-          @click="drawer=!drawer"
+          @click="turnoffDrawer"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -74,6 +68,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
+          @click="goTo(item.path)"
           link
         >
           <v-list-item-content>
@@ -86,38 +81,44 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import router from '../../router'
 
 export default {
   data () {
     return {
-      drawer: false,
       items: [
-        { title: '공지사항' },
-        { title: '1:1문의' }
+        { title: '공지사항', path: 'main' },
+        { title: '위치기반서비스 이용약관', path: 'termsofuse' },
+        { title: '1:1문의', path: 'main' }
       ]
     }
   },
   computed: {
+		// 백엔드 연결하면 수정할 것
     ...mapState({
-      toggleNavDrawer: state => state.toggle.navDrawerShow
-    }),
-    // 백엔드 연결하면 수정할 것
-    ...mapState({
-      user: state => state.toggle.tempUserInfoShow
+			user: state => state.toggle.tempUserInfoShow,
+			drawer: state => state.toggle.navDrawerShow,
     })
   },
   methods: {
+		...mapMutations('toggle', ['toggleNavDrawer']),
     goTo (path) {
       this.drawer = false
       router.push({ name: path })
-    }
+		},
+		turnoffDrawer() {
+			this.toggleNavDrawer(false)
+		}
   }
 }
 </script>
 
 <style scoped>
+.nav-fixed {
+	/* display: absolute;
+	height: 100vh; */
+}
 .weight-700 {
   font-weight: 700;
 }
