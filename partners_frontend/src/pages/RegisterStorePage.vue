@@ -52,7 +52,14 @@
       ></v-text-field>
       <v-file-input class="mt-0" label="사업자 등록증을 첨부하세요."></v-file-input>
     </div>
-    상호, 성명, 사업장 주소, 등록번호, 캡처
+    <v-col class="center pt-4" cols="12">
+      <v-btn class="Noto-Sans-KR" x-large color="primary">나의 사업장 요청하기</v-btn>
+    </v-col>
+    <v-row>
+      <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
+        <v-icon>fas fa-exclamation</v-icon><span class="pl-2 footer-text">사업장 요청 후 영업일 기준 하루가 소요됩니다.</span>
+      </v-col>
+    </v-row>
   </v-col>
 </template>
 
@@ -134,5 +141,25 @@ export default {
 }
 .text-area-font {
   font-family: 'Noto Sans KR', sans-serif;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.Noto-Sans-KR {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.center-also-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-position {
+  position: absolute;
+  bottom: 12px;
+}
+.footer-text {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #7b7b7b;
 }
 </style>
