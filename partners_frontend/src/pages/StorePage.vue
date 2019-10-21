@@ -53,7 +53,7 @@
     <!-- 여기까지 for문으로 처리 -->
 
     <v-col cols="12" class="section-bottom">
-      <v-col cols="12" class="section-bottom-inner section-bottom-text">
+      <v-col cols="12" class="section-bottom-inner section-bottom-text" @click="goToRegister()">
         <v-icon class="icon-color">fas fa-plus</v-icon>
         <h3>영업장을 추가하세요.</h3>
       </v-col>
@@ -84,6 +84,9 @@ export default {
   methods: {
     goToDetail () {
       router.push('/store/storenumber')
+    },
+    goToRegister () {
+      router.push('/store/register')
     },
     openClose () {
       this.openCloseToggle = !this.openCloseToggle

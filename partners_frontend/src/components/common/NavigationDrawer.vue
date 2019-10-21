@@ -26,20 +26,20 @@
         <div class="pa-1 menu-text">프로필</div>
       </v-col>
     </div>
-    <!-- <div class="flex">
+    <div class="flex">
       <v-col class="menu-inner block-four" cols="4">
-        <div class="pa-3"><v-icon class="icon">fas fa-store</v-icon></div>
-        <div class="pa-1 menu-text">영업장</div>
+        <div class="pa-3"><v-icon class="icon">fas fa-wrench</v-icon></div>
+        <div class="pa-1 menu-text">공사 중</div>
       </v-col>
       <v-col class="menu-inner block-five" cols="4">
-        <div class="pa-3"><v-icon class="icon">fas fa-user-alt</v-icon></div>
-        <div class="pa-1 menu-text">프로필</div>
+        <div class="pa-3"><v-icon class="icon">fas fa-wrench</v-icon></div>
+        <div class="pa-1 menu-text">공사 중</div>
       </v-col>
       <v-col class="menu-inner block-six" cols="4">
-        <div class="pa-3"><v-icon class="icon">fas fa-phone-alt</v-icon></div>
-        <div class="pa-1 menu-text">1:1 문의</div>
+        <div class="pa-3"><v-icon class="icon">fas fa-wrench</v-icon></div>
+        <div class="pa-1 menu-text">공사 중</div>
       </v-col>
-    </div> -->
+    </div>
     <v-col class="footer footer-text fill-width">
       <p class="center mb-2">연중무휴 고객센터 <span class="pl-4 menu-text">010-5191-0337</span></p>
       <p class="center mb-0 footer-info">Copyright Hey & Nerd in Gang-Nam, All Rights Reserved.</p>

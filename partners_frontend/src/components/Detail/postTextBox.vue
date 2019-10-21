@@ -4,6 +4,7 @@
       <div class="pa-5">
         <p class="post-title mb-0">공지사항 수정하기</p>
         <v-textarea
+          class="text-area-font"
           v-model="postContent"
         >
         </v-textarea>
@@ -63,5 +64,8 @@ export default {
 .btn-layout {
   display: flex;
   justify-content: flex-end;
+}
+.text-area-font {
+  font-family: 'Noto Sans KR', sans-serif;
 }
 </style>

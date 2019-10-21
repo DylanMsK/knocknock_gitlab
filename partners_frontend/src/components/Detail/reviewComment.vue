@@ -2,7 +2,7 @@
   <div>
     <div class="review-comment-layout">
       <v-col cols="1" class=""></v-col>
-      <v-col cols="11" class="partners pa-0">공지사항 수정</v-col>
+      <v-col cols="11" class="partners pa-0">사장님 댓글</v-col>
     </div>
     <div class="review-comment-layout">
       <v-col cols="1" class="pa-0">
