@@ -1,50 +1,30 @@
 <template>
-  <v-container class="pt-0">
-    <div class="map_wrap">
-      <div class="mb-1 timecontrol">
-        <v-btn 
-          @click="turnonFilter"
-          icon
-        >
-          <v-icon>mdi-filter-outline</v-icon>
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn-toggle 
-          v-model="toggle_exclusive"
-          color="primary"
-        >
-          <v-btn>현재 시간</v-btn>
-          <v-btn>1시간</v-btn>
-          <v-btn>2시간</v-btn>
-          <v-btn>3시간</v-btn>
-        </v-btn-toggle>
-      </div>
-      <div
-        id="map"
-        class="map-300h"
-      >
-      </div>
-      <!-- 위치 주소 표시 div -->
-      <div class="hAddr">
-        <span id="centerAddr"></span>
-      </div>
-      <!-- 지도 확대, 축소 컨트롤 div -->
-      <div class="custom_zoomcontrol radius_border"> 
-        <span onclick="zoomIn()">
-          <img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대" />
-        </span>  
-        <span onclick="zoomOut()">
-          <img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소" />
-        </span>
-      </div>
-      <!-- 새로고침 버튼 div -->
-      <div class="refresh radius_border">
-        <span>
-          <img src="https://images.vexels.com/media/users/3/131903/isolated/preview/dc1162fe4ecfe2abaccb5f7dad552d46-reload-flat-icon-by-vexels.png" alt="새로고침" />
-        </span>
-      </div>
-    </div>
-  </v-container>
+	<div class="map_wrap">
+		<div
+		id="map"
+		class="map-50vh"
+		>
+		</div>
+		<!-- 위치 주소 표시 div -->
+		<div class="hAddr">
+		<span id="centerAddr"></span>
+		</div>
+		<!-- 지도 확대, 축소 컨트롤 div -->
+		<div class="custom_zoomcontrol radius_border"> 
+		<span onclick="zoomIn()">
+			<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대" />
+		</span>  
+		<span onclick="zoomOut()">
+			<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소" />
+		</span>
+		</div>
+		<!-- 새로고침 버튼 div -->
+		<div class="refresh radius_border">
+		<span>
+			<img src="https://images.vexels.com/media/users/3/131903/isolated/preview/dc1162fe4ecfe2abaccb5f7dad552d46-reload-flat-icon-by-vexels.png" alt="새로고침" />
+		</span>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -150,19 +130,10 @@ var map = function() {
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-  data() {
-    return{
-      toggle_exclusive: 0,
-    }
-  },
   mounted () {
     map ()
   },
   methods: {
-    ...mapMutations('toggle', ['toggleFilter']),
-    turnonFilter() {
-      this.toggleFilter(true)
-    },
     zoomIn() {
       console.log(map)
       map.zoomInFunc
@@ -176,29 +147,20 @@ export default {
 </script>
 
 <style scoped>
-.map-300h {
-  width: 100%;
-  height: 55vh;
-}
 .map_wrap {
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 55vh;
+  height: 50vh;
 }
-.timecontrol {
-  display: flex; 
-  justify-content: space-between;
-  /* display: inline; */
-}
-.timecontrol button {
-  height: 36px !important;
-  font-weight: bold;
+.map-50vh {
+  width: 100%;
+  height: 50vh;
 }
 .hAddr {
   position: absolute;
   left: 10px;
-  top: 50px;
+  top: 20px;
   border-radius: 2px;
   background: #fff;
   background: rgba(255,255,255,0.8);
@@ -222,7 +184,7 @@ export default {
 }
 .custom_zoomcontrol {
   position: absolute;
-  top: 150px;
+  top: 120px;
   right: 10px;
   width: 36px;
   height: 80px;
@@ -248,7 +210,7 @@ export default {
 }
 .refresh {
   position: absolute;
-  top: 400px;
+  top: 350px;
   right: 10px;
   width: 36px;
   height: 36px;

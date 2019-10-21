@@ -1,35 +1,33 @@
 <template>
-	<v-container class="pt-0">
-		<v-list 
-			flat 
-			class="storelist py-0"
+	<v-list 
+		flat 
+		class="storelist py-0"
+	>
+		<v-list-item 
+			v-for="(store, i) in stores"
+			:key=i
+			class="d-block px-0 py-1"
 		>
-			<v-list-item 
-				v-for="(store, i) in stores"
-				:key=i
-				class="d-block px-0 py-1"
-			>
-				<div class="store-content">
-					<div class="store-title">{{ store.title }}</div>
-					<div class="store-subcategory">{{ store.subCategory }}</div>
-					<div class="ellipsis">
-						<div class="store-remainingtime">마감 {{ store.remainingTime }}분 전</div>
-						<v-divider vertical class="divider"></v-divider>
-						<div class="store-biztime">{{ store.biztime }}</div>
-					</div>
-					<div class="ellipsis">
-						<div class="store-biztel">{{ store.biztel }}</div>
-						<v-divider vertical class="divider"></v-divider>
-						<div class="store-addr">{{ store.addr }}</div>
-					</div>
+			<div class="store-content">
+				<div class="store-title">{{ store.title }}</div>
+				<div class="store-subcategory">{{ store.subCategory }}</div>
+				<div class="ellipsis">
+					<div class="store-remainingtime">마감 {{ store.remainingTime }}분 전</div>
+					<v-divider vertical class="divider"></v-divider>
+					<div class="store-biztime">{{ store.biztime }}</div>
 				</div>
-				<v-divider 
-					v-if="i != stores.length -1"
-					class="mt-1"
-				></v-divider>
-			</v-list-item>
-		</v-list>
-	</v-container>
+				<div class="ellipsis">
+					<div class="store-biztel">{{ store.biztel }}</div>
+					<v-divider vertical class="divider"></v-divider>
+					<div class="store-addr">{{ store.addr }}</div>
+				</div>
+			</div>
+			<v-divider 
+				v-if="i != stores.length -1"
+				class="mt-1"
+			></v-divider>
+		</v-list-item>
+	</v-list>
 </template>
 
 <script>
@@ -85,9 +83,9 @@ export default {
 
 <style scoped>
 .storelist {
-	height: 35vh;
+	height: 38vh;
 	overflow: auto;
-	border: 1px solid rgba(0, 0, 0, 0.2) !important; 
+	/* border: 1px solid rgba(0, 0, 0, 0.2) !important;  */
 	border-radius: 5px;
 }
 .store-content {
