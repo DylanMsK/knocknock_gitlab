@@ -7,12 +7,17 @@ class Client(models.Model):
     nickname = models.CharField(max_length=20)
     
     def __str__(self):
-        return "★[사용자] {} | {}".format(self.id, self.nickname)
+        return f'★[사용자] {self.id} | {self.nickname}'
 
 
 class Partner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
+    name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=15)
+    email = models.CharField(max_length=50)
+    certificate = models.ImageField(upload_to='partners/certificates')
+    certificate_number = models.CharField(max_length=30)
+
     def __str__(self):
-        return "☆[파트너] {} | {}".format(self.id)
+        return f'☆[파트너] {self.id} | {self.name}'
         
