@@ -3,10 +3,19 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from accounts.models import Partner
 
-# Create your models here.
 class Category(models.Model):
     main_category = models.CharField(max_length=30)
     sub_category = models.CharField(max_length=30)
+
+    def __str__(self):
+        return f'{self.main_category} | {self.sub_category}'
+
+
+class Option(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Store(models.Model):
@@ -19,15 +28,15 @@ class Store(models.Model):
     thumbnail = models.TextField(blank=True, default='')
     contact = models.CharField(max_length=15, blank=True, default='')
     road_addr = models.CharField(max_length=50)
+    common_addr = models.CharField(max_length=50)
     addr = models.CharField(max_length=50)
     tags = models.TextField(blank=True, default='')
-    price_average = models.IntegerField(default=0)
-    parking = models.BooleanField(default=False)
-    booking = models.BooleanField(default=False)
-    group_seat = models.BooleanField(default=False)
-    delivery = models.BooleanField(default=False)
-    togo = models.BooleanField(default=False)
-    partner = models.ForeignKey(Partner, on_delete=models.SET_DEFAULT, default=0)
-    review_count = models.IntegerField(default=0)
-    view_count = models.IntegerField(default=0)
+    price_avg = models.IntegerField(default=0)
+    partner = models.ForeignKey(Partner, on_delete=models.SET_DEFAULT, default=0, blank=True)
+    review_cnt = models.IntegerField(default=0)
+    view_cnt = models.IntegerField(default=0)
+    options = models.ManyToManyField(Option)
+    updated_at = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        return f'{self.addr}'
