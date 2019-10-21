@@ -2,8 +2,8 @@
 	<v-layout row class="pt-0 ma-0">
 		<v-row class="category">
 			<v-col 
-				v-for="(item, i) in categoryItems"
-				:key="i"
+				v-for="(item, idx) in categoryItems"
+				:key="idx"
 				cols="4"
 				class="items"
 			>
