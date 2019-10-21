@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="comment-layout mb-4">
+    <div class="post-layout mb-4">
       <div class="pa-5">
-        <p class="comment-title mb-0">댓글 작성하기</p>
-        <v-textarea>
+        <p class="post-title mb-0">공지사항 수정하기</p>
+        <v-textarea
+          :value="postContent"
+        >
         </v-textarea>
         <div class="fill-width btn-layout">
           <v-btn
@@ -18,18 +20,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  
+  computed: {
+    ...mapState('postText', ['postContent'])
+  }  
 }
 </script>
 
 <style scoped>
-.comment-layout {
+.post-layout {
   border: solid 1px #c1c1c1;
   border-radius: 3%;
 
 }
-.comment-title {
+.post-title {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
   font-weight: 700;

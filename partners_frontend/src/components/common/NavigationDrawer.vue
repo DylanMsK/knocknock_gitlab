@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     width="100%"
-    v-model="drawerToggle"
+    :value="drawerToggle"
     absolute
   >
     <div class="flex menu-header">
@@ -48,18 +48,12 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import router from '../../router'
 
 export default {
   computed: {
-    drawerToggle: {
-      get () {
-        return this.$store.state.drawer.drawerToggle
-      },
-      set () {
-      }
-    }
+    ...mapState('drawer', ['drawerToggle'])
   },
   methods: {
     ...mapMutations('drawer', ['drawerOnOff']),

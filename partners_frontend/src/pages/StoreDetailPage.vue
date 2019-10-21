@@ -13,10 +13,15 @@
       </v-rating>
       <span class="section-rating-num">3.7</span>
     </v-col>
-    <v-col cols="12 section-notice section-notice-layout">
-      <v-col cols="3" class="notice pa-0"><div>공지사항</div></v-col>
-      <v-col cols="9" class="notice-content pa-0">
-        <textarea class="textarea-layout" disabled>아프리카 돼지 열병 사태로 영업을 하지 않습니다.</textarea>
+    <v-col cols="12">
+      <v-col cols="12" class="notice px-0 pt-0 pb-2">
+        <div>공지사항</div><div class="post-modify-button" @click="postBox()">공지사항 수정하기</div>
+      </v-col>
+      <postTextBox
+        v-show="textBox"
+      />
+      <v-col class="pa-0 notice-content">
+        <div v-show="!textBox">{{ postContent }}</div>
       </v-col>
     </v-col>
     <v-col class="section-none py-1">
@@ -36,12 +41,16 @@
 import InfoDetail from '../components/Detail/infoDetail'
 import MenuDetail from '../components/Detail/menuDetail'
 import reviewDetail from '../components/Detail/reviewDetail'
+import postTextBox from '../components/Detail/postTextBox'
+
+import { mapState } from 'vuex'
 
 export default {
   components: {
     InfoDetail,
     MenuDetail,
-    reviewDetail
+    reviewDetail,
+    postTextBox
   },
   data () {
     return {
@@ -49,6 +58,7 @@ export default {
       infoToggle: true,
       menuToggle: false,
       reviewToggle: false,
+      textBox: false,
       choicedMenu: {
         fontWeight: 700,
         fontSize: '18px'
@@ -59,7 +69,13 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('postText', ['postContent'])
+  },
   methods: {
+    postBox () {
+      this.textBox = !this.textBox
+    },
     changeToggle (check) {
       if (check === 'info') {
         this.infoToggle = true
@@ -94,16 +110,12 @@ export default {
   font-weight: 700;
   font-size: 18px;
 }
-.section-notice {
-  height: 4rem;
-}
-.section-notice-layout {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .section-none {
   background-color: #efefef
+}
+.post-modify-button {
+  color: #0091EA;
+  font-weight: 500;
 }
 .section-menu {
   font-family: 'Noto Sans KR', sans-serif;
@@ -128,6 +140,8 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
   font-weight: 700;
+  display: flex;
+  justify-content: space-between;
 }
 .notice-content {
   font-family: 'Noto Sans KR', sans-serif;

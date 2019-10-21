@@ -40,6 +40,7 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
   color: #0091EA;
+  font-weight: 500;
 }
 .menu-title {
   font-family: 'Noto Sans KR', sans-serif;

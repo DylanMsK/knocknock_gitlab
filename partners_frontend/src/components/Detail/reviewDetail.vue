@@ -79,7 +79,7 @@ export default {
 }
 .review-content-button {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .review-button {
   color: #0091EA;
