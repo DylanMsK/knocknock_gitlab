@@ -4,7 +4,7 @@
       <div class="pa-5">
         <p class="post-title mb-0">공지사항 수정하기</p>
         <v-textarea
-          :value="postContent"
+          v-model="postContent"
         >
         </v-textarea>
         <div class="fill-width btn-layout">
@@ -12,6 +12,7 @@
             color="primary"
             dark
             small
+            @click="submit()"
           >작성 완료</v-btn>
         </div>
       </div>
@@ -20,12 +21,31 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
+  data () {
+    return {
+      newPost: ''
+    }
+  },
   computed: {
-    ...mapState('postText', ['postContent'])
-  }  
+    postContent: {
+      get () {
+        return this.$store.state.postText.postContent
+      },
+      set (content) {
+        this.newPost = content
+      }
+    }
+  },
+  methods: {
+    ...mapMutations('postText', ['changeTextBox', 'changeContent']),
+    submit () {
+      this.changeTextBox()
+      this.changeContent(this.newPost)
+    }
+  }
 }
 </script>
 

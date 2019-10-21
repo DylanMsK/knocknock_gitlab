@@ -15,7 +15,7 @@
     </v-col>
     <v-col cols="12">
       <v-col cols="12" class="notice px-0 pt-0 pb-2">
-        <div>공지사항</div><div class="post-modify-button" @click="postBox()">공지사항 수정하기</div>
+        <div>공지사항</div><div class="post-modify-button" @click="changeTextBox()">공지사항 수정하기</div>
       </v-col>
       <postTextBox
         v-show="textBox"
@@ -43,7 +43,7 @@ import MenuDetail from '../components/Detail/menuDetail'
 import reviewDetail from '../components/Detail/reviewDetail'
 import postTextBox from '../components/Detail/postTextBox'
 
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -58,7 +58,6 @@ export default {
       infoToggle: true,
       menuToggle: false,
       reviewToggle: false,
-      textBox: false,
       choicedMenu: {
         fontWeight: 700,
         fontSize: '18px'
@@ -70,12 +69,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('postText', ['postContent'])
+    ...mapState('postText', ['postContent', 'textBox'])
   },
   methods: {
-    postBox () {
-      this.textBox = !this.textBox
-    },
+    ...mapMutations('postText', ['changeTextBox']),
     changeToggle (check) {
       if (check === 'info') {
         this.infoToggle = true
