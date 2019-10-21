@@ -2,9 +2,9 @@
   <div class="fill-height">
     <v-col cols="12" class="store-title">영업장 관리</v-col>
     <v-col class="info-text pt-0">사진을 눌러서 <span class="open-text">영업 중 </span>/<span class="close-text"> 영업 마감</span>을 관리하세요.</v-col>
-    <v-col cols="12" class="section-top" @click="goToDetail()">
-      <v-col cols="4" class="pa-0"><v-img class="close-img" src="../assets/image/test.jpg"></v-img></v-col>
-      <v-col cols="8" class="pa-0 section-font">
+    <v-col cols="12" class="section-top">
+      <v-col cols="4" class="pa-0"><v-img v-bind:style="[openCloseToggle ? openImg : closeImg]" src="../assets/image/test.jpg" @click="openClose()"></v-img></v-col>
+      <v-col cols="8" class="pa-0 section-font" @click="goToDetail()">
         <div class="section-title section-title-layout pb-2">
           <h3>민수네 국밥가게</h3>
           <v-icon class="icon-size">fas fa-utensils</v-icon>
@@ -16,15 +16,18 @@
         <div class="section-detail-layout">
           <span class="section-detail-new-comment pr-1">새로 등록된 댓글</span><span class="section-detail-new-comment-count pl-1">5</span>
         </div>
-        <div>
+        <div v-show="!openCloseToggle">
           <span class="section-close-text pr-2">영업 마감</span><v-icon class="icon-size">fas fa-door-closed</v-icon>
+        </div>
+        <div v-show="openCloseToggle">
+          <span class="section-open-text pr-2">영업 중</span><v-icon class="icon-size">fas fa-door-open</v-icon>
         </div>
       </v-col>
     </v-col>
 
     <!-- 이 부분부터 for문으로 처리 -->
     <v-col cols="12" class="section">
-      <v-col cols="4" class="pa-0"><v-img class="open-img" src="../assets/image/test2.jpg"></v-img></v-col>
+      <v-col cols="4" class="pa-0"><v-img v-bind:style="[openCloseToggle ? openImg : closeImg]" src="../assets/image/test2.jpg"></v-img></v-col>
       <v-col cols="8" class="pa-0 section-font">
         <div class="section-title section-title-layout pb-2">
           <h3>동훈의 디카페인</h3>
@@ -38,7 +41,12 @@
           <span class="section-detail-new-comment pr-1">새로 등록된 댓글</span><span class="section-detail-new-comment-count-none pl-1">0</span>
         </div>
         <div>
-          <span class="section-open-text pr-2">영업 중</span><v-icon class="icon-size">fas fa-door-open</v-icon>
+          <div v-show="!openCloseToggle">
+            <span class="section-close-text pr-2">영업 마감</span><v-icon class="icon-size">fas fa-door-closed</v-icon>
+          </div>
+          <div v-show="openCloseToggle">
+            <span class="section-open-text pr-2">영업 중</span><v-icon class="icon-size">fas fa-door-open</v-icon>
+          </div>
         </div>
       </v-col>
     </v-col>
@@ -57,9 +65,28 @@
 import router from '../router'
 
 export default {
+  data () {
+    return {
+      openCloseToggle: false,
+      closeImg: {
+        borderRadius: '50%',
+        height: '100px',
+        width: '100px',
+        filter: 'brightness(50%)'
+      },
+      openImg: {
+        borderRadius: '50%',
+        height: '100px',
+        width: '100px'
+      }
+    }
+  },
   methods: {
     goToDetail () {
       router.push('/store/storenumber')
+    },
+    openClose () {
+      this.openCloseToggle = !this.openCloseToggle
     }
   }
 }
@@ -131,17 +158,6 @@ export default {
 }
 .section-bottom-text > h3 {
   padding-left: 15px;
-}
-.open-img {
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-}
-.close-img {
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-  filter: brightness(50%);
 }
 .section-detail-rating {
   font-size: 13px;

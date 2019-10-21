@@ -40,13 +40,13 @@
       <p class="pb-2"><span class="sunday-time-text">일요일 - </span>10:00 ~ 22:00</p>
       <div class="break-time-text pb-2">
         <div class="icon-width">
-          <v-icon class="icon-scale pr-2">fas fa-bed</v-icon>
+          <v-icon class="icon-scale pr-2" color="#00BFA5">fas fa-bed</v-icon>
         </div>
         <div>쉬는 시간 - 14:00 ~ 16:00</div>
       </div>
       <div class="last-order-text pb-2">
         <div class="icon-width">
-          <v-icon class="icon-scale pr-2">fas fa-clipboard-list</v-icon>
+          <v-icon class="icon-scale pr-2" color="#00BFA5">fas fa-clipboard-list</v-icon>
         </div>
         <div>마지막 주문 - 마감 1시간 전</div>
       </div>

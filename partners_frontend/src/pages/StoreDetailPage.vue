@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-    changeToggle(check) {
+    changeToggle (check) {
       if (check === 'info') {
         this.infoToggle = true
         this.menuToggle = false
