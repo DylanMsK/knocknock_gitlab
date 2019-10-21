@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-navigation-drawer
-      v-model="drawer"
-      absolute
+      :value="drawer"
+      app
       temporary
       width="100%"
     >
@@ -104,7 +104,7 @@ export default {
   methods: {
 		...mapMutations('toggle', ['toggleNavDrawer']),
     goTo (path) {
-      this.drawer = false
+      this.toggleNavDrawer(false)
       router.push({ name: path })
 		},
 		turnoffDrawer() {

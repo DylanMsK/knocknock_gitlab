@@ -1,7 +1,7 @@
 <template>
   <v-app class="white-bg">
   	<Header />
-	<NavigationDrawer />
+		<NavigationDrawer />
     <router-view class="mt-13" />
   </v-app>
 </template>
