@@ -59,7 +59,9 @@ export default {
     ...mapMutations('drawer', ['drawerOnOff']),
     goToStore () {
       this.drawerOnOff()
-      router.push('/store')
+      router.push('/store').catch(err => {
+        console.log('이미 같은 페이지입니다.')
+      })
     }
   }
 }
