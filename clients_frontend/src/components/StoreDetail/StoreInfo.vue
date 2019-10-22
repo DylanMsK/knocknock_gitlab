@@ -1,5 +1,5 @@
 <template>
-	<div class="mb-12 pb-4">
+	<div>
 		<v-tabs
 			v-model="tab"
 			background-color="transparent"
@@ -49,7 +49,7 @@ export default {
 		return {
 			tab: null,
 			items: [
-				'공지사항', '메뉴', '지도', '리뷰'
+				'정보', '메뉴', '지도', '리뷰'
 			]
 		}
 	},

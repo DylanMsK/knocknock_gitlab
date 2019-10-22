@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<StoreSummary />
+		<div class="divide-box"></div>
 		<StoreInfo />
 	</div>
 </template>
@@ -16,3 +17,11 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+.divide-box {
+	width: 100%; 
+	height: 30px; 
+	background-color: whitesmoke;
+}
+</style>

@@ -1,27 +1,10 @@
 <template>
 	<div>
-		<!-- SnackBar -->
-		<v-snackbar 
-			v-model="snackbar"
-			:timeout=this.timeout
-			bottom
-		>
-			마감 {{ storeInfo.remainingTime }}분 전
-			<v-btn
-				color="primary"
-				text
-				@click="snackbar = false"
-			>
-				Close
-			</v-btn>
-		</v-snackbar>
-
 		<!-- Info -->
 		<div class="thumbnail-wrap">
 			<v-img :src="storeInfo.thumbnail"></v-img>
 		</div>
 		<div class="mx-5 my-2">
-			<!-- <p class="store-remaining">마감 {{ storeInfo.remainingTime }}분 전</p> -->
 			<div class="store-title text-center">
 				<span class="store-name">{{ storeInfo.name }}</span>
 				<span class="store-subcategory">{{ storeInfo.subCategory }}</span>
@@ -30,18 +13,25 @@
 				<span>최근리뷰 {{ storeInfo.reviewCnt }}</span>
 				<v-divider
 					vertical 
-					class="divider"
+					class="vertical-divider"
 				></v-divider>
-				<span>{{ storeInfo.contact }}</span>
+				<span class="primary--text">{{ storeInfo.contact }}</span>
 			</div>
-			<v-divider class="my-3"></v-divider>
+			<v-divider class="my-2"></v-divider>
 			<v-row class="charcoal--text">
+				<v-col cols="12">
+					<p class="store-remaining">마감 {{ storeInfo.remainingTime }}분 전</p>
+				</v-col>
 				<v-col 
 					cols="10"
 					class="pt-0"
 				>
-					<p>{{ storeInfo.biztime }}</p>
-					<p class="mb-0">{{ storeInfo.addr }}</p>
+					<p class="mb-2">
+						<v-icon class="store-icon">mdi-clock-outline</v-icon><span>{{ storeInfo.biztime }}</span>
+					</p>
+					<p class="mb-2">
+						<v-icon class="store-icon">mdi-map-marker-outline</v-icon><span>{{ storeInfo.addr }}</span>
+					</p>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -92,24 +82,34 @@ export default {
 	padding: 5px;
 }
 .store-name {
-	font-size: 30px;
+	font-size: 28px;
 }
 .store-subcategory {
 	color: grey;
-	padding-left: 15px;
+	font-size: 14px;
+	padding-left: 12px;
 }
 .store-remaining {
-	color: red;
+	background-color: #1976d2;
+	color: white;
+	/* color: red; */
 	font-size: 20px;
+	font-weight: 700; 
+	margin: 0;
+	padding: 5px 10px;
 }
 .store-info {
 	color: gray;
-	font-size: 15px;
+	font-size: 14px;
 }
-.divider {
+.vertical-divider {
 	color: black; 
 	height: 15px;
 	margin: 0 10px;
+}
+.store-icon {
+	color: darkgray;
+	margin-right: 8px;
 }
 .charcoal--text {
 	color: rgb(102, 102, 102);

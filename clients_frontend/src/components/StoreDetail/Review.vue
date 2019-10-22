@@ -2,6 +2,7 @@
 	<div class="ma-2">
 		<v-btn 
 			@click="dialog=true"
+			text
 			block
 			color="primary"
 			class="my-2"
@@ -15,23 +16,46 @@
 			class="mb-1"
 		>
 		<div class="d-flex">
-			<v-card-title class="pa-4 pb-0">
+			<v-card-title class="pb-0">
 				hay***
 			</v-card-title>
 			<v-spacer></v-spacer>
-			<v-btn 
-				icon
-				class="pa-4"
-			>
-				<v-icon>mdi-dots-vertical</v-icon>
-			</v-btn>
+			<v-menu bottom left>
+				<template v-slot:activator="{ on }">
+					<v-btn
+						icon
+						v-on="on"
+						class="mt-2 mx-2"
+					>
+						<v-icon>mdi-dots-vertical</v-icon>
+					</v-btn>
+				</template>
+
+				<v-list>
+					<v-list-item
+						v-for="(item, i) in items"
+						:key="i"
+						@click=""
+					>
+						<v-list-item-title>{{ item.title }}</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
 		</div>
 			<v-card-subtitle class="py-0">
+				<v-rating 
+					v-model="rating"
+					dense
+					small
+					color="yellow darken-3"
+					readonly
+					class="review-rating mr-3"
+				></v-rating>
 				2019-10-21
 			</v-card-subtitle>
 			<v-card-text class="pa-4 black--text">
 				<p class="ellipsis-3line">
-					{{ review }}
+					{{ content }}
 				</p>
 			</v-card-text>
 		</v-card>
@@ -66,34 +90,36 @@
 							<v-rating 
 								v-model="rating"
 								dense
-								large
 								hover
 								class="review-rating"
 							></v-rating>
 						</v-col>
 					</v-row>
-					<p>내용</p>
-					<v-textarea
-						counter
-        		maxlength="120"
-						outlined
-						full-width
-        		single-line
-					>
-					</v-textarea>
+					<div>
+						<p>내용</p>
+						<v-textarea
+							counter
+							maxlength="120"
+							outlined
+							full-width
+							auto-grow
+							class="font-weight-medium"
+						>
+						</v-textarea>
+					</div>
 				</v-card-text>
 				<v-card-actions class="px-6">
 					<v-btn 
+						@click="registerReview"
 						block
 						color="primary"
-						class="font-weight-bold"
+						class="review-btn"
 					>
 						등록
 					</v-btn>
 				</v-card-actions>
       </v-card>
     </v-dialog>
-
 	</div>
 </template>
 
@@ -103,9 +129,19 @@ export default {
 		return {
 			dialog: false,
 			rating: 5,
-			review: '친구의 강력추천으로 가게된 역삼역 스윗밸런스!! 샐러드 카페 보다는 식당에 가까웠어요. 역삼역 가까이 위치해서 접근성이 좋았어요. 메뉴의 가격대도 적당하고 맛있었어요.'
+			content: '친구의 강력추천으로 가게된 역삼역 스윗밸런스!! 샐러드 카페 보다는 식당에 가까웠어요. 역삼역 가까이 위치해서 접근성이 좋았어요. 메뉴의 가격대도 적당하고 맛있었어요.',
+			items: [
+        { title: '수정' },
+        { title: '삭제' },
+      ],
+		
 		}
 	},
+	methods: {
+		registerReview () {
+			this.dialog = false
+		}
+	}
 }
 </script>
 
@@ -113,10 +149,13 @@ export default {
 .review {
 	font-size: 16px;
 	font-weight: 700;
-	margin: 15vh 0 0 0;
 }
 .review-rating {
 	display: inline-block;
 	text-align: right;
+}
+.review-btn{
+	font-weight: 700;
+	font-size: 16px;
 }
 </style>
