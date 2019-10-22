@@ -42,7 +42,6 @@ class PartnerSignupAPI(generics.GenericAPIView):
         if len(request.data['password']) < 6:       # 비밀번호 유효성 검사
             body = {'message': '비밀번호는 6자 이상으로'}   
             return Response(body, status=status.HTTP_400_BAD_REQUEST)
-
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

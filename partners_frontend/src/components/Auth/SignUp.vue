@@ -85,16 +85,16 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength, sameAs, integer } from 'vuelidate/lib/validators'
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      partnerName: '',
-      phoneNumber: '',
-      email: '',
-      password: '',
-      passwordCheck: ''
+      partnerName: '한동훈',
+      email: 'pok_winter@naver.com',
+      phoneNumber: '01051910337',
+      password: '18hantmd90',
+      passwordCheck: '18hantmd90'
     }
   },
   mixins: [validationMixin],
@@ -120,6 +120,7 @@ export default {
     },
   },
   computed: {
+    ...mapState('auth', ['error']),
     partnerNameErrors () {
       const errors = []
       if (!this.$v.partnerName.$dirty) {
@@ -166,11 +167,27 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', ['onOff']),
-    signUp () {
-      console.log(this.email, this.password, this.passwordCheck, this.partnerName, this.phoneNumber)
+    ...mapMutations('auth', ['onOff', 'initError']),
+    ...mapActions('auth', ['userSignUp']),
+    async signUp () {
+      this.$v.$touch()
       if (this.$v.$invalid) {
         console.log('Validation Error')
+      } else {
+        var info = {
+          email: this.email,
+          password: this.password,
+          partnerName: this.partnerName,
+          phoneNumber: this.phoneNumber
+        }
+        await this.userSignUp(info)
+        if (!this.error) {
+          this.onOff()
+          this.$emit('turnToggle')
+        } else {
+          this.$emit('turnToggleError')
+          this.initError()
+        }
       }
     }
   }
