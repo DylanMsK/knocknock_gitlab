@@ -12,6 +12,6 @@ export default new Vuex.Store({
 	toggle,
 	storeInfo,
 	menu,
-	review
+	review,
   }
 })

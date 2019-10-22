@@ -12,8 +12,8 @@ import NavigationDrawer from './components/Common/NavigationDrawer'
 
 export default {
   components: {
-	Header,
-	NavigationDrawer
+		Header,
+		NavigationDrawer
   }
 }
 </script>

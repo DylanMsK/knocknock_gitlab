@@ -5,6 +5,7 @@ import AuthPage from '../pages/AuthPage'
 import TermsOfUsePage from '../pages/TermsOfUsePage'
 import StoreDetailPage from '../pages/StoreDetailPage'
 import ProfilePage from '../pages/ProfilePage'
+import ManageReviewPage from '../pages/ManageReviewPage'
 
 Vue.use(Router)
 
@@ -17,6 +18,8 @@ export default new Router({
     { path: '/termsofuse', name: 'termsofuse', component: TermsOfUsePage },
 		{ path: '/store', name: 'store-detail', component: StoreDetailPage },
 
-		{ path: '/profile', name: 'profile', component: ProfilePage},
+		{ path: '/profile', name: 'profile', component: ProfilePage },
+
+		{ path: '/reviews', name: 'reviews', component: ManageReviewPage },
   ]
 })

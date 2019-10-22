@@ -52,6 +52,7 @@
             <p class="mb-0">찜한가게</p>
           </v-col>
           <v-col
+						@click="goTo('reviews')"
             cols="6"
             class="pr-6"
           >
