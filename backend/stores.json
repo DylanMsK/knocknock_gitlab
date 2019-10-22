@@ -1,0 +1,116 @@
+[
+{
+  "model": "stores.category",
+  "pk": 1,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\ud55c\uc2dd"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 2,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\uc591\uc2dd"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 3,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\uc544\uc2dc\uc544\uc74c\uc2dd"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 4,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\uc77c\uc2dd"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 5,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\uc911\uc2dd"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 6,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\ubd84\uc2dd"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 7,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\ubdd4\ud398"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 8,
+  "fields": {
+    "main_category": "\uc74c\uc2dd\uc810",
+    "sub_category": "\uae30\ud0c0"
+  }
+},
+{
+  "model": "stores.category",
+  "pk": 9,
+  "fields": {
+    "main_category": "\uce74\ud398",
+    "sub_category": "\uce74\ud398"
+  }
+},
+{
+  "model": "stores.option",
+  "pk": 1,
+  "fields": {
+    "name": "\uc8fc\ucc28"
+  }
+},
+{
+  "model": "stores.option",
+  "pk": 2,
+  "fields": {
+    "name": "\uc608\uc57d"
+  }
+},
+{
+  "model": "stores.option",
+  "pk": 3,
+  "fields": {
+    "name": "\ub2e8\uccb4"
+  }
+},
+{
+  "model": "stores.option",
+  "pk": 4,
+  "fields": {
+    "name": "\ud14c\uc774\ud06c\uc544\uc6c3"
+  }
+},
+{
+  "model": "stores.option",
+  "pk": 5,
+  "fields": {
+    "name": "\ud3ec\uc7a5"
+  }
+},
+{
+  "model": "stores.option",
+  "pk": 6,
+  "fields": {
+    "name": "\ubc30\ub2ec"
+  }
+}
+]
