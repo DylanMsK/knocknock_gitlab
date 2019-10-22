@@ -1,17 +1,17 @@
 <template>
   <div class="mt-5">
-    <div class="post-layout mb-4">
+    <div class="event-layout mb-4">
       <div class="pa-5">
-        <p class="post-title mb-0">제목</p>
+        <p class="event-title mb-0">제목</p>
         <v-text-field
           class="text-area-font"
-          v-model="postTitle"
+          v-model="eventTitle"
         >
         </v-text-field>
-        <p class="post-title mb-0">내용</p>
+        <p class="event-title mb-0">내용</p>
         <v-textarea
           class="text-area-font"
-          v-model="postContent"
+          v-model="eventContent"
         >
         </v-textarea>
         <div class="fill-width btn-layout">
@@ -33,45 +33,45 @@ import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      newPost: '',
+      newevent: '',
       newTitle: ''
     }
   },
   computed: {
-    postTitle: {
+    eventTitle: {
       get () {
-        return this.$store.state.postEvent.postTitle
+        return this.$store.state.postEvent.eventTitle
       },
       set (title) {
         this.newTitle = title
       }
     },
-    postContent: {
+    eventContent: {
       get () {
-        return this.$store.state.postEvent.postContent
+        return this.$store.state.postEvent.eventContent
       },
       set (content) {
-        this.newPost = content
+        this.newevent = content
       }
     }
   },
   methods: {
-    ...mapMutations('postEvent', ['changeTextBox', 'changeContent']),
+    ...mapMutations('eventEvent', ['changeTextBox', 'changeContent']),
     submit () {
       this.changeTextBox()
-      this.changeContent(this.newPost)
+      this.changeContent(this.newevent)
     }
   }
 }
 </script>
 
 <style scoped>
-.post-layout {
+.event-layout {
   border: solid 1px #c1c1c1;
   border-radius: 3%;
 
 }
-.post-title {
+.event-title {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
   font-weight: 700;

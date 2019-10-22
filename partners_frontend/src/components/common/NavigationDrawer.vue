@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    class="top-index"
     width="100%"
     :value="drawerToggle"
     absolute
@@ -68,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+.top-index {
+  z-index: 2;
+}
 .menu-text {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 900;

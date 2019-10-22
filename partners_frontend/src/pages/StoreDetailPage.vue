@@ -48,11 +48,8 @@
 import InfoDetail from '../components/Detail/infoDetail'
 import MenuDetail from '../components/Detail/menuDetail'
 import reviewDetail from '../components/Detail/reviewDetail'
-import postTextBox from '../components/Detail/postTextBox'
 import postList from '../components/Detail/postList'
 import eventList from '../components/Detail/eventList'
-
-import { mapState, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -61,7 +58,6 @@ export default {
     reviewDetail,
     postList,
     eventList,
-    postTextBox
   },
   data () {
     return {
@@ -81,11 +77,7 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapState('postText', ['postContent', 'textBox'])
-  },
   methods: {
-    ...mapMutations('postText', ['changeTextBox']),
     changeDetailToggle (check) {
       if (check === 'info') {
         this.infoToggle = true

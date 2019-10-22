@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import auth from './modules/auth'
 import drawer from './modules/drawer'
-import postText from './modules/postText'
+import postEvent from './modules/postEvent'
 
 Vue.use(Vuex)
 
@@ -11,6 +11,6 @@ export default new Vuex.Store({
   modules: {
     auth,
     drawer,
-    postText
+    postEvent
   }
 })
