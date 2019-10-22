@@ -90,11 +90,11 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      partnerName: '한동훈',
-      email: 'pok_winter@naver.com',
-      phoneNumber: '01051910337',
-      password: '18hantmd90',
-      passwordCheck: '18hantmd90'
+      partnerName: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      passwordCheck: ''
     }
   },
   mixins: [validationMixin],
@@ -172,7 +172,7 @@ export default {
     async signUp () {
       this.$v.$touch()
       if (this.$v.$invalid) {
-        console.log('Validation Error')
+        console.log('유효성 검사에서 에러가 발견되었습니다.')
       } else {
         var info = {
           email: this.email,

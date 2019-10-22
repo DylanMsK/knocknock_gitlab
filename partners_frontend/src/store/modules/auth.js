@@ -18,10 +18,15 @@ const mutations = {
 }
 
 const actions = {
-  async userSignUp ({ commit }, payload) {
-    await api.userSignUp(payload).then(resp => {
-      console.log(resp)
+  async userSignIn ({ commit }, payload) {
+    await api.userSignIn(payload).then(resp => {
+      localStorage.setItem('user', JSON.stringify(resp.data.user))
     }).catch(err => {
+      commit('setError', err.message)
+    })
+  },
+  async userSignUp ({ commit }, payload) {
+    await api.userSignUp(payload).catch(err => {
       commit('setError', err.message)
     })
   }
