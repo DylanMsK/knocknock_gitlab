@@ -18,5 +18,12 @@ export default {
       password: newUser.password
     }
     return axios.post(`${accountsUrl}/partner/signup/`, params)
+  },
+  userAuth (token) {
+    return axios.get(`${accountsUrl}/partner/auth/`, {
+      headers: {
+        'Authorization': 'knock ' + token
+      }
+    })
   }
 }

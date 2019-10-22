@@ -8,6 +8,13 @@ import vuetify from './plugins/vuetify'
 Vue.config.productionTip = false
 
 new Vue({
+  async created () {
+    if ('user' in localStorage) {
+      await store.dispatch('auth/userAuth')
+    } else {
+      router.push('/')
+    }
+  },
   router,
   store,
   vuetify,
