@@ -57,7 +57,7 @@
     </v-col>
     <v-row>
       <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
-        <v-icon>fas fa-exclamation</v-icon><span class="pl-2 footer-text">사업장 요청 후 영업일 기준 하루가 소요됩니다.</span>
+        <v-icon color="primary">fas fa-exclamation</v-icon><span class="px-2 footer-text">사업장 등록에는 영업일 기준 하루가 소요됩니다.</span><v-icon color="primary">fas fa-exclamation</v-icon>
       </v-col>
     </v-row>
   </v-col>
@@ -65,7 +65,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   data () {
@@ -160,6 +160,6 @@ export default {
 }
 .footer-text {
   font-family: 'Noto Sans KR', sans-serif;
-  color: #7b7b7b;
+  color: #0091EA;
 }
 </style>
