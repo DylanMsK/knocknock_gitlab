@@ -7,6 +7,7 @@
       <v-text-field
         class="Noto-Sans-KR"
         label="이메일"
+        v-model="email"
         outlined
         rounded
         clearable
@@ -14,6 +15,7 @@
       <v-text-field
         class="Noto-Sans-KR"
         label="비밀번호"
+        v-model="password"
         type="password"
         outlined
         rounded
@@ -21,7 +23,7 @@
       ></v-text-field>
     </v-col>
     <v-col class="center pt-0" cols="12">
-      <v-btn class="Noto-Sans-KR" x-large color="primary" @click="goTo()">로그인 하기</v-btn>
+      <v-btn class="Noto-Sans-KR" x-large color="primary" @click="signIn()">로그인 하기</v-btn>
     </v-col>
     <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
       <span class="px-3">낰낰 파트너의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
@@ -30,14 +32,35 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  computed: {
+    ...mapState('auth', ['error'])
+  },
   methods: {
-    ...mapMutations('auth', ['onOff']),
-    goTo () {
-      router.push('/store')
+    ...mapMutations('auth', ['onOff', 'initError']),
+    ...mapActions('auth', ['userSignIn']),
+    async signIn () {
+      var info = {
+        email: this.email,
+        password: this.password
+      }
+      await this.userSignIn(info)
+      if (!this.error) {
+        router.push('/store')
+      } else {
+        console.log('로그인 실패 ㅠㅠ')
+        this.initError()
+        this.$emit('turnToggleError')
+      }
     }
   }
 }

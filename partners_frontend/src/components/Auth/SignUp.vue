@@ -70,7 +70,7 @@
           ></v-text-field>
         </v-col>
         <v-col class="center pt-0" cols="12">
-          <v-btn class="Noto-Sans-KR" x-large color="primary">회원가입 하기</v-btn>
+          <v-btn class="Noto-Sans-KR" x-large color="primary" @click="signUp">회원가입 하기</v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -84,24 +84,31 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
-import { mapMutations } from 'vuex'
+import { required, email, minLength, sameAs, integer } from 'vuelidate/lib/validators'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
       partnerName: '',
-      phoneNumber: '',
       email: '',
+      phoneNumber: '',
       password: '',
       passwordCheck: ''
     }
   },
   mixins: [validationMixin],
   validations: {
+    partnerName: {
+      required
+    },
     email: {
       required,
       email
+    },
+    phoneNumber: {
+      required,
+      integer
     },
     password: {
       required,
@@ -111,14 +118,9 @@ export default {
       required,
       sameAs: sameAs('password')
     },
-    partnerName: {
-      required
-    },
-    phoneNumber: {
-      required
-    }
   },
   computed: {
+    ...mapState('auth', ['error']),
     partnerNameErrors () {
       const errors = []
       if (!this.$v.partnerName.$dirty) {
@@ -142,6 +144,7 @@ export default {
         return errors
       };
       !this.$v.phoneNumber.required && errors.push('휴대폰 번호를 입력해주세요.')
+      !this.$v.phoneNumber.integer && errors.push('숫자만 입력해주세요.')
       return errors
     },
     passwordErrors () {
@@ -164,7 +167,29 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('auth', ['onOff'])
+    ...mapMutations('auth', ['onOff', 'initError']),
+    ...mapActions('auth', ['userSignUp']),
+    async signUp () {
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        console.log('유효성 검사에서 에러가 발견되었습니다.')
+      } else {
+        var info = {
+          email: this.email,
+          password: this.password,
+          partnerName: this.partnerName,
+          phoneNumber: this.phoneNumber
+        }
+        await this.userSignUp(info)
+        if (!this.error) {
+          this.onOff()
+          this.$emit('turnToggle')
+        } else {
+          this.$emit('turnToggleError')
+          this.initError()
+        }
+      }
+    }
   }
 }
 </script>
