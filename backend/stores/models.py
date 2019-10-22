@@ -33,7 +33,7 @@ class Store(models.Model):
     addr = models.CharField(max_length=50)
     tags = models.TextField(blank=True, default='')
     price_avg = models.IntegerField(default=0)
-    partner = models.ForeignKey(Partner, on_delete=models.SET_NULL, null=True, blank=True)
+    partner = models.ForeignKey(Partner, on_delete=models.SET_NULL, default=None, null=True, blank=True)
     review_cnt = models.IntegerField(default=0)
     view_cnt = models.IntegerField(default=0)
     options = models.ManyToManyField(Option)
