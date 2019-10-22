@@ -41,13 +41,13 @@ import eventTextBox from './eventTextBox'
 import newTextBox from './newTextBox'
 
 export default {
-  components : {
+  components: {
     eventTextBox,
     newTextBox
   },
   data () {
     return {
-      arr: ['하루만 떨이 행사!','b','c','d','e', 'f', 'g'],
+      arr: ['하루만 떨이 행사!', 'b', 'c', 'd', 'e', 'f', 'g'],
       arr_content: ['떨이떨이떨이 !', 'B', 'C', 'D', 'E', 'F', 'G'],
       page: 1,
       textBoxToggle: false,

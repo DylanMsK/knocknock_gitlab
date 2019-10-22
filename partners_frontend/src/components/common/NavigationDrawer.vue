@@ -61,7 +61,8 @@ export default {
     goToStore () {
       this.drawerOnOff()
       router.push('/store').catch(err => {
-        console.log('이미 같은 페이지입니다.')
+        var error = err
+        console.log(error)
       })
     }
   }

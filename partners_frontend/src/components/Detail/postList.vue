@@ -41,13 +41,13 @@ import postTextBox from './postTextBox'
 import newTextBox from './newTextBox'
 
 export default {
-  components : {
+  components: {
     postTextBox,
     newTextBox
   },
   data () {
     return {
-      arr: ['휴가','b','c','d','e', 'f', 'g'],
+      arr: ['휴가', 'b', 'c', 'd', 'e', 'f', 'g'],
       arr_content: ['아프리카 열병 사태로 영업을 하지 않습니다.', 'B', 'C', 'D', 'E', 'F', 'G'],
       page: 1,
       textBoxToggle: false,

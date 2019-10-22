@@ -57,7 +57,7 @@ export default {
     MenuDetail,
     reviewDetail,
     postList,
-    eventList,
+    eventList
   },
   data () {
     return {
