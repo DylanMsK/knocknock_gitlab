@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from accounts.models import Partner
 
+
 class Category(models.Model):
     main_category = models.CharField(max_length=30)
     sub_category = models.CharField(max_length=30)
@@ -32,7 +33,7 @@ class Store(models.Model):
     addr = models.CharField(max_length=50)
     tags = models.TextField(blank=True, default='')
     price_avg = models.IntegerField(default=0)
-    partner = models.ForeignKey(Partner, on_delete=models.SET_DEFAULT, default=0, blank=True)
+    partner = models.ForeignKey(Partner, on_delete=models.SET_NULL, null=True, blank=True)
     review_cnt = models.IntegerField(default=0)
     view_cnt = models.IntegerField(default=0)
     options = models.ManyToManyField(Option)
@@ -40,3 +41,19 @@ class Store(models.Model):
     
     def __str__(self):
         return f'{self.addr}'
+
+
+class BusinessRegistration(models.Model):
+    store = models.OneToOneField(Store, on_delete=models.CASCADE)
+    partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=100)
+    business_registration_number = models.CharField(max_length=10)
+    representative_name = models.CharField(max_length=30)
+    business_address = models.CharField(max_length=100)
+    registration_image = models.ImageField(upload_to='partners/certificates')
+    business_commencement_date = models.DateField(null=True)
+    business_type = models.CharField(max_length=30, null=True)
+    business_item = models.CharField(max_length=30, null=True)
+
+    def __str__(self):
+        return f'{self.company_name} | {self.partner.name}'
