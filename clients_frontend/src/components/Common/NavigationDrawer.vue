@@ -14,14 +14,16 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn
-          icon
-          class="mx-3">
-          <v-icon>mdi-settings-outline</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-bell-outline</v-icon>
-        </v-btn>
+				<div v-if="user">
+					<v-btn
+						icon
+						class="mx-3">
+						<v-icon>mdi-settings-outline</v-icon>
+					</v-btn>
+					<v-btn icon>
+						<v-icon>mdi-bell-outline</v-icon>
+					</v-btn>
+				</div>
       </v-list-item>
 
       <div v-if="user">
@@ -32,7 +34,11 @@
           <v-list-item-content>
             <v-list-item-title>이혜희</v-list-item-title>
           </v-list-item-content>
-          <v-btn icon style="display: inline-block;">
+          <v-btn 
+						@click="goTo('profile')"
+						icon 
+						class="right-btn"
+					>
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
         </v-list-item>
@@ -130,5 +136,8 @@ export default {
 }
 .primary-text {
   color: #005b8f;
+}
+.right-btn {
+	display: inline-block;
 }
 </style>

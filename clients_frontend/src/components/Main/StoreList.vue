@@ -4,8 +4,9 @@
 		class="storelist py-0"
 	>
 		<v-list-item 
-			v-for="(store, i) in stores"
-			:key=i
+			v-for="(store, idx) in stores"
+			:key=idx
+			@click="goTo('store-detail', idx)"
 			class="d-block px-0 py-1"
 		>
 			<div class="store-content">
@@ -23,7 +24,7 @@
 				</div>
 			</div>
 			<v-divider 
-				v-if="i != stores.length -1"
+				v-if="idx != stores.length -1"
 				class="mt-1"
 			></v-divider>
 		</v-list-item>
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+import router from '../../router'
+
 export default {
 	data() {
 		return {
@@ -76,6 +79,11 @@ export default {
 					remainingTime: '30',
 				},
 			]
+		}
+	},
+	methods: {
+		goTo (path, storeId) {
+			router.push({ 'name': path })
 		}
 	}
 }
