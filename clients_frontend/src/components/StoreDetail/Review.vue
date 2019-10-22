@@ -44,31 +44,53 @@
 			transition="dialog-bottom-transition"
 		>
       <v-card>
-        <v-toolbar 
-					dark 
-					color="primary"
-				>
-          <v-toolbar-title>리뷰 남기기</v-toolbar-title>
+        <v-toolbar flat>
+          <v-toolbar-title class="font-weight-bold">스윗밸런스 역삼점</v-toolbar-title>
 					<v-spacer></v-spacer>
           <v-btn 
 						@click="dialog = false"
 						icon 
-						dark 
 					>
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
-				<div class="ma-5">
-					<p class="review-rating">평점</p>
-					<v-rating 
-						v-model="rating"
-						hover
-						dense
-						large
-					></v-rating>
+				<v-card-text class="review">
+					<v-row>
+						<v-col 
+							cols="2"
+							class="align-self-center"
+						>
+							<span>평점</span>
+						</v-col>
+						<v-col cols="10">
+							<v-rating 
+								v-model="rating"
+								dense
+								large
+								hover
+								class="review-rating"
+							></v-rating>
+						</v-col>
+					</v-row>
 					<p>내용</p>
-					<v-text-field outlined></v-text-field>
-				</div>
+					<v-textarea
+						counter
+        		maxlength="120"
+						outlined
+						full-width
+        		single-line
+					>
+					</v-textarea>
+				</v-card-text>
+				<v-card-actions class="px-6">
+					<v-btn 
+						block
+						color="primary"
+						class="font-weight-bold"
+					>
+						등록
+					</v-btn>
+				</v-card-actions>
       </v-card>
     </v-dialog>
 
@@ -88,8 +110,13 @@ export default {
 </script>
 
 <style scoped>
-.review-rating {
-	font-size: 20px;
+.review {
+	font-size: 16px;
 	font-weight: 700;
+	margin: 15vh 0 0 0;
+}
+.review-rating {
+	display: inline-block;
+	text-align: right;
 }
 </style>
