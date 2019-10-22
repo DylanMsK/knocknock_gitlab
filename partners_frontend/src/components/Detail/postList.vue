@@ -1,8 +1,10 @@
 <template>
   <v-col>
     <div class="post-title">
-      <v-icon class="mb-4 pr-3" color="#D32F2F">fas fa-exclamation</v-icon><p>공지사항</p>
+      <p><v-icon class="mb-1 pr-3" color="#D32F2F">fas fa-exclamation</v-icon>공지사항</p>
+      <p class="new-post" @click="newPost()">새 글 등록하기</p>
     </div>
+    <newTextBox v-show="newPostBoxToggle"/>
     <v-expansion-panels
       accordion
     >
@@ -36,22 +38,28 @@
 
 <script>
 import postTextBox from './postTextBox'
+import newTextBox from './newTextBox'
 
 export default {
   components : {
-    postTextBox
+    postTextBox,
+    newTextBox
   },
   data () {
     return {
       arr: ['휴가','b','c','d','e', 'f', 'g'],
       arr_content: ['아프리카 열병 사태로 영업을 하지 않습니다.', 'B', 'C', 'D', 'E', 'F', 'G'],
       page: 1,
-      textBoxToggle: false
+      textBoxToggle: false,
+      newPostBoxToggle: false
     }
   },
   methods: {
     openCloseTextBox () {
       this.textBoxToggle = !this.textBoxToggle
+    },
+    newPost () {
+      this.newPostBoxToggle = !this.newPostBoxToggle
     }
   }
 }
@@ -63,6 +71,7 @@ export default {
   font-size: 20px;
   font-weight: 900;
   display: flex;
+  justify-content: space-between;
 }
 .list-header {
   font-family: 'Noto Sans KR', sans-serif;
@@ -71,5 +80,10 @@ export default {
 .post-buttons {
   display: flex;
   justify-content: flex-end;
+}
+.new-post {
+  color: #0091EA;
+  font-size: 16px;
+  font-weight: 500;
 }
 </style>

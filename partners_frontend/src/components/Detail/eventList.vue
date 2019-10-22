@@ -1,8 +1,10 @@
 <template>
   <v-col>
     <div class="event-title">
-      <v-icon class="mb-4 pr-3" color="#FBC02D">fas fa-star</v-icon><p>이벤트</p>
+      <p><v-icon class="mb-1 pr-3" color="#FBC02D">fas fa-star</v-icon>이벤트</p>
+      <p class="new-post" @click="newPost()">새 글 등록하기</p>
     </div>
+    <newTextBox v-show="newPostBoxToggle"/>
     <v-expansion-panels
       accordion
     >
@@ -36,22 +38,28 @@
 
 <script>
 import eventTextBox from './eventTextBox'
+import newTextBox from './newTextBox'
 
 export default {
   components : {
-    eventTextBox
+    eventTextBox,
+    newTextBox
   },
   data () {
     return {
       arr: ['하루만 떨이 행사!','b','c','d','e', 'f', 'g'],
       arr_content: ['떨이떨이떨이 !', 'B', 'C', 'D', 'E', 'F', 'G'],
       page: 1,
-      textBoxToggle: false
+      textBoxToggle: false,
+      newPostBoxToggle: false
     }
   },
   methods: {
     openCloseTextBox () {
       this.textBoxToggle = !this.textBoxToggle
+    },
+    newPost () {
+      this.newPostBoxToggle = !this.newPostBoxToggle
     }
   }
 }
@@ -63,6 +71,7 @@ export default {
   font-size: 20px;
   font-weight: 900;
   display: flex;
+  justify-content: space-between;
 }
 .list-header {
   font-family: 'Noto Sans KR', sans-serif;
@@ -71,5 +80,10 @@ export default {
 .event-buttons {
   display: flex;
   justify-content: flex-end;
+}
+.new-post {
+  color: #0091EA;
+  font-size: 16px;
+  font-weight: 500;
 }
 </style>
