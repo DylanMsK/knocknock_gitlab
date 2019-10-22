@@ -13,24 +13,31 @@
       </v-rating>
       <span class="section-rating-num">3.7</span>
     </v-col>
-    <v-col cols="12">
-      <v-col cols="12" class="notice px-0 pt-0 pb-2">
-        <div>공지사항</div><div class="post-modify-button" @click="changeTextBox()">공지사항 수정하기</div>
-      </v-col>
-      <postTextBox
-        v-show="textBox"
-      />
-      <v-col class="pa-0 notice-content">
-        <div v-show="!textBox">{{ postContent }}</div>
-      </v-col>
-    </v-col>
+    <v-tabs
+      class="section-menu"
+      fixed-tabs
+      color="#0091EA"
+      background-color="#fafafa"
+      height="4rem"
+    >
+      <v-tab v-bind:style="[postToggle ? choicedMenu : justMenu]" @click="changePostToggle('post')">공지사항</v-tab>
+      <v-tab v-bind:style="[eventToggle ? choicedMenu : justMenu]" @click="changePostToggle('event')">이벤트</v-tab>
+    </v-tabs>
+    <postList v-show="postToggle"/>
+    <eventList v-show="eventToggle"/>
     <v-col class="section-none py-1">
     </v-col>
-    <v-col cols="12 pa-0 section-menu section-menu-layout">
-      <v-col v-bind:style="[infoToggle ? choicedMenu : justMenu]" @click="changeToggle('info')">정보</v-col>
-      <v-col v-bind:style="[menuToggle ? choicedMenu : justMenu]" @click="changeToggle('menu')" class="section-menu-center">메뉴</v-col>
-      <v-col v-bind:style="[reviewToggle ? choicedMenu : justMenu]" @click="changeToggle('review')">리뷰</v-col>
-    </v-col>
+    <v-tabs
+      class="section-menu"
+      fixed-tabs
+      color="#0091EA"
+      background-color="#fafafa"
+      height="4rem"
+    >
+      <v-tab v-bind:style="[infoToggle ? choicedMenu : justMenu]" @click="changeDetailToggle('info')">정보</v-tab>
+      <v-tab v-bind:style="[menuToggle ? choicedMenu : justMenu]" @click="changeDetailToggle('menu')">메뉴</v-tab>
+      <v-tab v-bind:style="[reviewToggle ? choicedMenu : justMenu]" @click="changeDetailToggle('review')">리뷰</v-tab>
+    </v-tabs>
     <InfoDetail v-show="infoToggle"/>
     <MenuDetail v-show="menuToggle"/>
     <reviewDetail v-show="reviewToggle"/>
@@ -42,6 +49,8 @@ import InfoDetail from '../components/Detail/infoDetail'
 import MenuDetail from '../components/Detail/menuDetail'
 import reviewDetail from '../components/Detail/reviewDetail'
 import postTextBox from '../components/Detail/postTextBox'
+import postList from '../components/Detail/postList'
+import eventList from '../components/Detail/eventList'
 
 import { mapState, mapMutations } from 'vuex'
 
@@ -50,6 +59,8 @@ export default {
     InfoDetail,
     MenuDetail,
     reviewDetail,
+    postList,
+    eventList,
     postTextBox
   },
   data () {
@@ -58,6 +69,8 @@ export default {
       infoToggle: true,
       menuToggle: false,
       reviewToggle: false,
+      postToggle: true,
+      eventToggle: false,
       choicedMenu: {
         fontWeight: 700,
         fontSize: '18px'
@@ -73,7 +86,7 @@ export default {
   },
   methods: {
     ...mapMutations('postText', ['changeTextBox']),
-    changeToggle (check) {
+    changeDetailToggle (check) {
       if (check === 'info') {
         this.infoToggle = true
         this.menuToggle = false
@@ -86,6 +99,15 @@ export default {
         this.infoToggle = false
         this.menuToggle = false
         this.reviewToggle = true
+      }
+    },
+    changePostToggle (check) {
+      if (check === 'post') {
+        this.postToggle = true
+        this.eventToggle = false
+      } else {
+        this.postToggle = false
+        this.eventToggle = true
       }
     }
   }
@@ -116,22 +138,6 @@ export default {
 }
 .section-menu {
   font-family: 'Noto Sans KR', sans-serif;
-}
-.section-menu-layout {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 4rem;
-}
-.section-menu-layout > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-.section-menu-center {
-  border-left: solid 1px #dfdfdf;
-  border-right: solid 1px #dfdfdf;
 }
 .notice {
   font-family: 'Noto Sans KR', sans-serif;
