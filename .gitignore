@@ -144,4 +144,11 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+### AWS ###
+*.pem
+*.ppk
+
+### DATA ###
+data/
+
 # End of https://www.gitignore.io/api/vuejs,django,jupyternotebooks
