@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 import SignIn from '../components/Auth/SignIn'
 import SignUp from '../components/Auth/SignUp'
@@ -20,6 +20,16 @@ export default {
   },
   computed: {
     ...mapState('auth', ['signUpToggle'])
+  },
+  methods: {
+    ...mapMutations('drawer', ['headerOnOff']),
+    ...mapMutations('drawer', ['headerInit'])
+  },
+  created () {
+    this.headerInit()
+  },
+  beforeDestroy: function () {
+    this.headerOnOff()
   }
 }
 </script>

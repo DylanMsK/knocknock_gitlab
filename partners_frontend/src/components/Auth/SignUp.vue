@@ -20,10 +20,24 @@
           ></v-text-field>
           <v-text-field
             label="이메일"
+            hint="이메일 형식으로 작성해주세요. (예: id@email.com/co.kr/net)"
             v-model="email"
             :error-messages="emailErrors"
             @input="$v.email.$touch()"
             @blur="$v.email.$touch()"
+            required
+            outlined
+            rounded
+            clearable
+            autocomplete="off"
+          ></v-text-field>
+          <v-text-field
+            label="휴대폰 번호"
+            hint="하이픈('-')을 제외하고 작성해주세요. (예: 01012345678)"
+            v-model="phoneNumber"
+            :error-messages="phoneNumberErrors"
+            @input="$v.phoneNumber.$touch()"
+            @blur="$v.phoneNumber.$touch()"
             required
             outlined
             rounded
@@ -54,7 +68,6 @@
             rounded
             clearable
           ></v-text-field>
-          <v-file-input label="사업자 등록증을 첨부하세요."></v-file-input>
         </v-col>
         <v-col class="center pt-0" cols="12">
           <v-btn class="Noto-Sans-KR" x-large color="primary">회원가입 하기</v-btn>
@@ -62,7 +75,7 @@
       </v-row>
       <v-row>
         <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
-          <span class="px-3">낰낰의 계정이 있으신가요?</span><v-btn class="login-font" color="primary" text @click="onOff()">로그인</v-btn>
+          <span class="px-3">낰낰 파트너의 계정이 있으신가요?</span><v-btn class="login-font" color="primary" text @click="onOff()">로그인</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -78,6 +91,7 @@ export default {
   data () {
     return {
       partnerName: '',
+      phoneNumber: '',
       email: '',
       password: '',
       passwordCheck: ''
@@ -99,6 +113,9 @@ export default {
     },
     partnerName: {
       required
+    },
+    phoneNumber: {
+      required
     }
   },
   computed: {
@@ -117,6 +134,14 @@ export default {
       };
       !this.$v.email.required && errors.push('이메일을 작성해주세요.')
       !this.$v.email.email && errors.push('이메일 형식으로 작성해주세요.')
+      return errors
+    },
+    phoneNumberErrors () {
+      const errors = []
+      if (!this.$v.phoneNumber.$dirty) {
+        return errors
+      };
+      !this.$v.phoneNumber.required && errors.push('휴대폰 번호를 입력해주세요.')
       return errors
     },
     passwordErrors () {
@@ -147,7 +172,7 @@ export default {
 <style scoped>
 .signup-font {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 72px;
+  font-size: 60px;
   font-weight: 900;
 }
 .Noto-Sans-KR {
@@ -169,8 +194,8 @@ export default {
   position: absolute;
   bottom: 12px;
 }
-.login-font > .v-btn__content {
+.login-font {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 }
 </style>

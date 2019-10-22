@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <p class="login-font mb-0">낰낰</p>
+      <p class="login-font mb-0">낰낰 <span>파트너</span></p>
     </v-col>
     <v-col cols="12">
       <v-text-field
@@ -21,20 +21,24 @@
       ></v-text-field>
     </v-col>
     <v-col class="center pt-0" cols="12">
-      <v-btn class="Noto-Sans-KR" x-large color="primary">로그인 하기</v-btn>
+      <v-btn class="Noto-Sans-KR" x-large color="primary" @click="goTo()">로그인 하기</v-btn>
     </v-col>
     <v-col class="Noto-Sans-KR center-also-align bottom-position fill-width">
-      <span class="px-3">낰낰의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
+      <span class="px-3">낰낰 파트너의 계정이 없으신가요?</span><v-btn class="signup-font" color="primary" text @click="onOff()">회원가입</v-btn>
     </v-col>
   </v-row>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import router from '../../router'
 
 export default {
   methods: {
-    ...mapMutations('auth', ['onOff'])
+    ...mapMutations('auth', ['onOff']),
+    goTo () {
+      router.push('/store')
+    }
   }
 }
 </script>
@@ -44,6 +48,9 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 72px;
   font-weight: 900;
+}
+.login-font > span {
+  font-size: 40px;
 }
 .Noto-Sans-KR {
   font-family: 'Noto Sans KR', sans-serif;
@@ -61,7 +68,7 @@ export default {
   position: absolute;
   bottom: 12px;
 }
-.signup-font > .v-btn__content {
+.signup-font {
   font-weight: 600;
   font-size: 16px;
 }
