@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-col class="total-size">
     <div class="review-detail-category">
       <p class="review-id mb-0">
         <span>이**님</span>
@@ -54,6 +54,9 @@ export default {
 </script>
 
 <style scoped>
+.total-size {
+  min-height: 700px;
+}
 .review-id {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 20px;

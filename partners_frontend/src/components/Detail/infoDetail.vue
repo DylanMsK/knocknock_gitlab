@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-col class="total-size">
     <div class="info-head">
       <p class="info-title pr-4">가게 소개</p>
       <p class="info-modify">수정하기</p>
@@ -104,6 +104,9 @@ export default {
 </script>
 
 <style scoped>
+.total-size {
+  min-height: 700px;
+}
 .info-head {
   display: flex;
   align-items: flex-end;

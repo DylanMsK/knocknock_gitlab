@@ -103,11 +103,19 @@ export default {
     },
     changePostToggle (check) {
       if (check === 'post') {
-        this.postToggle = true
-        this.eventToggle = false
+        if (this.postToggle === true) {
+          this.postToggle = false
+        } else {
+          this.postToggle = true
+          this.eventToggle = false
+        }
       } else {
-        this.postToggle = false
-        this.eventToggle = true
+        if (this.eventToggle === true) {
+          this.eventToggle = false
+        } else {
+          this.postToggle = false
+          this.eventToggle = true
+        }
       }
     }
   }

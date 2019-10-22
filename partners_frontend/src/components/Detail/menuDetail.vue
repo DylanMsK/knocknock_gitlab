@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-col class="total-size">
     <div class="menu-head">
       <p class="menu-title pr-4">메뉴</p>
       <p class="menu-modify">수정하기</p>
@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style scoped>
+.total-size {
+  min-height: 700px;
+}
 .menu-head {
   display: flex;
   align-items: flex-end;
