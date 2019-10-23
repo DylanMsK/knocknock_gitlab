@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.signals import user_logged_out
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -63,3 +64,13 @@ class ClientUserAPI(generics.RetrieveAPIView):
             },
             status = status.HTTP_202_ACCEPTED
         )
+
+
+class ClientLogoutAPI(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        request._auth.delete()
+        user_logged_out.send(sender=request.user.__class__,
+                             request=request, user=request.user)
+        return Response({'message': '로그아웃 완료'}, status=status.HTTP_202_ACCEPTED)
