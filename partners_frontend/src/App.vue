@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from '@/components/Common/Header'
-import Nav from '@/components/Common/NavigationDrawer'
+import Header from '@/components/common/Header'
+import Nav from '@/components/common/NavigationDrawer'
 import { mapState } from 'vuex'
 
 export default {
