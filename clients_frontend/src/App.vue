@@ -1,5 +1,5 @@
 <template>
-  <v-app class="white-bg">
+  <v-app class="white-bg notosans">
   	<Header />
 		<NavigationDrawer />
     <router-view class="mt-13" />
@@ -19,6 +19,9 @@ export default {
 </script>
 
 <style scoped>
+.notosans {
+	font-family: 'Noto Sans KR', sans-serif;
+}
 .white-bg {
   background-color: white !important;
 }
