@@ -49,18 +49,22 @@ export default {
     ...mapMutations('auth', ['onOff', 'initError']),
     ...mapActions('auth', ['userSignIn']),
     async signIn () {
-      var info = {
-        email: this.email,
-        password: this.password
-      }
-      await this.userSignIn(info)
-      if (!this.error) {
-        router.push('/store')
+      if (this.email == '' || this.password == '') {
+        this.$emit('turnToggleWrite')
       } else {
-        console.log('로그인 실패 ㅠㅠ')
-        this.initError()
-        this.$emit('turnToggleError')
-      }
+        var info = {
+          email: this.email,
+          password: this.password
+        }
+        await this.userSignIn(info)
+        if (!this.error) {
+          router.push('/store')
+        } else {
+          console.log('로그인 실패 ㅠㅠ')
+          this.initError()
+          this.$emit('turnToggleError')
+        }
+      } 
     }
   }
 }
