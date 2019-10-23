@@ -2,6 +2,7 @@
   <v-container fill-height>
     <SignIn
       @turnToggleError="signInErrorSnackBar=true"
+      @turnToggleWrite="signInWriteSnackBar=true"
     />
     <v-dialog v-model="signUpToggle" fullscreen hide-overlay transition="dialog-bottom-transition">
       <SignUp
@@ -42,6 +43,15 @@
     >
       이메일 혹은 비밀번호가 다릅니다.
     </v-snackbar>
+    <v-snackbar
+      class="Noto-Sans-KR"
+      color="#D32F2F"
+      :timeout="1500"
+      v-model="signInWriteSnackBar"
+      top
+    >
+      이메일과 비밀번호 모두 입력해주세요.
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -61,6 +71,7 @@ export default {
       snackBar: false,
       signUpErrorSnackBar: false,
       signInErrorSnackBar: false,
+      signInWriteSnackBar: false
     }
   },
   computed: {
