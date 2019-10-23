@@ -2,7 +2,8 @@ import api from '@/services/api'
 
 const state = {
   signUpToggle: false,
-  error: null
+  error: null,
+  signOutToggle: false
 }
 
 const mutations = {
@@ -14,6 +15,12 @@ const mutations = {
   },
   initError (state) {
     state.error = null
+  },
+  signOutCheck (state) {
+    state.signOutToggle = true
+  },
+  initSignOut (state) {
+    state.signOutToggle = false
   }
 }
 
@@ -32,7 +39,12 @@ const actions = {
   },
   async userSignOut ({ commit }) {
     var token = JSON.parse(localStorage.getItem('user')).token
-    await api.userSignOut(token)
+    await api.userSignOut(token).then(() => {
+      localStorage.removeItem('user')
+      commit('signOutCheck')
+    }).catch(err => {
+      console.log(err.message)
+    })
   },
   async userAuth ({ commit }) {
     var token = JSON.parse(localStorage.getItem('user')).token

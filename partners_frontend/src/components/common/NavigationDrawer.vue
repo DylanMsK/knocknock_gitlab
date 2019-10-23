@@ -55,19 +55,31 @@ import router from '../../router'
 
 export default {
   computed: {
-    ...mapState('drawer', ['drawerToggle'])
+    ...mapState('drawer', ['drawerToggle']),
+    ...mapState('auth', ['signOutToggle'])
   },
   methods: {
     ...mapMutations('drawer', ['drawerOnOff']),
+    ...mapMutations('auth', ['initSignOut']),
     ...mapActions('auth', ['userSignOut']),
     goToStore () {
       this.drawerOnOff()
-      router.push('/store').catch(err => {
-        console.log('이동하려는 위치가 현재와 동일합니다. / ' + err.message)
-      })
+      if (this.$router.currentRoute.name !== 'storePage') {
+        router.push('/store').catch(err => {
+          console.log('이동하려는 위치가 현재와 동일합니다. / ' + err.message)
+        })
+      }
     },
     async signOut () {
-      await this.userSignOut()
+      await this.userSignOut().then(() => {
+        if (this.signOutToggle === true) {
+          router.push('/')
+          this.initSignOut()
+          this.drawerOnOff()
+        } else {
+          console.log('로그아웃 실패!')
+        }
+      })
     }
   }
 }
