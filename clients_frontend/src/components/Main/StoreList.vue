@@ -6,7 +6,7 @@
 		<v-list-item 
 			v-for="(store, idx) in stores"
 			:key=idx
-			@click="goTo('store-detail', idx)"
+			@click="goTo('store-detail', idx+1)"
 			class="d-block px-0 py-1"
 		>
 			<div class="store-content">
@@ -82,9 +82,9 @@ export default {
 		}
 	},
 	methods: {
-		goTo (path, storeId) {
-			router.push({ 'name': path })
-		}
+		goTo(path, params) {
+			router.push({ name: path, params:{ storeId: params} });
+    },
 	}
 }
 </script>

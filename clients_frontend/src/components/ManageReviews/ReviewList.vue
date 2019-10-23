@@ -5,8 +5,8 @@
 			v-for="(review, idx) in reviews"
 			:key="idx"	
 			class="mb-12"
-		>
-			<Review :reviewId="idx" />
+		>	
+			<Review :review="review" />
 		</div>
 	</v-container>
 </template>
