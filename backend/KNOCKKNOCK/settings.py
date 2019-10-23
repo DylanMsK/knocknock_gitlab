@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.gis',
+    'django.contrib.gis',
     'django_extensions',                # django-extensions
     'corsheaders',                      # django-cors-headers
     'rest_framework',                   # rest_framework

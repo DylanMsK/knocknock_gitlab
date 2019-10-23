@@ -149,6 +149,6 @@ yarn-error.log
 *.ppk
 
 ### DATA ###
-data/
+# data/
 
 # End of https://www.gitignore.io/api/vuejs,django,jupyternotebooks
