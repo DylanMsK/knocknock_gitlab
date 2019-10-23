@@ -5,15 +5,17 @@ import store from './modules/store'
 import menu from './modules/menu'
 import review from './modules/review'
 import profile from './modules/profile'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules: {
-	toggle,
-	store,
-	menu,
-	review,
-	profile
-  }
+	modules: {
+		toggle,
+		store,
+		menu,
+		review,
+		profile,
+		auth
+	}
 })

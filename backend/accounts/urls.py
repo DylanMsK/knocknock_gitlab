@@ -17,7 +17,7 @@ urlpatterns = [
     path('client/signup/', ClientSignupAPI.as_view(), name='client_signup'),
     path('client/login/', ClientLoginAPI.as_view(), name='client_login'),
     path('client/auth/', ClientUserAPI.as_view()),
-    path('client/logout', ClientLogoutAPI.as_view(), name="client_logout"),
+    path('client/logout/', ClientLogoutAPI.as_view(), name="client_logout"),
 
     path('partner/signup/', PartnerSignupAPI.as_view(), name='partner_signup'),
     path('partner/login/', PartnerLoginAPI.as_view(), name='partner_login'),
