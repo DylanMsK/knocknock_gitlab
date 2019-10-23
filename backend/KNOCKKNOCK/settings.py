@@ -14,7 +14,7 @@ SECRET_KEY = '7#x6^)o8=alh5_7g!8z(n*m=_j)_o&do!a%k$50c%y6xpuzr1-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.gis',
+    'django.contrib.gis',
     'django_extensions',                # django-extensions
     'corsheaders',                      # django-cors-headers
     'rest_framework',                   # rest_framework
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'KNOCKKNOCK.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         #  'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        #  'NAME': 'geodjango',
-        #  'USER': 'hayley',
-        #  'PASSWORD': '1234',
+        #  'NAME': 'postgres',
+        #  'USER': '',
+        #  'PASSWORD': '',
         #  'HOST': 'localhost',
         #  'PORT': '5432',
     },
