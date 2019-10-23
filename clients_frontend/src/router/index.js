@@ -8,6 +8,7 @@ import ProfilePage from '../pages/ProfilePage'
 import ManageReviewsPage from '../pages/ManageReviewsPage'
 import ModifyReviewPage from '../pages/ModifyReviewPage'
 import NoticePage from '../pages/NoticePage'
+import QuestionPage from '../pages/QuestionPage'
 
 Vue.use(Router)
 
@@ -19,6 +20,7 @@ export default new Router({
     { path: '/auth', name: 'auth', component: AuthPage },
 		{ path: '/termsofuse', name: 'termsofuse', component: TermsOfUsePage },
 		{ path: '/notice', name: 'notice', component: NoticePage },
+		{ path: '/question', name: 'question', component: QuestionPage },
 
     { path: '/store/:storeId', name: 'store-detail', component: StoreDetailPage },
 

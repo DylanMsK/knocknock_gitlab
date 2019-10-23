@@ -103,7 +103,7 @@ export default {
       items: [
         { title: '공지사항', path: 'notice' },
         { title: '위치기반서비스 이용약관', path: 'termsofuse' },
-        { title: '1:1문의', path: 'main' }
+        { title: '1:1문의', path: 'question' }
       ]
     }
   },
