@@ -12,7 +12,9 @@ new Vue({
     if ('user' in localStorage) {
       await store.dispatch('auth/userAuth')
     } else {
-      router.push('/')
+      router.push('/').catch(err => {
+        console.log('이동하려는 위치가 현재와 동일합니다. / ' + err.message)
+      })
     }
   },
   router,
