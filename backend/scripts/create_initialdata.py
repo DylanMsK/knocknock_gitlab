@@ -3,16 +3,24 @@ import csv
 from stores.models import Category, Option, Store
 
 def run():
-    with open('/Users/dylan/Desktop/github/s1p1151009/data/강남구_한식_상세.csv', 'r', encoding='utf8') as f:
+    with open('/Users/dylan/Desktop/github/s1p1151009/data/store_section18.csv', 'r', encoding='utf8') as f:
         reader = csv.DictReader(f)
         fields = ['id', 'name', 'businessCategory', 'category', 'desc', 'x', 'y', 'imageSrc', 'phone',
                   'roadAddr', 'commonAddr', 'addr', 'tags', 'options', 'totalReviewCount', 'priceCategory']
-        category = Category.objects.get(sub_category='한식')
-        for row in reader:
-            # print(row)
+        for idx, row in enumerate(reader):
+            if idx and idx % 100 == 0:
+                print(f'{idx}/{len(reader)}')
             origin_id = row['id']
             name = row['name']
-            description = row['desc']
+            description = row['description']
+            if Category.objects.filter(sub_category=row['subCategory']).exists():
+                category = Category.objects.get(sub_category=row['subCategory'])
+            else:
+                if row['subCategory'] == '카페':
+                    main_category = '카페'
+                else:
+                    main_category = '음식점'
+                category = Category.objects.create(main_category=main_category, sub_category=row['subCategory'])
             lon = row['x']
             lat = row['y']
             thumbnail = row['imageSrc']
@@ -37,8 +45,11 @@ def run():
                           thumbnail=thumbnail, contact=contact, road_addr=road_addr, common_addr=common_addr,
                           addr=addr, tags=tags, price_avg=price_avg, review_cnt=review_cnt)
             for option in row['options'].split(','):
-                if option in ['예약', '단체석', '주차', '포장', '배달']:
+                if Option.objects.filter(name=option).exists():
                     opt = Option.objects.get(name=option)
-                    store.options.add(opt)
+                else:
+                    opt = Option.objects.create(name=option)
+                store.options.add(opt)
+
             store.save()
         
