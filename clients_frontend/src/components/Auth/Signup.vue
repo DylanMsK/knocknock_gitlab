@@ -11,7 +11,7 @@
       class="white-bg">
       <v-row class="justify-center">
         <v-col cols="11">
-          <p class="font-weight-700 font-size-50">회원가입</p>
+          <p class="font-weight-700 font-size-40">회원가입</p>
           <v-text-field
             v-model="email"
             outlined
@@ -158,8 +158,8 @@ export default {
 .font-size-20 {
   font-size: 20px !important;
 }
-.font-size-50 {
-  font-size: 50px;
+.font-size-40 {
+  font-size: 40px;
 }
 .hr-light {
   border: 0.5px solid rgba(0, 0, 0, 0.2);
