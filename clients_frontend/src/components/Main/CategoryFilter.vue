@@ -1,25 +1,39 @@
 <template>
-	<v-layout row class="pt-0 ma-0">
-		<v-row class="category">
-			<v-col 
-				v-for="(item, idx) in categoryItems"
-				:key="idx"
-				cols="4"
-				class="items"
-			>
-				<v-flex class="text-center item-box">
-					<v-img :src="item.icon" class="store-icon"></v-img>
-					<p class="mb-0">{{ item.title }}</p>
-				</v-flex>
-			</v-col>
-		</v-row>
-	</v-layout>
+	<v-item-group multiple>
+    <v-layout row class="pt-0 ma-0">
+      <v-row class="category">
+        <v-col
+          v-for="(item, idx) in categoryItems"
+          :key="idx"
+          cols="4"
+					class="items"
+        >
+          <v-item v-slot:default="{ active, toggle }">
+            <v-card
+              :color="active ? 'blue lighten-5' : 'white'"
+              height="12.7vh"
+							flat
+              @click="toggle"
+							:class="active ? 'active-item-box' : 'item-box'"
+            >
+							<div @click="selectCategory(item.title)">
+								<v-img :src="item.icon" class="store-icon"></v-img>
+								<p class="mb-0">{{ item.title }}</p>
+							</div>
+            </v-card>
+          </v-item>
+        </v-col>
+      </v-row>
+    </v-layout>
+  </v-item-group>
 </template>
 
 <script>
 export default {
-	data() {
+	data () {
 		return {
+			seleted: '',
+			selectedCategory: [],
 			categoryItems: [
 				{ title: '한식', icon: 'https://image.flaticon.com/icons/svg/135/135669.svg'},
 				{ title: '양식', icon: 'https://image.flaticon.com/icons/svg/135/135644.svg'},
@@ -33,6 +47,18 @@ export default {
 				// '한식', '양식', '아시아음식', '일식', '중식', '분식', '카페', '뷔페', '기타'
 			]
 		}
+	},
+	created() {
+		this.selected = false
+	},
+	methods: {
+		selectCategory (param) {
+			if (!this.selectedCategory.includes(param)) {
+				this.selectedCategory.push(param)
+			} else {
+				this.selectedCategory.splice(this.selectedCategory.indexOf(param), 1)
+			}
+		}
 	}
 }
 </script>
@@ -43,13 +69,19 @@ export default {
 	padding: auto;
 }
 .category .items {
-	height: 12.7vh;
+	height: 12.8vh;
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
 	border-right: 1px solid rgba(0, 0, 0, 0.1);
 	padding: 0;
 }
+.active-item-box {
+	color: #1976d2 !important;
+	padding-top: 3vh;
+	text-align: center;
+}
 .item-box {
 	padding-top: 3vh;
+	text-align: center;
 }
 .store-icon {
 	width: 40px;
