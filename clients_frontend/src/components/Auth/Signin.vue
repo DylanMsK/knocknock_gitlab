@@ -110,7 +110,7 @@ export default {
     ...mapMutations('toggle', ['toggleHeader']),
     // 백엔드 연결하면 삭제할 것
     ...mapMutations('toggle', ['toggleUserInfo']),
-    ...mapMutations('auth', ['initError', 'logOutCondition']),
+    ...mapMutations('auth', ['initError', 'logOutCondition', 'setEmail']),
     ...mapActions('auth', ['signIn']),
     openSignup () {
       this.$v.$reset()
@@ -130,7 +130,8 @@ export default {
         if (!this.err) {
           router.push('/')
           this.toggleHeader(true)
-          this.logOutCondition()
+					this.logOutCondition()
+					this.setEmail()
         } else {
           console.log('로그인 실패 ㅠㅠ')
           this.initError()

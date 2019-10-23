@@ -2,10 +2,17 @@ import api from '@/services/api'
 
 const state = {
   err: null,
-  condition: true // 로그인
+	condition: true, // 로그인
+	email: null
 }
 
 const mutations = {
+	setEmail(state) {
+		state.email = JSON.parse(localStorage.user).username
+	},
+	initEmail(state) {
+		state.email = null
+	},
   setError (state, payload) {
     state.err = payload
   },
@@ -17,7 +24,7 @@ const mutations = {
   },
   logOutCondition (state) {
     state.condition = false // 로그아웃
-  }
+	},
 }
 
 const actions = {

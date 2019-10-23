@@ -14,7 +14,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
-				<div v-if="user">
+				<div v-if="!condition">
 					<v-btn 
 						icon
 						class="mx-3"
@@ -32,13 +32,13 @@
 				</div>
       </v-list-item>
 
-      <div v-if="user">
+      <div v-if="!condition">
         <v-list-item class="height-90">
           <v-list-item-avatar>
             <v-img src="../../assets/person-blue.png"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>이혜희</v-list-item-title>
+            <v-list-item-title>{{ email }}</v-list-item-title>
           </v-list-item-content>
           <v-btn 
 						@click="goTo('profile')"
@@ -70,18 +70,11 @@
         <v-list-item class="height-90">
           <v-list-item-content>
             <v-list-item-title
-              v-if="condition"
               @click="goTo('auth')"
               class="primary-text">
                 로그인
             </v-list-item-title>
-            <v-list-item-title
-              v-else
-              @click="logOut()"
-              class="primary-text">
-                로그아웃
-            </v-list-item-title>
-          </v-list-item-content>
+					</v-list-item-content>
         </v-list-item>
       </div>
 
@@ -113,21 +106,19 @@ export default {
         { title: '공지사항', path: 'notice' },
         { title: '위치기반서비스 이용약관', path: 'termsofuse' },
         { title: '1:1문의', path: 'question' }
-      ]
+			]
     }
-  },
+	},
   computed: {
-		// 백엔드 연결하면 수정할 것
     ...mapState({
 			user: state => state.toggle.tempUserInfoShow,
       drawer: state => state.toggle.navDrawerShow,
-      condition: state => state.auth.condition,
-      err: state => state.auth.err
-    })
+			condition: state => state.auth.condition,
+			email: state => state.auth.email
+		})
   },
   methods: {
-    ...mapActions('auth', ['signOut']),
-    ...mapMutations('auth', ['initError', 'logInCondition']),
+		...mapMutations('auth', ['setEmail']),
 		...mapMutations('toggle', ['toggleNavDrawer']),
     goTo (path) {
       this.toggleNavDrawer(false)
@@ -135,16 +126,6 @@ export default {
 				router.push({ name: path })
 			}
 		},
-    async logOut () {
-      await this.signOut()
-      if (!this.err) {
-        console.log('로그아웃 성공')
-        this.logInCondition()
-      } else {
-        console.log('로그아웃 실패')
-        this.initError()
-      }
-    },
 		turnoffDrawer() {
 			this.toggleNavDrawer(false)
 		}

@@ -16,7 +16,7 @@
 		<v-tabs-items v-model="tab">
 			<v-tab-item>
 				<v-card flat>
-					<Notice />
+					<Option />
 				</v-card>
 			</v-tab-item>
 			<v-tab-item>

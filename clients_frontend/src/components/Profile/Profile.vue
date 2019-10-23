@@ -65,6 +65,7 @@
 		<div class="positon-bottom">
 			<v-btn 
 				text
+				@click="logOut()"
 				class="charcoal--text"
 			>
 				로그아웃
@@ -80,20 +81,36 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import router from '../../router'
 
 export default {
 	computed: {
 		...mapGetters('profile', {
 			profile: 'getprofile'
-		})
+		}),
+		...mapState('auth', ['err'])
 	},
 	created() {
 		this.getSingleProfile(0)
 	},
 	methods: {
-		...mapActions('profile', ['getSingleProfile'])
-	}
+    ...mapMutations('auth', ['initError', 'logInCondition', 'initEmail']),
+		...mapActions('profile', ['getSingleProfile']),
+		...mapActions('auth', ['signOut']),
+		async logOut () {
+			await this.signOut()
+			if (!this.err) {
+				console.log('로그아웃 성공')
+				router.push('/')
+				this.logInCondition()
+				this.initEmail()
+			} else {
+				console.log('로그아웃 실패')
+				this.initError()
+			}
+		}
+	},
 }
 </script>
 
