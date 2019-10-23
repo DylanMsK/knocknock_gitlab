@@ -29,6 +29,14 @@ const actions = {
     await api.userSignUp(payload).catch(err => {
       commit('setError', err.message)
     })
+  },
+  async userSignOut ({ commit }) {
+    var token = JSON.parse(localStorage.getItem('user')).token
+    await api.userSignOut(token)
+  },
+  async userAuth ({ commit }) {
+    var token = JSON.parse(localStorage.getItem('user')).token
+    await api.userAuth(token)
   }
 }
 

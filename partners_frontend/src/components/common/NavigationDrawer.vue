@@ -42,6 +42,7 @@
       </v-col>
     </div>
     <v-col class="footer footer-text fill-width">
+      <p class="center signOut-text" @click="signOut()">로그아웃</p>
       <p class="center mb-2">연중무휴 고객센터 <span class="pl-4 menu-text">010-5191-0337</span></p>
       <p class="center mb-0 footer-info">Copyright Hey & Nerd in Gang-Nam, All Rights Reserved.</p>
     </v-col>
@@ -49,7 +50,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
@@ -58,12 +59,15 @@ export default {
   },
   methods: {
     ...mapMutations('drawer', ['drawerOnOff']),
+    ...mapActions('auth', ['userSignOut']),
     goToStore () {
       this.drawerOnOff()
       router.push('/store').catch(err => {
-        var error = err
-        console.log(error)
+        console.log('이동하려는 위치가 현재와 동일합니다. / ' + err.message)
       })
+    },
+    async signOut () {
+      await this.userSignOut()
     }
   }
 }
@@ -77,6 +81,9 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 900;
   color: black;
+}
+.signOut-text {
+  font-weight: 900;
 }
 .menu-inner > div {
   display: flex;
@@ -95,7 +102,7 @@ export default {
   font-weight: 900;
 }
 .menu-header {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 .flex {
   display: flex;

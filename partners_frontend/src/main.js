@@ -8,6 +8,15 @@ import vuetify from './plugins/vuetify'
 Vue.config.productionTip = false
 
 new Vue({
+  async created () {
+    if ('user' in localStorage) {
+      await store.dispatch('auth/userAuth')
+    } else {
+      router.push('/').catch(err => {
+        console.log('이동하려는 위치가 현재와 동일합니다. / ' + err.message)
+      })
+    }
+  },
   router,
   store,
   vuetify,
