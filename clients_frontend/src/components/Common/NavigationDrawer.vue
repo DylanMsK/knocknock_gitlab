@@ -101,7 +101,7 @@ export default {
   data () {
     return {
       items: [
-        { title: '공지사항', path: 'main' },
+        { title: '공지사항', path: 'notice' },
         { title: '위치기반서비스 이용약관', path: 'termsofuse' },
         { title: '1:1문의', path: 'main' }
       ]
@@ -117,8 +117,10 @@ export default {
   methods: {
 		...mapMutations('toggle', ['toggleNavDrawer']),
     goTo (path) {
-      this.toggleNavDrawer(false)
-      router.push({ name: path })
+			this.toggleNavDrawer(false)
+			if (this.$route.name !== path) {
+				router.push({ name: path })
+			}
 		},
 		turnoffDrawer() {
 			this.toggleNavDrawer(false)
