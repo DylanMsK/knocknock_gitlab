@@ -14,18 +14,20 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
+				<div v-if="user">
+					<v-btn 
+						icon
+						class="mx-3"
+					>
+						<v-icon>mdi-bell-outline</v-icon>
+					</v-btn>
+				</div>
 				<div>
 					<v-btn
 						@click="goTo('main')"
 						icon
-						class="mx-3"
 					>
 						<v-icon>mdi-home-outline</v-icon>
-					</v-btn>
-				</div>
-				<div v-if="user">
-					<v-btn icon>
-						<v-icon>mdi-bell-outline</v-icon>
 					</v-btn>
 				</div>
       </v-list-item>
