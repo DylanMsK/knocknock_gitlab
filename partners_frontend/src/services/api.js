@@ -19,6 +19,13 @@ export default {
     }
     return axios.post(`${accountsUrl}/partner/signup/`, params)
   },
+  userSignOut (token) {
+    return axios.post(`${accountsUrl}/logout/`, {
+      headers: {
+        'Authorization': 'knock ' + token
+      }
+    })
+  },
   userAuth (token) {
     return axios.get(`${accountsUrl}/partner/auth/`, {
       headers: {

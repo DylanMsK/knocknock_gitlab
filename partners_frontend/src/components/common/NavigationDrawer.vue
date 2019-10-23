@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
@@ -59,14 +59,15 @@ export default {
   },
   methods: {
     ...mapMutations('drawer', ['drawerOnOff']),
+    ...mapActions('auth', ['userSignOut']),
     goToStore () {
       this.drawerOnOff()
       router.push('/store').catch(err => {
         console.log('이동하려는 위치가 현재와 동일합니다. / ' + err.message)
       })
     },
-    signOut () {
-      console.log('ㅎㅇ?')
+    async signOut () {
+      await this.userSignOut()
     }
   }
 }
