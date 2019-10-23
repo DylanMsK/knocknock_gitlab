@@ -16,5 +16,19 @@ export default {
       password: user.password
     }
     return axios.post(`${accountsUrl}/client/login/`, params)
+  },
+  signOut (token) {
+    return axios.get(`${accountsUrl}/client/logout/`, {
+      headers: {
+        'Authorization': 'knock ' + token
+      }
+    })
+  },
+  userAuth (token) {
+    return axios.get(`${accountsUrl}/client/auth/`, {
+      headers: {
+        'Authorization': 'knock ' + token
+      }
+    })
   }
 }

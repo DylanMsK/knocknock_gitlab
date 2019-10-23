@@ -1,7 +1,8 @@
 import api from '@/services/api'
 
 const state = {
-  err: null
+  err: null,
+  condition: true // 로그인
 }
 
 const mutations = {
@@ -10,6 +11,12 @@ const mutations = {
   },
   initError (state) {
     state.err = null
+  },
+  logInCondition (state) {
+    state.condition = true // 로그인
+  },
+  logOutCondition (state) {
+    state.condition = false // 로그아웃
   }
 }
 
@@ -25,6 +32,19 @@ const actions = {
     }).catch(err => {
       commit('setError', err.message)
     })
+  },
+  async signOut ({ commit }) {
+    var token = JSON.parse(localStorage.getItem('user')).token
+    await api.signOut(token).then(() => {
+      localStorage.removeItem('user')
+      commit('setError')
+    }).catch(err => {
+      console.log(err.message)
+    })
+  },
+  async userAuth ({ commit }) {
+    var token = JSON.parse(localStorage.getItem('user')).token
+    await api.userAuth(token)
   }
 }
 

@@ -70,8 +70,17 @@
         <v-list-item class="height-90">
           <v-list-item-content>
             <v-list-item-title
+              v-if="condition"
               @click="goTo('auth')"
-              class="primary-text">로그인</v-list-item-title>
+              class="primary-text">
+                로그인
+            </v-list-item-title>
+            <v-list-item-title
+              v-else
+              @click="logOut()"
+              class="primary-text">
+                로그아웃
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </div>
@@ -94,7 +103,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
@@ -111,15 +120,29 @@ export default {
 		// 백엔드 연결하면 수정할 것
     ...mapState({
 			user: state => state.toggle.tempUserInfoShow,
-			drawer: state => state.toggle.navDrawerShow,
+      drawer: state => state.toggle.navDrawerShow,
+      condition: state => state.auth.condition,
+      err: state => state.auth.err
     })
   },
   methods: {
+    ...mapActions('auth', ['signOut']),
+    ...mapMutations('auth', ['initError', 'logInCondition']),
 		...mapMutations('toggle', ['toggleNavDrawer']),
     goTo (path) {
       this.toggleNavDrawer(false)
       router.push({ name: path })
-		},
+    },
+    async logOut () {
+      await this.signOut()
+      if (!this.err) {
+        console.log('로그아웃 성공')
+        this.logInCondition()
+      } else {
+        console.log('로그아웃 실패')
+        this.initError()
+      }
+    },
 		turnoffDrawer() {
 			this.toggleNavDrawer(false)
 		}
