@@ -72,7 +72,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators'
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
@@ -89,6 +89,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('auth', ['err']),
     emailErrors () {
       const errors = []
       if (!this.$v.email.$dirty) return errors
@@ -109,20 +110,33 @@ export default {
     ...mapMutations('toggle', ['toggleHeader']),
     // 백엔드 연결하면 삭제할 것
     ...mapMutations('toggle', ['toggleUserInfo']),
+    ...mapMutations('auth', ['initError']),
+    ...mapActions('auth', ['signIn']),
     openSignup () {
       this.$v.$reset()
       this.email = ''
       this.password = ''
       this.toggleSignup(true)
     },
-    signin () {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
-        router.push({ name: 'main' })
-        this.toggleHeader(true)
-        // 백엔드 연결하면 삭제할 것
-        this.toggleUserInfo(true)
-      } else {}
+    async signin () {
+      console.log(this.err) 
+      if (this.email == '' || this.password == '') {
+        this.$emit('turnToggleWrite')
+      } else {
+        var info = {
+          email: this.email,
+          password: this.password
+        }
+        await this.signIn(info)
+        if (!this.err) {
+          router.push('/')
+          this.toggleHeader(true)
+        } else {
+          console.log('로그인 실패 ㅠㅠ')
+          this.initError()
+          this.$emit('turnToggleError')
+        }
+      }
     }
   }
 }

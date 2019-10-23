@@ -9,5 +9,12 @@ export default {
       password: newUser.password
     }
     return axios.post(`${accountsUrl}/client/signup/`, params)
+  },
+  signIn (user) {
+    var params = {
+      username: user.email,
+      password: user.password
+    }
+    return axios.post(`${accountsUrl}/client/login/`, params)
   }
 }

@@ -18,6 +18,13 @@ const actions = {
     await api.signUp(payload).catch(err => {
       commit('setError', err.message)
     })
+  },
+  async signIn ({ commit }, payload) {
+    await api.signIn(payload).then(resp => {
+      localStorage.setItem('user', JSON.stringify(resp.data.user))
+    }).catch(err => {
+      commit('setError', err.message)
+    })
   }
 }
 
