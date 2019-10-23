@@ -14,29 +14,31 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
+				<div v-if="!condition">
+					<v-btn 
+						icon
+						class="mx-3"
+					>
+						<v-icon>mdi-bell-outline</v-icon>
+					</v-btn>
+				</div>
 				<div>
 					<v-btn
 						@click="goTo('main')"
 						icon
-						class="mx-3"
 					>
 						<v-icon>mdi-home-outline</v-icon>
 					</v-btn>
 				</div>
-				<div v-if="user">
-					<v-btn icon>
-						<v-icon>mdi-bell-outline</v-icon>
-					</v-btn>
-				</div>
       </v-list-item>
 
-      <div v-if="user">
+      <div v-if="!condition">
         <v-list-item class="height-90">
           <v-list-item-avatar>
             <v-img src="../../assets/person-blue.png"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>이혜희</v-list-item-title>
+            <v-list-item-title>{{ email }}</v-list-item-title>
           </v-list-item-content>
           <v-btn 
 						@click="goTo('profile')"
@@ -69,8 +71,10 @@
           <v-list-item-content>
             <v-list-item-title
               @click="goTo('auth')"
-              class="primary-text">로그인</v-list-item-title>
-          </v-list-item-content>
+              class="primary-text">
+                로그인
+            </v-list-item-title>
+					</v-list-item-content>
         </v-list-item>
       </div>
 
@@ -92,31 +96,35 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
   data () {
     return {
       items: [
-        { title: '공지사항', path: 'main' },
+        { title: '공지사항', path: 'notice' },
         { title: '위치기반서비스 이용약관', path: 'termsofuse' },
-        { title: '1:1문의', path: 'main' }
-      ]
+        { title: '1:1문의', path: 'question' }
+			]
     }
-  },
+	},
   computed: {
-		// 백엔드 연결하면 수정할 것
     ...mapState({
 			user: state => state.toggle.tempUserInfoShow,
-			drawer: state => state.toggle.navDrawerShow,
-    })
+      drawer: state => state.toggle.navDrawerShow,
+			condition: state => state.auth.condition,
+			email: state => state.auth.email
+		})
   },
   methods: {
+		...mapMutations('auth', ['setEmail']),
 		...mapMutations('toggle', ['toggleNavDrawer']),
     goTo (path) {
       this.toggleNavDrawer(false)
-      router.push({ name: path })
+			if (this.$route.name !== path) {
+				router.push({ name: path })
+			}
 		},
 		turnoffDrawer() {
 			this.toggleNavDrawer(false)

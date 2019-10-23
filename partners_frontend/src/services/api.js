@@ -20,7 +20,7 @@ export default {
     return axios.post(`${accountsUrl}/partner/signup/`, params)
   },
   userSignOut (token) {
-    return axios.post(`${accountsUrl}/logout/`, {
+    return axios.get(`${accountsUrl}/partner/logout/`, {
       headers: {
         'Authorization': 'knock ' + token
       }

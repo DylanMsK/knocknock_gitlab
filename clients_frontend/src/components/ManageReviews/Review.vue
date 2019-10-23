@@ -6,8 +6,7 @@
 				<v-icon class="grey--text">mdi-chevron-right</v-icon>
 			</v-btn>
 		</div>
-		<!-- 수정 버튼 누르기 전 -->
-		<div v-if="!modify">
+		<div>
 			<div>
 				<v-rating 
 					v-model="review.score"
@@ -20,32 +19,11 @@
 				></v-rating>
 				<span class="caption">2019-10-22</span>
 			</div>
-			<div class="pt-2 pl-1">
-				<p class="mb-0">{{ review.content }}</p>
-			</div>
-		</div>
-		<!-- 수정 버튼 누른 후 -->
-		<div v-else>
-			<div>
-				<v-rating 
-					v-model="review.score"
-					dense
-					small
-					background-color="yellow darken-3"
-					color="yellow darken-3"
-					class="review-rating mr-3"
-				></v-rating>
-			</div>
-			<div class="pt-2 pl-1">
-				<v-textarea 
-					:value="review.content"
-					class="mb-0">
-				</v-textarea>
-			</div>
+			<p class="mb-0 pt-2 pl-1">{{ review.content }}</p>
 		</div>
 		<div>
 			<v-btn
-				@click="modifyReview"
+				@click="goTo('modify-review', review.id)"
 				icon
 				color="primary"
 				class="review-btn"	
@@ -57,6 +35,7 @@
 				class="vertical-divider"
 			></v-divider>
 			<v-btn 
+				@click="dialog=true"
 				icon	
 				color="primary"
 				class="review-btn"	
@@ -64,37 +43,57 @@
 				삭제
 			</v-btn>
 		</div>
+
+		<!-- Chechk Modal -->
+		<v-dialog
+      v-model="dialog"
+      max-width="290"
+    >
+      <v-card class="text-center">
+        <p class="pt-5">
+          리뷰를 정말 삭제하시겠습니까?
+        </p>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-3"
+            text
+            @click="dialog = false"
+          >
+            닫기
+          </v-btn>
+          <v-btn
+            color="blue darken-3"
+            text
+            @click="dialog = false"
+          >
+            확인
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 	</div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import router from '../../router'
 
 export default {
 	data() {
 		return {
-			modify: false,
+			dialog: false,
 		}
 	},
 	props: {
-		reviewId: {
-			type: Number,
-			default: 0,
+		review: {
+			type: Object,
+			default: {},
 		}
-	},
-	computed: {
-		...mapGetters('review', {
-			review: 'getReview'
-		})
-	},
-	created() {
-		this.getSingleReview(this.reviewId)
 	},
 	methods: {
-		...mapActions('review', ['getSingleReview']),
-		modifyReview () {
-			this.modify = !this.modify
-		}
+    goTo(path, params) {
+			router.push({ name: path, params:{ reviewId: params} });
+    },
 	}
 }
 </script>

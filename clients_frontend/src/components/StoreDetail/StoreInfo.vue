@@ -16,7 +16,7 @@
 		<v-tabs-items v-model="tab">
 			<v-tab-item>
 				<v-card flat>
-					<Notice />
+					<Option />
 				</v-card>
 			</v-tab-item>
 			<v-tab-item>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Notice from './Notice'
+import Option from './Option'
 import Menu from './Menu'
 import Location from './Location'
 import Review from './Review'
@@ -54,7 +54,7 @@ export default {
 		}
 	},
 	components: {
-		Notice,
+		Option,
 		Menu,
 		Location,
 		Review

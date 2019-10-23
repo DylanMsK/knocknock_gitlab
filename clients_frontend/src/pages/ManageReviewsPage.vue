@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ReviewList from '../components/Reviews/ReviewList'
+import ReviewList from '../components/ManageReviews/ReviewList'
 
 export default {
 	components: {

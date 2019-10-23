@@ -62,7 +62,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			storeInfo: state => state.storeInfo.storeInfo,
+			storeInfo: state => state.store.storeInfo,
 		})
 	},
 	methods: {

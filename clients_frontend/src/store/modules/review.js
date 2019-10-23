@@ -39,7 +39,7 @@ const getters = {
 
 const actions = {
 	getSingleReview({ commit }, reviewId) {
-		const review = state.reviews[reviewId]
+		const review = state.reviews[reviewId-1]
 		commit('setSingleReview', review)
 	}
 }

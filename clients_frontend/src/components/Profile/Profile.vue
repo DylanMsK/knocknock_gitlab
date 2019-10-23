@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div>
+		<div class="mx-10">
 			<v-text-field 
 				outlined
 				:value=profile.nickname
@@ -8,7 +8,11 @@
 				class="profile-textfield"
 			>
 			</v-text-field>
-			<v-btn text block class="font-weight-bold">
+			<v-btn 
+				text 
+				block 
+				class="font-weight-bold"
+			>
 				수정
 			</v-btn>
 		</div>
@@ -61,6 +65,7 @@
 		<div class="positon-bottom">
 			<v-btn 
 				text
+				@click="logOut()"
 				class="charcoal--text"
 			>
 				로그아웃
@@ -76,20 +81,36 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import router from '../../router'
 
 export default {
 	computed: {
 		...mapGetters('profile', {
 			profile: 'getprofile'
-		})
+		}),
+		...mapState('auth', ['err'])
 	},
 	created() {
 		this.getSingleProfile(0)
 	},
 	methods: {
-		...mapActions('profile', ['getSingleProfile'])
-	}
+    ...mapMutations('auth', ['initError', 'logInCondition', 'initEmail']),
+		...mapActions('profile', ['getSingleProfile']),
+		...mapActions('auth', ['signOut']),
+		async logOut () {
+			await this.signOut()
+			if (!this.err) {
+				console.log('로그아웃 성공')
+				router.push('/')
+				this.logInCondition()
+				this.initEmail()
+			} else {
+				console.log('로그아웃 실패')
+				this.initError()
+			}
+		}
+	},
 }
 </script>
 
@@ -105,7 +126,7 @@ export default {
 }
 .profile-textfield {
 	height: 60px;
-	margin: 24px 36px 0 36px;
+	margin-top: 24px;
 }
 .profile-btn {
 	height: 40px !important;

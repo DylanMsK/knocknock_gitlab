@@ -78,7 +78,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   mixins: [validationMixin],
@@ -130,10 +130,13 @@ export default {
     },
     ...mapState({
       dialog: state => state.toggle.signupShow
-    })
+    }),
+    ...mapState('auth', ['err'])
   },
   methods: {
     ...mapMutations('toggle', ['toggleSignup']),
+    ...mapMutations('auth', ['initError']),
+    ...mapActions('auth', ['signUp']),
     backSignin () {
       this.$v.$reset()
       this.email = ''
@@ -141,8 +144,25 @@ export default {
       this.checkPassword = ''
       this.toggleSignup(false)
     },
-    signup () {
+    async signup () {
       this.$v.$touch()
+      if (this.$v.$invalid) {
+        console.log('유효성 검사에서 에러가 발견되었습니다.')
+      } else {
+        var info = {
+          email: this.email,
+          password: this.password,
+          checkPassword: this.checkPassword
+        }
+        await this.signUp(info)
+        if (!this.err) {
+          this.toggleSignup(false)
+          this.$emit('turnToggle')
+        } else {
+          this.$emit('turnToggleError')
+          this.initError()
+        }
+      }
     }
   }
 }

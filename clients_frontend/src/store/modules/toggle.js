@@ -4,7 +4,8 @@ const state = {
 	navDrawerShow: false,
   // 백엔드 연결하면 삭제할 것
   tempUserInfoShow: false,
-  filterShow: false,
+	filterShow: false,
+	registerReviewModalShow: false,
 }
 
 const mutations = {
@@ -23,7 +24,10 @@ const mutations = {
   },
   toggleFilter (state, toggle) {
 	  state.filterShow = toggle
-  }
+	},
+	toggleRegisterReviewModal (state, toggle) {
+		state.registerReviewModalShow = toggle 
+	}
 }
 
 export default {
