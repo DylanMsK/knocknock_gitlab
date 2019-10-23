@@ -1,4 +1,5 @@
-from django.db import models
+# from django.db import models
+from django.contrib.gis.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 from accounts.models import Partner
@@ -35,8 +36,9 @@ class Store(models.Model):
     name = models.CharField('이름', max_length=50)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='카테고리')
     description = models.TextField('설명', blank=True, default='')
-    lon = models.FloatField('경도', validators=[MaxValueValidator(180), MinValueValidator(-180)])
-    lat = models.FloatField('위도', validators=[MaxValueValidator(90), MinValueValidator(-90)])
+    # lon = models.FloatField('경도', validators=[MaxValueValidator(180), MinValueValidator(-180)])
+    # lat = models.FloatField('위도', validators=[MaxValueValidator(90), MinValueValidator(-90)])
+    location = models.PointField(srid=4326)
     thumbnail = models.TextField('대표 사진', blank=True, default='')
     contact = models.CharField('전화번호', max_length=15, blank=True, default='')
     road_addr = models.CharField('도로명 주소', max_length=50)
@@ -47,7 +49,7 @@ class Store(models.Model):
     partner = models.ForeignKey(Partner, on_delete=models.SET_NULL, default=None, null=True, blank=True, verbose_name='파트너')
     review_cnt = models.IntegerField('네이버 리뷰갯수', default=0)
     view_cnt = models.IntegerField('조회수', default=0)
-    options = models.ManyToManyField(Option, verbose_name='옵션')
+    options = models.ManyToManyField(Option, verbose_name='옵션', blank=True)
     updated_at = models.DateTimeField('마지막 수정일', auto_now=True)
 
     class Meta:
