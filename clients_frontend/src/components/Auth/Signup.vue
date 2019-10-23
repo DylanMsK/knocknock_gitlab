@@ -99,9 +99,9 @@ export default {
   },
   data () {
     return {
-      email: 'rrkkee015@naver.com',
-      password: '18hantmd90',
-      checkPassword: '18hantmd90'
+      email: '',
+      password: '',
+      checkPassword: ''
     }
   },
   computed: {
