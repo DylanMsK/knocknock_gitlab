@@ -31,12 +31,12 @@
 				<v-icon>mdi-minus</v-icon>
 			</v-btn>
 		</div>
-		<div class="refreshBtn radius_border">
+		<div class="gpsBtn radius_border">
 			<v-btn
 				@click="currentAddr"
 				icon
 			>
-				<v-icon>mdi-refresh</v-icon>
+				<v-icon>mdi-crosshairs-gps</v-icon>
 			</v-btn>
 		</div>
 	</div>
@@ -100,6 +100,7 @@ export default {
 		onMapEvent (params) {
 			this.pointMarker.setPosition(params[0].latLng)
 			this.searchAddrFromCoords(params[0].latLng, this.displayCenterInfo);
+			console.log(params[0].latLng)
 		},
 		getAddr () {
 			this.searchAddrFromCoords(this.map.getCenter(), this.displayCenterInfo);
@@ -174,7 +175,7 @@ export default {
 	z-index: 1;
 	text-align: center;
 }
-.refreshBtn {
+.gpsBtn {
 	position: absolute;
 	width: 40px;
 	background-color: white;
