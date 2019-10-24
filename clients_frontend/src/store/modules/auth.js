@@ -44,7 +44,9 @@ const actions = {
   },
   async userAuth ({ commit }) {
     var token = JSON.parse(localStorage.getItem('user')).token
-    await api.userAuth(token)
+    await api.userAuth(token).catch(err => {
+      commit('setError', err)
+    })
   }
 }
 

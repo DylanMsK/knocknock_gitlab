@@ -7,6 +7,7 @@ module.exports = {
     proxy: {
       '/accounts': {
         target: 'http://localhost:8000/'
+        // target: 'http://13.125.93.228/'
       }
     }
   },
