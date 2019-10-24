@@ -7,6 +7,7 @@
 			:mapTypeId="mapTypeId"
 			:libraries="libraries"
 			@load="onLoad"
+			@dblclick="zoomIn"
 			@click="onMapEvent($event)"
 			class="map" />
 		<div class="zoomControl radius_border">
@@ -41,7 +42,9 @@ export default {
 			level: 3,
 			mapTypeId: VueDaumMap.MapTypeId.NORMAL,
 			libraries: [],
-			map: null
+			map: null,
+			curMarker: null,
+			pointMarker: null,
 		}
 	},
 	methods: {
@@ -62,11 +65,15 @@ export default {
 					var imageSrc = 'http://testrottenwifi.ito.lt/bundles/itowififront/images/my-location-icon.png',
 							imageSize = new kakao.maps.Size(70, 70),
 							imageOption = {offset: new kakao.maps.Point(27, 69)}; 
-					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
-					var marker = new kakao.maps.Marker({
+					var curMarkerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+					this.curMarker = new kakao.maps.Marker({
 						map: map,
 						position: new kakao.maps.LatLng(lat, lng),
-						image: markerImage
+						image: curMarkerImage
+					})
+					this.pointMarker = new kakao.maps.Marker({
+						map: map,
+						position: ''
 					})
 				})
 			} else {
@@ -74,18 +81,7 @@ export default {
 			}
 		},
 		onMapEvent (params) {
-			var lat = params[0].latLng.Ha
-			var lng = params[0].latLng.Ga
-			console.log(`lat: ${lat}, lng: ${lng}`)
-			this.displayMarker(lat, lng)
-		},
-		displayMarker (lat, lng) {
-			var marker = new kakao.maps.Marker({
-				map: this.map,
-				position: new kakao.maps.LatLng(lat, lng)
-			})
-
-			marker.setPosition((lat, lng));
+			this.pointMarker.setPosition(params[0].latLng)
 		},
 		zoomIn () {
 			if (this.level > 1) {
