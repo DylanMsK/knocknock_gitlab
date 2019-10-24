@@ -1,4 +1,4 @@
-import api from '@/services/api'
+import api from '@/services/authApi'
 
 const state = {
   signUpToggle: false,
@@ -28,8 +28,8 @@ const actions = {
   async userSignIn ({ commit }, payload) {
     await api.userSignIn(payload).then(resp => {
       localStorage.setItem('user', JSON.stringify(resp.data.user))
-    }).catch(err => {
-      commit('setError', err.message)
+    }).catch(error => {
+      commit('setError', error.message)
     })
   },
   async userSignUp ({ commit }, payload) {
@@ -42,13 +42,15 @@ const actions = {
     await api.userSignOut(token).then(() => {
       localStorage.removeItem('user')
       commit('signOutCheck')
-    }).catch(err => {
-      console.log(err.message)
+    }).catch(error => {
+      console.log(error.message)
     })
   },
   async userAuth ({ commit }) {
     var token = JSON.parse(localStorage.getItem('user')).token
-    await api.userAuth(token)
+    await api.userAuth(token).catch(error => {
+      commit('setError', error.message)
+    })
   }
 }
 
