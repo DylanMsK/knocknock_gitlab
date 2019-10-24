@@ -8,5 +8,4 @@ class StoreAdmin(OSMGeoAdmin):
 
 admin.site.register(Category)
 admin.site.register(Option)
-# admin.site.register(Store)
 admin.site.register(BusinessRegistration)
