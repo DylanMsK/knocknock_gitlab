@@ -4,7 +4,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from accounts.models import Partner
-from accounts.serializers import (
+from accounts.serializers.partner_serializers import (
     PartnerSignupSerializer,
     LoginSerializer,
     UserSerializer,
@@ -73,3 +73,4 @@ class PartnerLogoutAPI(generics.RetrieveAPIView):
         user_logged_out.send(sender=request.user.__class__,
                              request=request, user=request.user)
         return Response({'message': '로그아웃 완료'}, status=status.HTTP_202_ACCEPTED)
+
