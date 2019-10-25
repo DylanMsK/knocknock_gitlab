@@ -1,12 +1,17 @@
 <template>
 	<v-container>
 		<p class="font-headline">리뷰관리</p>
-		<div
-			v-for="(review, idx) in reviews"
-			:key="idx"	
-			class="mb-12"
-		>	
-			<Review :review="review" />
+		<div v-if="reviews.length">
+			<div
+				v-for="(review, idx) in reviews"
+				:key="idx"	
+				class="mb-12"
+			>	
+				<Review :review="review" />
+			</div>
+		</div>
+		<div v-else>
+			<p>등록된 리뷰가 없습니다.</p>
 		</div>
 	</v-container>
 </template>

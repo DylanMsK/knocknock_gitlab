@@ -2,35 +2,35 @@
 	<div>
 		<!-- Info -->
 		<div class="thumbnail-wrap">
-			<v-img :src="storeInfo.thumbnail"></v-img>
+			<v-img :src="store.thumbnail" class="thumbnail"></v-img>
 		</div>
 		<div class="mx-5 my-2">
 			<div class="store-title text-center">
-				<span class="store-name">{{ storeInfo.name }}</span>
-				<span class="store-subcategory">{{ storeInfo.subCategory }}</span>
+				<span class="store-name">{{ store.name }}</span>
+				<span class="store-subcategory">{{ store.subCategory }}</span>
 			</div>
 			<div class="store-info text-center">
-				<span>최근리뷰 {{ storeInfo.reviewCnt }}</span>
+				<span>최근리뷰 {{ store.reviewCnt }}</span>
 				<v-divider
 					vertical 
 					class="vertical-divider"
 				></v-divider>
-				<span class="primary--text">{{ storeInfo.contact }}</span>
+				<span class="primary--text">{{ store.contact }}</span>
 			</div>
 			<v-divider class="my-2"></v-divider>
 			<v-row class="charcoal--text">
 				<v-col cols="12">
-					<p class="store-remaining">마감 {{ storeInfo.remainingTime }}분 전</p>
+					<p class="store-remaining">마감 {{ store.remainingTime }}분 전</p>
 				</v-col>
 				<v-col 
 					cols="10"
 					class="pt-0"
 				>
 					<p class="mb-2">
-						<v-icon class="store-icon">mdi-clock-outline</v-icon><span>{{ storeInfo.biztime }}</span>
+						<v-icon class="store-icon">mdi-clock-outline</v-icon><span>{{ store.biztime }}</span>
 					</p>
 					<p class="mb-2">
-						<v-icon class="store-icon">mdi-map-marker-outline</v-icon><span>{{ storeInfo.addr }}</span>
+						<v-icon class="store-icon">mdi-map-marker-outline</v-icon><span>{{ store.addr }}</span>
 					</p>
 				</v-col>
 				<v-col 
@@ -50,22 +50,28 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	data() {
 		return {
+			storeId: 0,
 			snackbar: true,
 			timeout: 0,
 			bookmark: false,
 		}
 	},
+	created() {
+		this.storeId = this.$router.app._route.params.storeId
+	},
 	computed: {
-		...mapState({
-			storeInfo: state => state.store.storeInfo,
-		})
+		...mapState('store', ['store'])
+	},
+	mounted() {
+		this.getSingleStore(this.storeId)
 	},
 	methods: {
+		...mapActions('store', ['getSingleStore']),
 		checkBookmark() {
 			this.bookmark = !this.bookmark
 		}
@@ -74,9 +80,10 @@ export default {
 </script>
 
 <style scoped>
-.thumbnail-wrap {
+.thumbnail {
 	width: 100%;
 	height: 280px;
+	object-fit: cover;
 }
 .store-title {
 	padding: 5px;

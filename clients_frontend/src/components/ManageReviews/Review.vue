@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="pl-1">
-			<span class="store-title">store name</span>
+			<span class="store-title">{{ store.name }}</span>
 			<v-btn icon>
 				<v-icon class="grey--text">mdi-chevron-right</v-icon>
 			</v-btn>
@@ -77,6 +77,7 @@
 
 <script>
 import router from '../../router'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	data() {
@@ -90,7 +91,14 @@ export default {
 			default: {},
 		}
 	},
+	computed: {
+		...mapState('store', ['store'])
+	},
+	mounted() {
+		this.getSingleStore(this.review.store)
+	},
 	methods: {
+		...mapActions('store', ['getSingleStore']),
     goTo(path, params) {
 			router.push({ name: path, params:{ reviewId: params} });
     },
