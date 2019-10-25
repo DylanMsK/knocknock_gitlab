@@ -19,7 +19,7 @@
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">사업자 주소</v-col>
-        <v-col cols="8">서울특별시 강남구 역삼동 테헤란로38길 40-8</v-col>
+        <v-col cols="8">{{ data.road_addr }}</v-col>
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">사업자 번호</v-col>
@@ -59,7 +59,7 @@
     <div class="info-detail-category">
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">연락처</v-col>
-        <v-col cols="8">010-5191-0337</v-col>
+        <v-col cols="8">{{ data.contact }}</v-col>
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">주차</v-col>
@@ -83,7 +83,8 @@
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">가격대</v-col>
-        <v-col cols="8">{{ data.price_avg }} 원</v-col>
+        <v-col v-if="data.price_avg!=='0'" cols="8">{{ data.price_avg }} 원</v-col>
+        <v-col v-else cols="8">가격대 정보가 없습니다.</v-col>
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">네이버 리뷰 수</v-col>

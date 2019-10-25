@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const partnerUrl = '/partner/stores'
+// const partnerUrl = '/partner/stores'
+const partnerUrl = 'http://13.125.93.228/partner/stores'
 
 export default {
   getAllStores (token) {

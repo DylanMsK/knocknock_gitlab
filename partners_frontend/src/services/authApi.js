@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const accountsUrl = '/accounts'
+// const accountsUrl = '/accounts'
+const accountsUrl = 'http://13.125.93.228/accounts'
 
 export default {
   userSignIn (user) {

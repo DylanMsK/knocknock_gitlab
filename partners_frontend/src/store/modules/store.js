@@ -25,7 +25,10 @@ const mutations = {
       storeName: state.oneStore.data.name,
       description: state.oneStore.data.description,
       price_avg: state.oneStore.data.price_avg.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-      review_cnt: state.oneStore.data.review_cnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      review_cnt: state.oneStore.data.review_cnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      road_addr: state.oneStore.data.road_addr,
+      contact: state.oneStore.data.contact,
+      option: state.oneStore.data.option
     }
   }
 }
