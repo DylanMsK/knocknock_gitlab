@@ -57,7 +57,6 @@
 
 <script>
 import VueDaumMap from 'vue-daum-map'
-import config from '../../../map.config';
 
 export default {
 	components: {
@@ -65,7 +64,7 @@ export default {
 	},
 	data() {
 		return {
-			appKey: config.appKey,
+			appKey: process.env.VUE_APP_KEY,
 			center: {lat: 37.553190, lng: 126.972759}, 
 			level: 3,
 			mapTypeId: VueDaumMap.MapTypeId.NORMAL,
