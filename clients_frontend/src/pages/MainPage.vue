@@ -43,7 +43,7 @@ export default {
     return{
       toggle_exclusive: 0,
     }
-  },
+	},
   components: {
 		Map,
 		StoreList,
@@ -54,8 +54,12 @@ export default {
 			filterToggle: state => state.toggle.filterShow
 		})
 	},
+	mounted() {
+		this.toggleHeader(true)
+	},
 	methods: {
-    ...mapMutations('toggle', ['toggleFilter']),
+		...mapMutations('toggle', ['toggleFilter']),
+		...mapMutations('toggle', ['toggleHeader']),
     turnonFilter() {
       this.toggleFilter(!this.filterToggle)
     },
