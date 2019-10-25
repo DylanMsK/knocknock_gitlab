@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from accounts.models import Partner
+from stores.models import Store
 
 
 class PartnerSignupSerializer(serializers.ModelSerializer):
@@ -48,4 +49,10 @@ class PartnerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Partner
+        fields = '__all__'
+
+
+class PartnerStoresSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Store
         fields = '__all__'
