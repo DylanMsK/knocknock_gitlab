@@ -1,24 +1,26 @@
 import axios from 'axios'
 
-const storesUrl = '/stores'
+const partnerUrl = '/partner/stores'
 
 export default {
-  getAllStores (user) {
-    var params = {
-
-    }
-    return axios.get(`${storesUrl}/`, params)
+  getAllStores (token) {
+    return axios.get(`${partnerUrl}/`, {
+      headers: {
+        'Authorization': 'knock ' + token
+      }
+    })
   },
-  getOneStore (storeId) {
-    var params = {
-
-    }
-    return axios.get(`${storesUrl}/`, params)
+  getOneStore (storeId, token) {
+    return axios.get(`${partnerUrl}/` + storeId + '/', {
+      headers: {
+        'Authorization': 'knock ' + token
+      }
+    })
   },
   enrollStore (info) {
     var params = {
 
     }
-    return axios.get(`${storesUrl}/`, params)
+    return axios.get(`${partnerUrl}/`, params)
   }
 }

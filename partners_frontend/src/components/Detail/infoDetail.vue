@@ -5,7 +5,7 @@
       <p class="info-modify">수정하기</p>
     </div>
     <p class="info-description">
-      민수네 국밥가게는 돼지국밥, 순대국밥, 콩나물국밥 등 다양한 국밥을 판매하며, 한 숟가락 드실 시 든든~하고, 뜨뜻하게 하루를 보낼 수 있습니다. 만약, 조커가 국밥을 먹을 수 있었다면, 몸도 마음도 따뜻해져서 최악의 악당으로 되지 않았을겁니다.
+      {{ data.description }}
     </p>
     <p class="info-title">사업자 정보</p>
     <div class="info-detail-category">
@@ -15,7 +15,7 @@
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">상호명</v-col>
-        <v-col cols="8">민수네 국밥가게</v-col>
+        <v-col cols="8">{{ data.storeName }}</v-col>
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">사업자 주소</v-col>
@@ -83,11 +83,11 @@
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">가격대</v-col>
-        <v-col cols="8">10,000원 ~ 25,000원</v-col>
+        <v-col cols="8">{{ data.price_avg }} 원</v-col>
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">네이버 리뷰 수</v-col>
-        <v-col cols="8">7,302개</v-col>
+        <v-col cols="8">{{ data.review_cnt }} 개</v-col>
       </v-col>
       <v-col cols="12" class="info-detail pb-2">
         <v-col cols="4" class="info-tag">조회수</v-col>
@@ -99,7 +99,12 @@
 
 <script>
 export default {
-  
+  props: {
+    data: {
+      type: Object,
+      default: {}
+    }
+  }
 }
 </script>
 

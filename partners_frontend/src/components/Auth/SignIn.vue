@@ -38,8 +38,8 @@ import router from '../../router'
 export default {
   data () {
     return {
-      email: 'pok_winter@naver.com',
-      password: '18hantmd90'
+      email: '',
+      password: ''
     }
   },
   computed: {
