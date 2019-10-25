@@ -57,6 +57,7 @@
 
 <script>
 import VueDaumMap from 'vue-daum-map'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
 	components: {
@@ -76,8 +77,13 @@ export default {
 			refresh: false,
 		}
 	},
+	computed: {
+		...mapGetters('store', ['storesLoc'])
+	},
 	methods: {
+		...mapMutations('store', ['getRequestObj']),
 		onLoad (map) {
+			this.map = map
 			// 지도가 load 되면 현재위치를 center로 지정
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition((position) => {
@@ -89,7 +95,6 @@ export default {
 					this.center.lng = lng
 
 					// 현재 위치 마커 표시
-					this.map = map					
 					var imageSrc = 'http://testrottenwifi.ito.lt/bundles/itowififront/images/my-location-icon.png',
 							imageSize = new kakao.maps.Size(70, 70),
 							imageOption = {offset: new kakao.maps.Point(27, 69)}; 
@@ -103,12 +108,36 @@ export default {
 			} else {
 				console.log('geolocation 사용 불가능')
 			}
-			// 클릭한 곳 마커 표시
+			this.getRequestObj({
+				'lat': this.center.lat,
+				'lon': this.center.lng,
+				'hour': 0,
+				'd': 500
+			})
+			// // 클릭한 곳 마커 표시
 			// this.pointMarker = new kakao.maps.Marker({
 			// 	map: map,
 			// 	position: ''
 			// })
 			// this.searchAddrFromCoords(map.getCenter(), this.displayCenterInfo);
+			this.markingStore()
+		},
+		markingStore () {
+			// stores 불러와서 마커 찍기
+			for (var idx in this.storesLoc) {
+				var storeLoc = new kakao.maps.LatLng(this.storesLoc[idx].latlon.lat, this.storesLoc[idx].latlon.lon)
+				var storeMarker = new kakao.maps.Marker({
+					map: this.map,
+					position: storeLoc
+				})
+
+				var infowindow = new kakao.maps.InfoWindow({
+					position : storeLoc, 
+					content : `<div style="width: 100%; padding: 5px;">${this.storesLoc[idx].name}</div>`
+				});
+				
+				infowindow.open(this.map, storeMarker);
+			}
 		},
 		onMapEvent (params) {
 			// this.pointMarker.setPosition(params[0].latLng)
@@ -134,7 +163,7 @@ export default {
     if (status === kakao.maps.services.Status.OK) {
 			var infoDiv = document.getElementById('centerAddr');
 			for(var i = 0; i < result.length; i++) {
-            // 행정동의 region_type 값은 'H' 이므로
+            // 행정동의 region_type 값 'H' 
 					if (result[i].region_type === 'H') {
 							this.centerAddr = result[i].address_name;
 							break;
@@ -160,12 +189,13 @@ export default {
 		zoomIn () {
 			if (this.level > 1) {
 				this.level -= 1
-		}
-	},
+			}
+		},
 		zoomOut () {
 			if (this.level < 14) {
 				this.level += 1
-		}}
+			}
+		}
 	}
 }
 </script>

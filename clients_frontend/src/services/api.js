@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const accountsUrl = '/accounts'
+const storesUrl = '/stores'
 
 export default {
   signUp (newUser) {
@@ -30,5 +31,10 @@ export default {
         'Authorization': 'knock ' + token
       }
     })
-  }
+	},
+	
+	// Store
+	searchStores(lon, lat, hour, d) {
+		return axios.get(`${storesUrl}/?loc=${lon},${lat}&hour=${hour}&d=${d}`)
+	}
 }
