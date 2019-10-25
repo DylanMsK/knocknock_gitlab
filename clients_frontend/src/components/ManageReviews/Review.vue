@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="pl-1">
-			<span class="store-title">{{ store.name }}</span>
+			<span class="store-title">{{ storesNameInReviews[review.id-1] }}</span>
 			<v-btn icon>
 				<v-icon class="grey--text">mdi-chevron-right</v-icon>
 			</v-btn>
@@ -92,7 +92,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState('store', ['store'])
+		...mapState('store', ['store', 'storesNameInReviews'])
 	},
 	mounted() {
 		this.getSingleStore(this.review.store)

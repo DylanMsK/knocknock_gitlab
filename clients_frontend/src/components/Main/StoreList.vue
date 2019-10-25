@@ -20,7 +20,7 @@
 				<div class="ellipsis">
 					<div class="store-biztel">{{ store.contact }}</div>
 					<v-divider vertical class="divider"></v-divider>
-					<div class="store-addr">{{ store.addr }}</div>
+					<div class="store-addr">{{ store.roadAddr }}</div>
 				</div>
 			</div>
 			<v-divider 

@@ -13,7 +13,6 @@
 
 <script>
 import VueDaumMap from 'vue-daum-map'
-import config from '../../../map.config';
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -23,7 +22,7 @@ export default {
 	data() {
 		return {
 			storeId: 0,
-			appKey: config.appKey,
+			appKey: process.env.VUE_APP_KEY,
 			center: {lat: 0, lng: 0,},
 			level: 3,
 			mapTypeId: VueDaumMap.MapTypeId.NORMAL,

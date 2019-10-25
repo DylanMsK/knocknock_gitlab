@@ -26,14 +26,24 @@
 					cols="10"
 					class="pt-0"
 				>
-					<p class="mb-2">
-						<v-icon class="store-icon">mdi-clock-outline</v-icon><span>{{ store.biztime }}</span>
-					</p>
-					<p class="mb-2">
-						<v-icon class="store-icon">mdi-map-marker-outline</v-icon><span>{{ store.addr }}</span>
-					</p>
+					<div class="mb-2 d-flex">
+						<v-col cols="1" class="pa-0">
+							<v-icon class="store-icon">mdi-clock-outline</v-icon>
+						</v-col>
+						<v-col cols="11" class="py-0">
+							<span>{{ store.biztime }}</span>
+						</v-col>
+					</div>
+					<div class="mb-2 d-flex">
+						<v-col cols="1" class="pa-0">
+							<v-icon class="store-icon">mdi-map-marker-outline</v-icon>
+						</v-col>
+						<v-col cols="11" class="py-0">
+							<span>{{ store.roadAddr }}</span>
+						</v-col>
+					</div>
 				</v-col>
-				<v-col 
+				<v-col
 					cols="2"
 				>
 					<v-btn 
