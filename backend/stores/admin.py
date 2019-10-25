@@ -1,6 +1,6 @@
 from django.contrib.gis.admin import OSMGeoAdmin
 from django.contrib import admin
-from stores.models import Category, Option, Store, BusinessRegistration
+from stores.models import Category, Option, Store
 
 @admin.register(Store)
 class StoreAdmin(OSMGeoAdmin):
@@ -8,4 +8,3 @@ class StoreAdmin(OSMGeoAdmin):
 
 admin.site.register(Category)
 admin.site.register(Option)
-admin.site.register(BusinessRegistration)

@@ -1,10 +1,12 @@
 from django.urls import path
 from partners.views import (
     PartnerStoreListAPI,
-    PartnerStoreDetailAPI
+    PartnerStoreDetailAPI,
+    BusinessRegistrationAPI
 )
 
 urlpatterns = [
-    path('partner/', PartnerStoreListAPI.as_view(), name='manage_store_list'), 
-    path('partner/<int:pk>/', PartnerStoreDetailAPI.as_view(), name='manage_store_detail'), 
+    path('stores/', PartnerStoreListAPI.as_view(), name='manage_store_list'),
+    path('stores/<int:pk>/', PartnerStoreDetailAPI.as_view(), name='manage_store_detail'),
+    path('regist/', BusinessRegistrationAPI.as_view())
 ]
