@@ -4,12 +4,14 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from accounts.models import Partner
-from accounts.serializers import (
+from accounts.serializers.partner_serializers import (
     PartnerSignupSerializer,
     LoginSerializer,
     UserSerializer,
-    PartnerSerializer
+    PartnerSerializer,
+    PartnerStoresSerializer
 )
+from stores.models import Store
 from knox.models import AuthToken
 
 
@@ -73,3 +75,26 @@ class PartnerLogoutAPI(generics.RetrieveAPIView):
         user_logged_out.send(sender=request.user.__class__,
                              request=request, user=request.user)
         return Response({'message': '로그아웃 완료'}, status=status.HTTP_202_ACCEPTED)
+
+
+class PartnerStoreListAPI(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = PartnerStoresSerializer
+
+    def get_queryset(self):
+        partner = Partner.objects.get(user=self.request.user)
+        queryset = Store.objects.filter(partner=partner).all()
+        return queryset
+
+
+class PartnerStoreDetailAPI(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)         # 자기 자신만 가능한 권한도 추가해야됨
+    serializer_class = PartnerStoresSerializer
+
+    def get_queryset(self):
+        return Store.objects.all()
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, pk=self.kwargs['pk'])
+        return obj

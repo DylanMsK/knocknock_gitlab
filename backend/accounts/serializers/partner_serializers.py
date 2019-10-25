@@ -1,29 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from accounts.models import Client, Partner
-
-
-class ClientSignupSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
-
-    class Meta:
-        model = Client
-        fields = ('id', 'username', 'password')
-        extra_kwargs = {"password": {"write_only": True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password'],
-            is_active=True
-        )
-        client = Client.objects.create(
-            user=user,
-            nickname=validated_data['username'].split('@')[0]
-        )
-        return client
+from accounts.models import Partner
+from stores.models import Store
 
 
 class PartnerSignupSerializer(serializers.ModelSerializer):
@@ -66,15 +45,14 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ClientSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    class Meta:
-        model = Client
-        fields = '__all__'
-
-
 class PartnerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Partner
+        fields = '__all__'
+
+
+class PartnerStoresSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Store
         fields = '__all__'

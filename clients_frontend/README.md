@@ -6,6 +6,11 @@ npm install -g vue-cli
 npm install
 ```
 
+## Vue Daum Map
+```
+npm install vue-daum-map --save
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
