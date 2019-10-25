@@ -21,4 +21,5 @@ yarn-error.log*
 *.sw?
 
 # VueDaumMap app key
-map.config.js
+.env.development
+.env.production
