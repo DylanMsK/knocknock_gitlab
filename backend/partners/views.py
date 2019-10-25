@@ -3,11 +3,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 
 from partners.serializers import (
     PartnerStoresSerializer,
-    ImageSerializer
+    RegisterBusinessRegistration
 )
 from partners.models import BusinessRegistration
 from accounts.models import Partner
@@ -38,16 +38,14 @@ class PartnerStoreDetailAPI(generics.RetrieveUpdateAPIView):
 
 
 class BusinessRegistrationAPI(generics.GenericAPIView):
-    parser_class = (FileUploadParser,)
-    serializer_class = ImageSerializer
+    parser_class = (MultiPartParser, FormParser, FileUploadParser,)
+    permission_classes = (IsAuthenticated,)
+    serializer_class = RegisterBusinessRegistration
 
     def post(self, request, *args, **kwargs):
-        
-        serializer = self.get_serializer(data=request.data)
-
+        serializer = self.get_serializer(data=self.request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
