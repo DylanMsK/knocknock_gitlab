@@ -9,8 +9,8 @@
 			@load="onLoad"
 			@dblclick="zoomIn"
 			@click="onMapEvent($event)"
-			@dragend="getAddr"
-			@zoom_changed="getAddr"
+			@dragend="changedLoc"
+			@zoom_changed="changedLoc"
 			@bounds_changed="getAddr"
 			class="map" />
 		<div class="hAddr">
@@ -31,14 +31,27 @@
 				<v-icon>mdi-minus</v-icon>
 			</v-btn>
 		</div>
-		<div class="refreshBtn radius_border">
+		<div class="gpsBtn radius_border">
 			<v-btn
 				@click="currentAddr"
 				icon
 			>
-				<v-icon>mdi-refresh</v-icon>
+				<v-icon>mdi-crosshairs-gps</v-icon>
 			</v-btn>
 		</div>
+		<transition
+			name="fade"
+		>
+			<div 
+				v-if="refresh"
+				@click="refreshStoreList"
+				class="refreshBtn radius_border"
+			>
+				<v-btn>
+					<v-icon>mdi-refresh</v-icon>여기에서 재탐색
+				</v-btn>
+			</div>
+		</transition>
 	</div>
 </template>
 
@@ -60,6 +73,7 @@ export default {
 			curMarker: null,
 			pointMarker: null,
 			centerAddr: '',
+			refresh: false,
 		}
 	},
 	methods: {
@@ -90,15 +104,24 @@ export default {
 				console.log('geolocation 사용 불가능')
 			}
 			// 클릭한 곳 마커 표시
-			this.pointMarker = new kakao.maps.Marker({
-				map: map,
-				position: ''
-			})
-			this.searchAddrFromCoords(map.getCenter(), this.displayCenterInfo);
+			// this.pointMarker = new kakao.maps.Marker({
+			// 	map: map,
+			// 	position: ''
+			// })
+			// this.searchAddrFromCoords(map.getCenter(), this.displayCenterInfo);
 		},
 		onMapEvent (params) {
-			this.pointMarker.setPosition(params[0].latLng)
+			// this.pointMarker.setPosition(params[0].latLng)
 			this.searchAddrFromCoords(params[0].latLng, this.displayCenterInfo);
+			console.log(params[0].latLng)
+		},
+		changedLoc () {
+			this.refresh = true
+			this.searchAddrFromCoords(this.map.getCenter(), this.displayCenterInfo);
+		},
+		refreshStoreList() {
+			this.refresh = false
+			console.log(this.center)
 		},
 		getAddr () {
 			this.searchAddrFromCoords(this.map.getCenter(), this.displayCenterInfo);
@@ -166,21 +189,29 @@ export default {
 }
 .zoomControl {
 	position: absolute;
-	width: 40px;
-	background-color: white;
 	top: 200px;
 	right: 10px;
 	z-index: 1;
+	width: 40px;
+	background-color: white;
+	text-align: center;
+}
+.gpsBtn {
+	position: absolute;
+	top: 55vh;
+	right: 10px;
+	z-index: 1;
+	width: 40px;
+	background-color: white;
 	text-align: center;
 }
 .refreshBtn {
 	position: absolute;
-	width: 40px;
-	background-color: white;
-	top: 450px;
-	right: 10px;
+	top: 55vh;
 	z-index: 1;
-	text-align: center;
+	width: 150px;
+	background-color: white;
+	margin: 0 30vw;
 }
 .radius_border {
   border: 1px solid #919191;
@@ -188,5 +219,17 @@ export default {
 }
 .color_919191 {
 	border-color: #919191 !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition-duration: 0.2s;
+	transition-property: opacity;
+	transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+	opacity: 0
 }
 </style>

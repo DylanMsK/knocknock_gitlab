@@ -20,10 +20,10 @@
 				v-model="toggle_exclusive"
 				color="primary"
 			>
-				<v-btn>현재 시간</v-btn>
-				<v-btn>1시간</v-btn>
-				<v-btn>2시간</v-btn>
-				<v-btn>3시간</v-btn>
+				<v-btn @click="serveTime(0)">현재 시간</v-btn>
+				<v-btn @click="serveTime(1)">1시간</v-btn>
+				<v-btn @click="serveTime(2)">2시간</v-btn>
+				<v-btn @click="serveTime(3)">3시간</v-btn>
 			</v-btn-toggle>
 		</div>
 		<Map />
@@ -62,7 +62,10 @@ export default {
 		...mapMutations('toggle', ['toggleHeader']),
     turnonFilter() {
       this.toggleFilter(!this.filterToggle)
-    },
+		},
+		serveTime(params) {
+			console.log(params)
+		}
 	}
 }
 </script>
