@@ -10,8 +10,6 @@ from accounts.views.partner_views import (
     PartnerLoginAPI,
     PartnerUserAPI,
     PartnerLogoutAPI,
-    PartnerStoreListAPI,
-    PartnerStoreDetailAPI
 )
 
 
@@ -21,8 +19,6 @@ urlpatterns = [
     path('client/auth/', ClientUserAPI.as_view()),
     path('client/logout/', ClientLogoutAPI.as_view(), name="client_logout"),
 
-    path('partner/', PartnerStoreListAPI.as_view(), name='manage_store_list'), 
-    path('partner/<int:pk>/', PartnerStoreDetailAPI.as_view(), name='manage_store_detail'), 
     path('partner/signup/', PartnerSignupAPI.as_view(), name='partner_signup'),
     path('partner/login/', PartnerLoginAPI.as_view(), name='partner_login'),
     path('partner/auth/', PartnerUserAPI.as_view()),
