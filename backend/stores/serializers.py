@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from accounts.models import Partner
 from stores.models import Category, Store
 
 
@@ -7,6 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
 
 class StoreSerializer(serializers.ModelSerializer):
     category = CategorySerializer()

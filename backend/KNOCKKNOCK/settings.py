@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'knox',                             # django-rest-knox
     'accounts.apps.AccountsConfig',     # accounts
     'stores.apps.StoresConfig',         # stores
+    'partners.apps.PartnersConfig'      # partners
 ]
 
 MIDDLEWARE = [

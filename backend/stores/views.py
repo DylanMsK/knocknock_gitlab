@@ -1,8 +1,12 @@
+from rest_framework import generics, status
+from rest_framework.response import Response
+
 from django.shortcuts import get_object_or_404
 
-from rest_framework import generics
-
-from stores.serializers import CategorySerializer, StoreSerializer
+from stores.serializers import (
+    CategorySerializer,
+    StoreSerializer
+)
 from stores.models import Category, Store
 
 
@@ -22,5 +26,3 @@ class StoreDetailAPI(generics.RetrieveAPIView):
         obj = get_object_or_404(queryset, self.kwargs['pk'])
         return obj
     
-
-

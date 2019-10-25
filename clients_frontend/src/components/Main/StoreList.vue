@@ -10,7 +10,7 @@
 			class="d-block px-0 py-1"
 		>
 			<div class="store-content">
-				<div class="store-title">{{ store.title }}</div>
+				<div class="store-title">{{ store.name }}</div>
 				<div class="store-subcategory">{{ store.subCategory }}</div>
 				<div class="ellipsis">
 					<div class="store-remainingtime">마감 {{ store.remainingTime }}분 전</div>
@@ -18,7 +18,7 @@
 					<div class="store-biztime">{{ store.biztime }}</div>
 				</div>
 				<div class="ellipsis">
-					<div class="store-biztel">{{ store.biztel }}</div>
+					<div class="store-biztel">{{ store.contact }}</div>
 					<v-divider vertical class="divider"></v-divider>
 					<div class="store-addr">{{ store.addr }}</div>
 				</div>
@@ -33,53 +33,11 @@
 
 <script>
 import router from '../../router'
+import { mapState } from 'vuex'
 
 export default {
-	data() {
-		return {
-			stores: [
-				{
-					title: '마구로젠 역삼점',
-					subCategory: '생선회',
-					addr: '서울 강남구 논현로86길 32',
-					biztel: '02-573-2777',
-					biztime: '토요일 11:30~22:30 일요일 몇시까지',
-					remainingTime: '60',
-				},
-				{
-					title: '베이징코야 역삼동점',
-					subCategory: '중식당',
-					addr: '서울 강남구 논현로86길 어떤빌딩 몇층',
-					biztel: '02-573-2777',
-					biztime: '매일 11:30~22:30',
-					remainingTime: '30',
-				},
-				{
-					title: '순남시래기 역삼점',
-					subCategory: '백반, 가정식',
-					addr: '서울 강남구 논현로86길 32',
-					biztel: '02-573-2777',
-					biztime: '토요일 11:30~22:30',
-					remainingTime: '30',
-				},
-				{
-					title: '베이징코야 역삼동점',
-					subCategory: '중식당',
-					addr: '서울 강남구 논현로86길 어떤빌딩 몇층',
-					biztel: '02-573-2777',
-					biztime: '매일 11:30~22:30',
-					remainingTime: '30',
-				},
-				{
-					title: '순남시래기 역삼점',
-					subCategory: '백반, 가정식',
-					addr: '서울 강남구 논현로86길 32',
-					biztel: '02-573-2777',
-					biztime: '토요일 11:30~22:30',
-					remainingTime: '30',
-				},
-			]
-		}
+	computed: {
+		...mapState('store', ['stores'])
 	},
 	methods: {
 		goTo(path, params) {
