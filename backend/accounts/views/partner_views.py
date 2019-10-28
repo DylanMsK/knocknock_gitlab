@@ -6,9 +6,11 @@ from rest_framework.permissions import IsAuthenticated
 from accounts.models import Partner
 from accounts.serializers.partner_serializers import (
     PartnerSignupSerializer,
+    PartnerSerializer,
+)
+from accounts.serializers.client_serializers import (
     LoginSerializer,
     UserSerializer,
-    PartnerSerializer,
 )
 from knox.models import AuthToken
 
