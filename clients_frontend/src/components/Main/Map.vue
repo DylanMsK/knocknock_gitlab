@@ -57,7 +57,7 @@
 
 <script>
 import VueDaumMap from 'vue-daum-map'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -78,10 +78,11 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters('store', ['storesLoc'])
+		...mapGetters('store', ['storesLoc']),
+		...mapState('store', ['stores'])
 	},
 	methods: {
-		...mapMutations('store', ['getRequestObj']),
+		...mapActions('store', ['getStores']),
 		onLoad (map) {
 			this.map = map
 			// 지도가 load 되면 현재위치를 center로 지정
@@ -108,12 +109,7 @@ export default {
 			} else {
 				console.log('geolocation 사용 불가능')
 			}
-			this.getRequestObj({
-				'lat': this.center.lat,
-				'lon': this.center.lng,
-				'hour': 0,
-				'd': 500
-			})
+			this.getStoreList()
 			// // 클릭한 곳 마커 표시
 			// this.pointMarker = new kakao.maps.Marker({
 			// 	map: map,
@@ -137,12 +133,24 @@ export default {
 				});
 				
 				infowindow.open(this.map, storeMarker);
+			// for (var idx in this.stores) {
+			// 	var storeLoc = new kakao.maps.LatLng(this.storesLoc[idx].latlon.lat, this.storesLoc[idx].latlon.lon)
+			// 	var storeMarker = new kakao.maps.Marker({
+			// 		map: this.map,
+			// 		position: storeLoc
+			// 	})
+
+			// 	var infowindow = new kakao.maps.InfoWindow({
+			// 		position : storeLoc, 
+			// 		content : `<div style="width: 100%; padding: 5px;">${this.storesLoc[idx].name}</div>`
+			// 	});
+				
+			// 	infowindow.open(this.map, storeMarker);
 			}
 		},
 		onMapEvent (params) {
 			// this.pointMarker.setPosition(params[0].latLng)
 			this.searchAddrFromCoords(params[0].latLng, this.displayCenterInfo);
-			console.log(params[0].latLng)
 		},
 		changedLoc () {
 			this.refresh = true
@@ -150,7 +158,17 @@ export default {
 		},
 		refreshStoreList() {
 			this.refresh = false
-			console.log(this.center)
+			this.getStoreList()
+		},
+		getStoreList() {
+			this.getStores({
+				'lat': this.center.lat,
+				'lon': this.center.lng,
+				'hour': 0,
+				'd': 500
+			})
+			console.log(this.stores)
+			this.markingStore()
 		},
 		getAddr () {
 			this.searchAddrFromCoords(this.map.getCenter(), this.displayCenterInfo);

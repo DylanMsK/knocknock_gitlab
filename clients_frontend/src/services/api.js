@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+
+// const accountsUrl = '/accounts'
+// const storesUrl = '/stores'
 const accountsUrl = 'http://13.125.93.228/accounts'
 const storesUrl = 'http://13.125.93.228/stores'
 
