@@ -14,7 +14,7 @@ const router = new VueRouter({
     { path: '/', component: authPage, name: 'authPage' },
     { path: '/store', component: storePage, name: 'storePage' },
     { path: '/store/register', component: registerStorePage, name: 'registreStorePage' },
-    { path: '/store/storenumber', component: storeDetailPage, name: 'storeDetailPage' }
+    { path: '/store/:storeId', component: storeDetailPage, name: 'storeDetailPage' }
   ]
 })
 

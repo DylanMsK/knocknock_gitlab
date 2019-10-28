@@ -17,7 +17,8 @@ class OptionSerializer(serializers.ModelSerializer):
 
 
 class StoreSerializer(serializers.ModelSerializer):
-    # category = CategorySerializer()
+    category = CategorySerializer()
+    options = OptionSerializer()
 
     class Meta:
         model = Store

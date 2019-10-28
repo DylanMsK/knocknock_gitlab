@@ -8,24 +8,25 @@ const state = {
 		},
 		{
 			id: 2,
-			store: 3,
+			store: 2,
 			score: 4,
 			content: '맛있어욤'
 		},
 		{
 			id: 3,
-			store: 5,
+			store: 3,
 			score: 1,
 			content: '맛없어요'
 		},
 		{
-			id: 2,
-			store: 4,
+			id: 4,
+			store: 3,
 			score: 2,
 			content: '맛없어요'
 		},
 	],
-	review: {}
+	review: {},
+	storesIdInReviews: []
 }
 
 const getters = {
@@ -34,6 +35,12 @@ const getters = {
 	},
 	getReview (state) {
 		return state.review
+	},
+	getStoresIdInReviews (state) {
+		for (var idx in state.reviews) {
+			state.storesIdInReviews.push(state.reviews[idx].store)
+		}
+		return state.storesIdInReviews
 	}
 }
 

@@ -5,6 +5,7 @@ from stores.models import Store
 class BusinessRegistration(models.Model):
     store = models.OneToOneField(Store, on_delete=models.CASCADE, verbose_name='가게')
     partner = models.ForeignKey(Partner, on_delete=models.CASCADE, verbose_name='파트너')
+    is_new = models.BooleanField(default=False)
     company_name = models.CharField('상호', max_length=100)
     business_registration_number = models.CharField('등록번호', max_length=10)
     representative_name = models.CharField('대표자명', max_length=30)

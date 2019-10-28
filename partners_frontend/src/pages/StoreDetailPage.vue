@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <v-col cols="12" class="pb-1 store-title">민수네 국밥가게</v-col>
+    <v-col cols="12" class="pb-1 store-title">{{ storeInfo.storeName }}</v-col>
     <v-col cols="12" class="pt-0 store-rating-layout">
       <v-rating
         class="pr-3"
@@ -38,13 +38,15 @@
       <v-tab v-bind:style="[menuToggle ? choicedMenu : justMenu]" @click="changeDetailToggle('menu')">메뉴</v-tab>
       <v-tab v-bind:style="[reviewToggle ? choicedMenu : justMenu]" @click="changeDetailToggle('review')">리뷰</v-tab>
     </v-tabs>
-    <InfoDetail v-show="infoToggle"/>
+    <InfoDetail :data='storeInfo' v-show="infoToggle"/>
     <MenuDetail v-show="menuToggle"/>
     <reviewDetail v-show="reviewToggle"/>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
+
 import InfoDetail from '../components/Detail/infoDetail'
 import MenuDetail from '../components/Detail/menuDetail'
 import reviewDetail from '../components/Detail/reviewDetail'
@@ -77,7 +79,17 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('store', ['oneStore', 'storeInfo']),
+  },
+  async created () {
+    await this.getOneStore(this.$route.params.storeId)
+    this.setInfo()
+    console.log(this.oneStore.data)
+  },
   methods: {
+    ...mapActions('store', ['getOneStore']),
+    ...mapMutations('store', ['setInfo']),
     changeDetailToggle (check) {
       if (check === 'info') {
         this.infoToggle = true

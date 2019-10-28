@@ -1,9 +1,10 @@
-import api from '@/services/api'
+import api from '@/services/storeApi'
 
 const state = {
   allStores: [],
-  oneStore: null,
-  error: null
+  oneStore: [],
+  error: null,
+  storeInfo: {}
 }
 
 const mutations = {
@@ -18,20 +19,33 @@ const mutations = {
   },
   initError (state) {
     state.error = null
+  },
+  setInfo (state) {
+    state.storeInfo = {
+      storeName: state.oneStore.data.name,
+      description: state.oneStore.data.description,
+      price_avg: state.oneStore.data.price_avg.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      review_cnt: state.oneStore.data.review_cnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      road_addr: state.oneStore.data.road_addr,
+      contact: state.oneStore.data.contact,
+      option: state.oneStore.data.option
+    }
   }
 }
 
 const actions = {
-  async getAllStores ({ commit }, payload) {
-    await api.getAllStore(payload).then(resp => {
+  async getAllStores ({ commit }) {
+    var token = JSON.parse(localStorage.getItem('user')).token
+    await api.getAllStores(token).then(resp => {
       commit('regiAllStores', resp)
     }).catch(error => {
       commit('setError', error)
     })
   },
   async getOneStore ({ commit }, payload) {
-    await api.getOneStore(payload).then(resp => {
-      commit('regiOneStres', resp)
+    var token = JSON.parse(localStorage.getItem('user')).token
+    await api.getOneStore(payload, token).then(resp => {
+      commit('regiOneStore', resp)
     }).catch(error => {
       commit('setError', error)
     })
