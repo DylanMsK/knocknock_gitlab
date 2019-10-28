@@ -6,12 +6,12 @@
 		<v-list-item 
 			v-for="(store, idx) in stores"
 			:key=idx
-			@click="goTo('store-detail', idx+1)"
+			@click="goTo('store-detail', store.id)"
 			class="d-block px-0 py-1"
 		>
 			<div class="store-content">
 				<div class="store-title">{{ store.name }}</div>
-				<div class="store-subcategory">{{ store.subCategory }}</div>
+				<div class="store-subcategory">{{ store.category }}</div>
 				<div class="ellipsis">
 					<div class="store-remainingtime">마감 {{ store.remainingTime }}분 전</div>
 					<v-divider vertical class="divider"></v-divider>
@@ -20,7 +20,7 @@
 				<div class="ellipsis">
 					<div class="store-biztel">{{ store.contact }}</div>
 					<v-divider vertical class="divider"></v-divider>
-					<div class="store-addr">{{ store.addr }}</div>
+					<div class="store-addr">{{ store.roadAddr }}</div>
 				</div>
 			</div>
 			<v-divider 

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import Review from './Review'
 
 export default {
@@ -31,8 +31,18 @@ export default {
 	},
 	computed: {
 		...mapGetters('review', {
-			reviews: 'getAllReviews'
-		})
+			reviews: 'getAllReviews',
+			storesId: 'getStoresIdInReviews'
+		}),
+	},
+	mounted() {
+		this.getStoresName()
+	},
+	methods: {
+		...mapMutations('store', ['getStoresNameInReviews']),
+		getStoresName () {
+			this.getStoresNameInReviews(this.storesId)
+		}
 	}
 }
 </script>

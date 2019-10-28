@@ -2,11 +2,14 @@
   <div class="fill-height">
     <v-col cols="12" class="store-title">영업장 관리</v-col>
     <v-col class="info-text pt-0">사진을 눌러서 <span class="open-text">영업 중 </span>/<span class="close-text"> 영업 마감</span>을 관리하세요.</v-col>
-    <v-col cols="12" class="section-top">
-      <v-col cols="4" class="pa-0"><v-img v-bind:style="[openCloseToggle ? openImg : closeImg]" src="../assets/image/test.jpg" @click="openClose()"></v-img></v-col>
-      <v-col cols="8" class="pa-0 section-font" @click="goToDetail()">
+    <v-col v-for="store in allStores.data" :key="store.id" cols="12" class="section-top">
+      <v-col cols="4" class="pa-0">
+        <v-img v-if="store.thumbnail" :style="[openCloseToggle ? openImg : closeImg]" :src="store.thumbnail" @click="openClose()"></v-img>
+        <v-img v-else :style="[openCloseToggle ? openImg : closeImg]" src="../assets/image/noneThumbnail.png" @click="openClose()"></v-img>
+      </v-col>
+      <v-col cols="8" class="pa-0 section-font" @click="goToDetail(store.id)">
         <div class="section-title section-title-layout pb-2">
-          <h3>민수네 국밥가게</h3>
+          <h3>{{ store.name }}</h3>
           <v-icon class="icon-size">fas fa-utensils</v-icon>
         </div>
         <div class="section-detail-layout pb-1">
@@ -63,6 +66,7 @@
 
 <script>
 import router from '../router'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -81,9 +85,16 @@ export default {
       }
     }
   },
+  async created () {
+    await this.getAllStores()
+  },
+  computed: {
+    ...mapState('store', ['allStores'])
+  },
   methods: {
-    goToDetail () {
-      router.push('/store/storenumber')
+    ...mapActions('store', ['getAllStores']),
+    goToDetail (id) {
+      router.push('/store/' + id)
     },
     goToRegister () {
       router.push('/store/register')

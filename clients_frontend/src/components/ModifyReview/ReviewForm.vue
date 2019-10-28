@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import router from '../../router'
 
 export default {
@@ -57,9 +57,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters('review', {
-			review: 'getReview'
-		})
+		...mapState('review', ['review'])
 	},
 	created() {
 		this.reviewId = this.$router.app._route.params.reviewId
