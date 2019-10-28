@@ -16,16 +16,17 @@ class PartnerStoresSerializer(serializers.ModelSerializer):
 
 
 class RegisterBusinessRegistration(serializers.ModelSerializer):
+    partner_id = serializers.CharField(max_length=10)
     store_id = serializers.CharField(max_length=10)
     registration_image = serializers.ImageField()
 
     class Meta:
         model = BusinessRegistration
-        fields = ('store_id', 'is_new', 'company_name', 'business_registration_number',
+        fields = ('partner_id', 'store_id', 'is_new', 'company_name', 'business_registration_number',
                   'representative_name', 'business_address', 'registration_image')
     
     def create(self, validated_data):
-        partner = Partner.objects.get(user=CurrentUserDefault())
+        partner = Partner.objects.get(pk=validated_data['partner_id'])
         store = Store.objects.get(pk=validated_data['store_id'])
         registration = BusinessRegistration.objects.create(
             store=store,
