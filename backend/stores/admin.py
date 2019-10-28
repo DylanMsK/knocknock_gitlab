@@ -1,6 +1,14 @@
 from django.contrib.gis.admin import OSMGeoAdmin
 from django.contrib import admin
-from stores.models import Category, Option, Store
+from stores.models import (
+    Category,
+    Option,
+    Store,
+    BusinessHour,
+    PublicHoliday,
+    HolidayHour,
+    Dayoff
+)
 
 @admin.register(Store)
 class StoreAdmin(OSMGeoAdmin):
@@ -8,3 +16,7 @@ class StoreAdmin(OSMGeoAdmin):
 
 admin.site.register(Category)
 admin.site.register(Option)
+admin.site.register(BusinessHour)
+admin.site.register(PublicHoliday)
+admin.site.register(HolidayHour)
+admin.site.register(Dayoff)
