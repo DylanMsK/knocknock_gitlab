@@ -1,15 +1,24 @@
 from rest_framework import serializers
 
-from stores.models import Category, Store
+from accounts.models import Partner
+from stores.models import Category, Option, Store
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ('main_category', 'sub_category',)
+
+
+class OptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Option
+        fields = ('name',)
+
 
 class StoreSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
+    options = OptionSerializer()
 
     class Meta:
         model = Store

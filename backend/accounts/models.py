@@ -17,6 +17,7 @@ class Client(models.Model):
 
 class Partner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='partner')
+    name = models.CharField('이름', max_length=15)
     phone = models.CharField('휴대폰 번호', max_length=15)
     email = models.CharField('이메일', max_length=30)
 

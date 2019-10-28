@@ -9,7 +9,7 @@ from accounts.views.partner_views import (
     PartnerSignupAPI,
     PartnerLoginAPI,
     PartnerUserAPI,
-    PartnerLogoutAPI
+    PartnerLogoutAPI,
 )
 
 

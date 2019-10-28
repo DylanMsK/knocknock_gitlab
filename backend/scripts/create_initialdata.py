@@ -7,9 +7,7 @@ def run():
         reader = csv.DictReader(f)
         fields = ['id', 'name', 'businessCategory', 'category', 'desc', 'x', 'y', 'imageSrc', 'phone',
                   'roadAddr', 'commonAddr', 'addr', 'tags', 'options', 'totalReviewCount', 'priceCategory']
-        for idx, row in enumerate(reader):
-            if idx and idx % 100 == 0:
-                print(f'{idx}/{len(reader)}')
+        for row in reader:
             origin_id = row['id']
             name = row['name']
             description = row['description']
@@ -23,6 +21,7 @@ def run():
                 category = Category.objects.create(main_category=main_category, sub_category=row['subCategory'])
             lon = row['x']
             lat = row['y']
+            location = f'SRID=4326;POINT ({lon} {lat})'
             thumbnail = row['imageSrc']
             contact = row['phone']
             road_addr = row['roadAddr']
@@ -41,10 +40,12 @@ def run():
                 tags = ','.join([tag for tag in eval(row['tags'])])
             else:
                 tags = ''
-            store = Store.objects.create(origin_id=origin_id, name=name, category=category, description=description, lon=lon, lat=lat,
-                          thumbnail=thumbnail, contact=contact, road_addr=road_addr, common_addr=common_addr,
-                          addr=addr, tags=tags, price_avg=price_avg, review_cnt=review_cnt)
+            store = Store.objects.create(origin_id=origin_id, name=name, category=category, description=description, location=location,
+                                         lon=lon, lat=lat, thumbnail=thumbnail, contact=contact, road_addr=road_addr, common_addr=common_addr,
+                                         addr=addr, tags=tags, price_avg=price_avg, review_cnt=review_cnt)
             for option in row['options'].split(','):
+                if not option.strip():
+                    continue
                 if Option.objects.filter(name=option).exists():
                     opt = Option.objects.get(name=option)
                 else:

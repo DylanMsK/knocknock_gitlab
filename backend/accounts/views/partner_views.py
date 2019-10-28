@@ -4,11 +4,11 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from accounts.models import Partner
-from accounts.serializers import (
+from accounts.serializers.partner_serializers import (
     PartnerSignupSerializer,
     LoginSerializer,
     UserSerializer,
-    PartnerSerializer
+    PartnerSerializer,
 )
 from knox.models import AuthToken
 

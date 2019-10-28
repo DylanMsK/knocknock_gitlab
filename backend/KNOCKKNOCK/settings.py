@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7#x6^)o8=alh5_7g!8z(n*m=_j)_o&do!a%k$50c%y6xpuzr1-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -26,17 +26,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.gis',
+    'django.contrib.gis',
     'django_extensions',                # django-extensions
     'corsheaders',                      # django-cors-headers
     'rest_framework',                   # rest_framework
     'knox',                             # django-rest-knox
     'accounts.apps.AccountsConfig',     # accounts
     'stores.apps.StoresConfig',         # stores
+    'partners.apps.PartnersConfig'      # partners
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -46,9 +48,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080'
+    # 'http://localhost:8080'
 ]
 
 
@@ -78,14 +80,14 @@ WSGI_APPLICATION = 'KNOCKKNOCK.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #  'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        #  'NAME': 'postgres',
-        #  'USER': '',
-        #  'PASSWORD': '',
-        #  'HOST': 'localhost',
-        #  'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+         'NAME': 'test',
+         'USER': '',
+         'PASSWORD': '',
+         'HOST': 'localhost',
+         'PORT': '5432',
     },
 }
 
@@ -130,7 +132,7 @@ REST_FRAMEWORK = {
 REST_KNOX = {
   'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
   'AUTH_TOKEN_CHARACTER_LENGTH': 64,
-  'TOKEN_TTL': timedelta(hours=1),
+  'TOKEN_TTL': timedelta(hours=24),
   'USER_SERIALIZER': 'knox.serializers.UserSerializer',
   'TOKEN_LIMIT_PER_USER': 1,
   'AUTO_REFRESH': True,
@@ -142,7 +144,8 @@ REST_KNOX = {
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240

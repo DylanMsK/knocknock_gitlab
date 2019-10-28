@@ -4,7 +4,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from accounts.models import Client
-from accounts.serializers import (
+from accounts.serializers.client_serializers import (
     ClientSignupSerializer,
     LoginSerializer,
     UserSerializer,
