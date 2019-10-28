@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from accounts.models import Partner
+from accounts.serializers.client_serializers import UserSerializer
 
 
 class PartnerSignupSerializer(serializers.ModelSerializer):
@@ -27,21 +28,21 @@ class PartnerSignupSerializer(serializers.ModelSerializer):
         return partner
 
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=20)
-    password = serializers.CharField(max_length=20)
+# class LoginSerializer(serializers.Serializer):
+#     username = serializers.CharField(max_length=20)
+#     password = serializers.CharField(max_length=20)
 
-    def validate(self, data):
-        user = authenticate(**data)
-        if user and user.is_active:
-            return user
-        return serializers.ValidationError('등록된 사용자가 아닙니다')
+#     def validate(self, data):
+#         user = authenticate(**data)
+#         if user and user.is_active:
+#             return user
+#         return serializers.ValidationError('등록된 사용자가 아닙니다')
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = '__all__'
 
 
 class PartnerSerializer(serializers.ModelSerializer):

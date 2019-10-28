@@ -29,8 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django_extensions',                # django-extensions
     'corsheaders',                      # django-cors-headers
-    'rest_framework',                   # rest_framework
+    'drf_yasg',                         # drf-yasg
+    'rest_framework',                   # djangorestframework
     'knox',                             # django-rest-knox
+    'docs.apps.DocsConfig',             # docs
     'accounts.apps.AccountsConfig',     # accounts
     'stores.apps.StoresConfig',         # stores
     'partners.apps.PartnersConfig'      # partners
