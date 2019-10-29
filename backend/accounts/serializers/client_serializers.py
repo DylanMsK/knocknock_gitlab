@@ -40,7 +40,7 @@ class LoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username',)
+        fields = '__all__'
 
 
 class ClientSerializer(serializers.ModelSerializer):
