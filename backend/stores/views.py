@@ -5,9 +5,15 @@ from django.contrib.gis.measure import D
 from django.db.models import Q
 
 from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from stores.serializers import CategorySerializer, StoreSerializer, StoreSearchSerializer
+from stores.serializers import (
+    CategorySerializer,
+    StoreSerializer,
+    StoreReviewSerializer,
+    StoreSearchSerializer
+)
 from stores.models import Category, Store
 
 
@@ -38,6 +44,21 @@ class StoreDetailAPI(generics.RetrieveAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, id=self.kwargs['pk'])
         return obj
+
+
+class CreateStoreReviewAPI(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = StoreReviewSerializer
+
+    def post(self, request, *args, **kwargs):
+        if len(request.data['content']) < 1:
+            body = {'message': '내용을 입력해주세요'}
+            return Response(body, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        body = {'message': '리뷰 작성 완료'}
+        return Response(body, status=status.HTTP_201_CREATED)
     
 
 class SearchStoreAPI(generics.ListAPIView):
