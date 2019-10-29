@@ -7,6 +7,6 @@ from partners.views import (
 
 urlpatterns = [
     path('stores/', PartnerStoreListAPI.as_view(), name='manage_store_list'),
-    path('stores/<int:pk>/', PartnerStoreDetailAPI.as_view(), name='manage_store_detail'),
+    path('stores/<int:store_id>/', PartnerStoreDetailAPI.as_view(), name='manage_store_detail'),
     path('regist/', BusinessRegistrationAPI.as_view())
 ]

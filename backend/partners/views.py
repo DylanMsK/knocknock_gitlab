@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
+# from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 
 from partners.serializers import (
     PartnerStoresSerializer,
@@ -33,12 +33,12 @@ class PartnerStoreDetailAPI(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, pk=self.kwargs['pk'])
+        obj = get_object_or_404(queryset, pk=self.kwargs['store_id'])
         return obj
 
 
 class BusinessRegistrationAPI(generics.GenericAPIView):
-    parser_class = (MultiPartParser, FormParser, FileUploadParser,)
+    # parser_class = (MultiPartParser, FormParser, FileUploadParser,)
     permission_classes = (IsAuthenticated,)
     serializer_class = RegisterBusinessRegistration
 
