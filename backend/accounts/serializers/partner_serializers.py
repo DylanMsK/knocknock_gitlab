@@ -11,7 +11,7 @@ class PartnerSignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Partner
-        fields = ('id', 'username', 'password', 'phone')
+        fields = ('id', 'username', 'password', 'name', 'phone')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -22,8 +22,9 @@ class PartnerSignupSerializer(serializers.ModelSerializer):
         )
         partner = Partner.objects.create(
             user=user,
+            name=validated_data['name'],
             phone=validated_data['phone'],
-            email=validated_data['username']
+            email=validated_data['username'],
         )
         return partner
 
