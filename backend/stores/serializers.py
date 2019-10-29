@@ -37,7 +37,7 @@ class StoreSerializer(serializers.ModelSerializer):
 
 class ClientReviewSerializer(serializers.ModelSerializer):
     # client = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
-    client = ClientSerializer()
+    client = ClientSerializer(read_only=True)
 
     class Meta:
         model = ClientReview
