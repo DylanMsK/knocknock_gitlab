@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import Partner, Client
+from accounts.serializers.client_serializers import ClientSerializer
 from stores.models import Category, Option, Store, ClientReview, PartnerFeedback
 
 
@@ -35,6 +36,8 @@ class StoreSerializer(serializers.ModelSerializer):
 
 
 class ClientReviewSerializer(serializers.ModelSerializer):
+    # client = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
+    client = ClientSerializer()
 
     class Meta:
         model = ClientReview
