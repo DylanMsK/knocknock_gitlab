@@ -10,16 +10,16 @@ from rest_framework.response import Response
 
 from stores.serializers import (
     CategorySerializer,
-    StoreSerializer,
+    StoreByDistanceSerializer,
     ClientReviewSerializer,
     PartnerFeedbackSerializer,
-    StoreSearchSerializer
+    StoreSerializer
 )
 from stores.models import Category, Store, ClientReview, PartnerFeedback
 
 
 class StoreListAPI(generics.ListAPIView):
-    serializer_class = StoreSerializer
+    serializer_class = StoreByDistanceSerializer
 
     def get_queryset(self):
         location = self.request.query_params.get('loc')
@@ -39,11 +39,11 @@ class StoreListAPI(generics.ListAPIView):
 
 class StoreDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Store.objects.all()
-    serializer_class = StoreSearchSerializer
+    serializer_class = StoreSerializer
 
     def get_object(self):
         queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, id=self.kwargs['pk'])
+        obj = get_object_or_404(queryset, id=self.kwargs['store_id'])
         return obj
 
 
@@ -117,7 +117,7 @@ class DeletePartnerFeedbackAPI(generics.RetrieveUpdateDestroyAPIView):
 
 class SearchStoreAPI(generics.ListAPIView):
     queryset = Store.objects.all()
-    serializer_class = StoreSearchSerializer
+    serializer_class = StoreSerializer
 
     def filter_queryset(self, queryset):
         if self.request.query_params.get('name'):

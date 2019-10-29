@@ -17,7 +17,7 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 
-class StoreSerializer(serializers.ModelSerializer):
+class StoreByDistanceSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     options = serializers.StringRelatedField(many=True)
     distance = serializers.SerializerMethodField('get_distance')
@@ -33,35 +33,6 @@ class StoreSerializer(serializers.ModelSerializer):
 
     def get_old_address(self, obj):
         return f'{obj.common_addr} {obj.addr}'
-
-
-class ClientReviewSerializer(serializers.ModelSerializer):
-    # client = serializers.SlugRelatedField(read_only=True, slug_field='nickname')
-    client = ClientSerializer(read_only=True)
-
-    class Meta:
-        model = ClientReview
-        fields = '__all__'
-        read_only_fields = ('id', 'client', 'store', 'created_at')
-
-    def create(self, validated_data):
-        store_id = self.context.get('view').kwargs.get('store_id')
-        if store_id is None:
-            raise serializers.ValidationError("해당 Store가 존재하지 않습니다.")
-        
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            user = request.user
-            if user is None:
-                raise serializers.ValidationError("존재하지 않는 User입니다.")
-        client = Client.objects.get(user=user)
-        store = Store.objects.get(pk=store_id)
-        review = ClientReview.objects.create(
-            store=store,
-            client=client,
-            content=validated_data['content']
-        )
-        return review
 
 
 class PartnerFeedbackSerializer(serializers.ModelSerializer):
@@ -98,16 +69,44 @@ class PartnerFeedbackSerializer(serializers.ModelSerializer):
         return feedback
 
 
+class ClientReviewSerializer(serializers.ModelSerializer):
+    client = ClientSerializer(read_only=True)
+    feedbacks = PartnerFeedbackSerializer(many=True, read_only=True)
 
-class StoreSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientReview
+        fields = '__all__'
+        read_only_fields = ('id', 'client', 'store', 'created_at')
+
+    def create(self, validated_data):
+        store_id = self.context.get('view').kwargs.get('store_id')
+        if store_id is None:
+            raise serializers.ValidationError("해당 Store가 존재하지 않습니다.")
+        
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+            if user is None:
+                raise serializers.ValidationError("존재하지 않는 User입니다.")
+        client = Client.objects.get(user=user)
+        store = Store.objects.get(pk=store_id)
+        review = ClientReview.objects.create(
+            store=store,
+            client=client,
+            content=validated_data['content']
+        )
+        return review
+
+
+class StoreSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     options = serializers.StringRelatedField(many=True)
     reviews = ClientReviewSerializer(many=True, read_only=True)
-    feedbacks = PartnerFeedbackSerializer(many=True, read_only=True)
 
     class Meta:
         model = Store
         fields = ('id', 'name', 'category', 'description', 'lon', 'lat', 'thumbnail', 'contact',
-                  'road_addr', 'common_addr', 'addr', 'tags', 'price_avg', 'partner', 'review_cnt', 'view_cnt', 'reviews', 'feedbacks', 'options')
+                  'road_addr', 'common_addr', 'addr', 'tags', 'price_avg', 'partner', 'review_cnt',
+                  'view_cnt', 'reviews', 'options')
 
 

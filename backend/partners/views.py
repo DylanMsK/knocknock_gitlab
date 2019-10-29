@@ -6,17 +6,17 @@ from rest_framework.permissions import IsAuthenticated
 # from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 
 from partners.serializers import (
-    PartnerStoresSerializer,
     RegisterBusinessRegistration
 )
 from partners.models import BusinessRegistration
 from accounts.models import Partner
 from stores.models import Store
+from stores.serializers import StoreSerializer
 
 
 class PartnerStoreListAPI(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = PartnerStoresSerializer
+    serializer_class = StoreSerializer
 
     def get_queryset(self):
         partner = Partner.objects.get(user=self.request.user)
@@ -26,7 +26,7 @@ class PartnerStoreListAPI(generics.ListAPIView):
 
 class PartnerStoreDetailAPI(generics.RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)         # 자기 자신만 가능한 권한도 추가해야됨
-    serializer_class = PartnerStoresSerializer
+    serializer_class = StoreSerializer
 
     def get_queryset(self):
         return Store.objects.all()
