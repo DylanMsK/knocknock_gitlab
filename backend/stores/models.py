@@ -2,7 +2,7 @@
 from django.contrib.gis.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from accounts.models import Partner
+from accounts.models import Partner, Client
 
 
 class Category(models.Model):
@@ -126,3 +126,34 @@ class Dayoff(models.Model):
     
     def __str__(self):
         return f'{self.store}'
+
+
+class ClientReview(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, verbose_name='가게', related_name='reviews')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='클라이언트', related_name='reviews')
+    content = models.CharField('내용', max_length=300)
+    created_at = models.DateTimeField('작성일', auto_now_add=True)
+
+    class Meta:
+        verbose_name = '가게 리뷰'
+        verbose_name_plural = '가게 리뷰'
+        ordering = ['id']
+
+    def __str__(self):
+        return f'{self.store.name} | {self.client.nickname} | {self.content}'
+
+
+class PartnerFeedback(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, verbose_name='가게', related_name='feedbacks')
+    review = models.ForeignKey(ClientReview, on_delete=models.CASCADE, verbose_name='답글', related_name='feedbacks')
+    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, verbose_name='파트너', related_name='feedbacks')
+    content = models.CharField('내용', max_length=300)
+    created_at = models.DateTimeField('작성일', auto_now_add=True)
+
+    class Meta:
+        verbose_name = '파트너 피드백'
+        verbose_name_plural = '파트너 피드백'
+        ordering = ['id']
+
+    def __str__(self):
+        return f'{self.store.name} | {self.review.id} | {self.content}'
