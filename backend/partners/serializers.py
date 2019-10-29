@@ -6,15 +6,6 @@ from stores.models import Store
 from stores.serializers import CategorySerializer, OptionSerializer
 
 
-class PartnerStoresSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    options = OptionSerializer(many=True)
-
-    class Meta:
-        model = Store
-        fields = '__all__'
-
-
 class RegisterBusinessRegistration(serializers.ModelSerializer):
     store_id = serializers.IntegerField()
     # registration_image = serializers.ImageField()
