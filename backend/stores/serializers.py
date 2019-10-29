@@ -36,21 +36,24 @@ class StoreSerializer(serializers.ModelSerializer):
 
 
 class StoreReviewSerializer(serializers.ModelSerializer):
-    store_id = serializers.IntegerField()
+    # store_id = serializers.IntegerField()
 
     class Meta:
         model = Review
-        fields = ('store_id', 'content')
+        fields = ('content',)
 
     def create(self, validated_data):
-        user = None
+        store_id = self.context.get('view').kwargs.get('store_id')
+        if store_id is None:
+            raise serializers.ValidationError("해당 Store가 존재하지 않습니다.")
+        
         request = self.context.get("request")
         if request and hasattr(request, "user"):
             user = request.user
-        print(user)
+            if user is None:
+                raise serializers.ValidationError("존재하지 않는 User입니다.")
         client = Client.objects.get(user=user)
-        print(client)
-        store = Store.objects.get(pk=validated_data['store_id'])
+        store = Store.objects.get(pk=store_id)
         review = Review.objects.create(
             store=store,
             client=client,

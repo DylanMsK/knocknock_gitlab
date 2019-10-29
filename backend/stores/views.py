@@ -14,7 +14,7 @@ from stores.serializers import (
     StoreReviewSerializer,
     StoreSearchSerializer
 )
-from stores.models import Category, Store
+from stores.models import Category, Store, Review
 
 
 class StoreListAPI(generics.ListAPIView):
@@ -59,6 +59,19 @@ class CreateStoreReviewAPI(generics.GenericAPIView):
         serializer.save()
         body = {'message': '리뷰 작성 완료'}
         return Response(body, status=status.HTTP_201_CREATED)
+
+
+class DeleteStoreReivewAPI(generics.GenericAPIView):
+    queryset = Review.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+
+        obj = get_object_or_404(queryset, id=kwargs['review_id'])
+        obj.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     
 
 class SearchStoreAPI(generics.ListAPIView):
