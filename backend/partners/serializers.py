@@ -16,26 +16,32 @@ class PartnerStoresSerializer(serializers.ModelSerializer):
 
 
 class RegisterBusinessRegistration(serializers.ModelSerializer):
-    partner_id = serializers.CharField(max_length=10)
-    store_id = serializers.CharField(max_length=10)
-    registration_image = serializers.ImageField()
+    store_id = serializers.IntegerField()
+    # registration_image = serializers.ImageField()
 
     class Meta:
         model = BusinessRegistration
-        fields = ('partner_id', 'store_id', 'is_new', 'company_name', 'business_registration_number',
-                  'representative_name', 'business_address', 'registration_image')
-    
+        fields = ('store_id', 'company_name', 'business_registration_number',
+                  'representative_name', 'business_address')
+
     def create(self, validated_data):
-        partner = Partner.objects.get(pk=validated_data['partner_id'])
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+            if user is None:
+                raise serializers.ValidationError("존재하지 않는 User입니다.")
+        partner = Partner.objects.get(user=user)
         store = Store.objects.get(pk=validated_data['store_id'])
+        store.partner = partner
+        store.save()
+        
         registration = BusinessRegistration.objects.create(
             store=store,
             partner=partner,
-            is_new=validated_data['is_new'],
             company_name=validated_data['company_name'],
             business_registration_number=validated_data['business_registration_number'],
             representative_name=validated_data['representative_name'],
             business_address=validated_data['business_address'],
-            registration_image=validated_data['registration_image']
+            # registration_image=validated_data['registration_image']
         )
         return registration
