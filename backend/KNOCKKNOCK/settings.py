@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7#x6^)o8=alh5_7g!8z(n*m=_j)_o&do!a%k$50c%y6xpuzr1-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'docs.apps.DocsConfig',             # docs
     'accounts.apps.AccountsConfig',     # accounts
     'stores.apps.StoresConfig',         # stores
-    'partners.apps.PartnersConfig'      # partners
+    'partners.apps.PartnersConfig',     # partners
+    'menus.apps.MenusConfig',           # menus
 ]
 
 MIDDLEWARE = [
