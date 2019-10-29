@@ -8,7 +8,7 @@ from stores.models import (
     PublicHoliday,
     HolidayHour,
     Dayoff,
-    Review
+    ClientReview
 )
 
 @admin.register(Store)
@@ -21,4 +21,4 @@ admin.site.register(BusinessHour)
 admin.site.register(PublicHoliday)
 admin.site.register(HolidayHour)
 admin.site.register(Dayoff)
-admin.site.register(Review)
+admin.site.register(ClientReview)

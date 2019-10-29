@@ -11,10 +11,10 @@ from rest_framework.response import Response
 from stores.serializers import (
     CategorySerializer,
     StoreSerializer,
-    StoreReviewSerializer,
+    ClientReviewSerializer,
     StoreSearchSerializer
 )
-from stores.models import Category, Store, Review
+from stores.models import Category, Store, ClientReview, PartnerFeedback
 
 
 class StoreListAPI(generics.ListAPIView):
@@ -46,9 +46,9 @@ class StoreDetailAPI(generics.RetrieveAPIView):
         return obj
 
 
-class CreateStoreReviewAPI(generics.GenericAPIView):
+class CreateClientReviewAPI(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = StoreReviewSerializer
+    serializer_class = ClientReviewSerializer
 
     def post(self, request, *args, **kwargs):
         if len(request.data['content']) < 1:
@@ -61,8 +61,8 @@ class CreateStoreReviewAPI(generics.GenericAPIView):
         return Response(body, status=status.HTTP_201_CREATED)
 
 
-class DeleteStoreReivewAPI(generics.GenericAPIView):
-    queryset = Review.objects.all()
+class DeleteClientReivewAPI(generics.GenericAPIView):
+    queryset = ClientReview.objects.all()
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, *args, **kwargs):

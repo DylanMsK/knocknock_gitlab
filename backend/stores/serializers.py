@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import Partner, Client
-from stores.models import Category, Option, Store, Review
+from stores.models import Category, Option, Store, ClientReview, PartnerFeedback
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -35,11 +35,10 @@ class StoreSerializer(serializers.ModelSerializer):
         return f'{obj.common_addr} {obj.addr}'
 
 
-class StoreReviewSerializer(serializers.ModelSerializer):
-    # store_id = serializers.IntegerField()
+class ClientReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Review
+        model = ClientReview
         fields = ('content',)
 
     def create(self, validated_data):
@@ -54,7 +53,7 @@ class StoreReviewSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("존재하지 않는 User입니다.")
         client = Client.objects.get(user=user)
         store = Store.objects.get(pk=store_id)
-        review = Review.objects.create(
+        review = ClientReview.objects.create(
             store=store,
             client=client,
             content=validated_data['content']
