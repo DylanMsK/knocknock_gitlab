@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
-from partners.models import BusinessRegistration
 from accounts.models import Partner
 from stores.models import Store
-from stores.serializers import CategorySerializer, OptionSerializer
+from partners.models import BusinessRegistration, Feedback
+from clients.models import Review
 
 
 class RegisterBusinessRegistration(serializers.ModelSerializer):
@@ -36,3 +36,37 @@ class RegisterBusinessRegistration(serializers.ModelSerializer):
             # registration_image=validated_data['registration_image']
         )
         return registration
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+        read_only_fields = ('id', 'store', 'review', 'partner', 'created_at')
+
+    def create(self, validated_data):
+        store_id = self.context.get('view').kwargs.get('store_id')
+        if store_id is None:
+            raise serializers.ValidationError("해당 Store가 존재하지 않습니다.")
+        store = Store.objects.get(pk=store_id)
+        
+        review_id = self.context.get('view').kwargs.get('review_id')
+        if review_id is None:
+            raise serializers.ValidationError("해당 Review가 존재하지 않습니다.")
+        review = Review.objects.get(pk=review_id)
+
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+            if user is None:
+                raise serializers.ValidationError("존재하지 않는 User입니다.")
+        partner = Partner.objects.get(user=user)
+
+        feedback = Feedback.objects.create(
+            store=store,
+            review=review,
+            partner=partner,
+            content=validated_data['content']
+        )
+        return feedback

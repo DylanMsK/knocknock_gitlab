@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',     # accounts
     'stores.apps.StoresConfig',         # stores
     'partners.apps.PartnersConfig',     # partners
+    'clients.apps.ClientsConfig',       # clients
     'menus.apps.MenusConfig',           # menus
 ]
 

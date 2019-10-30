@@ -11,12 +11,10 @@ from rest_framework.response import Response
 from stores.serializers import (
     CategorySerializer,
     StoreByDistanceSerializer,
-    ClientReviewSerializer,
-    PartnerFeedbackSerializer,
     StoreListSerializer,
     StoreDetailSerializer
 )
-from stores.models import Category, Store, ClientReview, PartnerFeedback
+from stores.models import Category, Store
 
 
 class StoreByDistanceListAPI(generics.ListAPIView):
@@ -60,72 +58,4 @@ class StoreDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, id=self.kwargs['store_id'])
-        return obj
-
-
-class RetrieveCreateClientReviewAPI(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = ClientReviewSerializer
-
-    def get_queryset(self):
-        queryset = ClientReview.objects.filter(store_id=self.kwargs['store_id'])
-        return queryset.order_by('-created_at')
-
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(self.get_queryset(), many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request, *args, **kwargs):
-        if len(request.data['content']) < 1:
-            body = {'message': '내용을 입력해주세요'}
-            return Response(body, status=status.HTTP_400_BAD_REQUEST)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        body = {'message': '리뷰 작성 완료'}
-        return Response(body, status=status.HTTP_201_CREATED)
-
-
-class DeleteClientReivewAPI(generics.GenericAPIView):
-    queryset = ClientReview.objects.all()
-    permission_classes = [IsAuthenticated]
-
-    def delete(self, request, *args, **kwargs):
-        obj = get_object_or_404(self.get_queryset(), id=kwargs['review_id'])
-        obj.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class RetrieveCreatePartnerFeedbackAPI(generics.GenericAPIView):
-    queryset = PartnerFeedback.objects.all()
-    serializer_class = PartnerFeedbackSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = PartnerFeedback.objects.filter(store_id=self.kwargs['store_id'])
-        return queryset.order_by('-created_at')
-
-    def get(self, request, *args, **kwargs):
-        serializer = self.get_serializer(self.get_queryset(), many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
-    def post(self, request, *args, **kwargs):
-        if len(request.data['content']) < 1:
-            body = {'message': '내용을 입력해주세요'}
-            return Response(body, status=status.HTTP_400_BAD_REQUEST)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        body = {'message': '피드백 작성 완료'}
-        return Response(body, status=status.HTTP_201_CREATED)
-    
-
-class DeletePartnerFeedbackAPI(generics.RetrieveUpdateDestroyAPIView):
-    queryset = PartnerFeedback.objects.all()
-    serializer_class = PartnerFeedbackSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_object(self):
-        queryset = self.get_queryset()
-        obj = get_object_or_404(queryset, pk=self.kwargs['feedback_id'])
         return obj
