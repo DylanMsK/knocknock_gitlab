@@ -13,12 +13,13 @@ from stores.serializers import (
     StoreByDistanceSerializer,
     ClientReviewSerializer,
     PartnerFeedbackSerializer,
+    StoreListSerializer,
     StoreSerializer
 )
 from stores.models import Category, Store, ClientReview, PartnerFeedback
 
 
-class StoreListAPI(generics.ListAPIView):
+class StoreByDistanceListAPI(generics.ListAPIView):
     serializer_class = StoreByDistanceSerializer
 
     def get_queryset(self):
@@ -34,6 +35,14 @@ class StoreListAPI(generics.ListAPIView):
             hour = self.request.query_params.get('hour')
             distance = self.request.query_params.get('d')
             queryset = queryset.filter(Q(distance__lte=int(distance))).order_by('distance')
+        return queryset
+
+
+class StoreListAPI(generics.ListAPIView):
+    serializer_class = StoreListSerializer
+
+    def get_queryset(self):
+        queryset = Store.objects.all()
         return queryset
 
 
@@ -117,7 +126,7 @@ class DeletePartnerFeedbackAPI(generics.RetrieveUpdateDestroyAPIView):
 
 class SearchStoreAPI(generics.ListAPIView):
     queryset = Store.objects.all()
-    serializer_class = StoreSerializer
+    serializer_class = StoreListSerializer
 
     def filter_queryset(self, queryset):
         if self.request.query_params.get('name'):

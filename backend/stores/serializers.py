@@ -99,6 +99,15 @@ class ClientReviewSerializer(serializers.ModelSerializer):
         return review
 
 
+class StoreListSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
+    class Meta:
+        model = Store
+        fields = ('id', 'name', 'category', 'lon', 'lat', 'contact', 'road_addr', 'common_addr', 'addr',
+                  'view_cnt',)
+
+
 class StoreSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     options = serializers.StringRelatedField(many=True)
