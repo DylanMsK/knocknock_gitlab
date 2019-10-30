@@ -7,9 +7,7 @@ from stores.models import (
     BusinessHour,
     PublicHoliday,
     HolidayHour,
-    Dayoff,
-    ClientReview,
-    PartnerFeedback
+    Dayoff
 )
 
 @admin.register(Store)
@@ -30,18 +28,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class OptionAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
-
-
-@admin.register(ClientReview)
-class ClientReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'store', 'content', 'created_at')
-    list_display = ('id', 'store',)
-
-
-@admin.register(PartnerFeedback)
-class PartnerFeedbackAdmin(admin.ModelAdmin):
-    list_display = ('id', 'store', 'content', 'created_at',)
-    list_display_links = ('id', 'store',)
 
 
 admin.site.register(BusinessHour)

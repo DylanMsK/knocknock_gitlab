@@ -1,6 +1,8 @@
 from django.db import models
 from accounts.models import Partner
 from stores.models import Store
+from clients.models import Review
+
 
 class BusinessRegistration(models.Model):
     store = models.OneToOneField(Store, on_delete=models.CASCADE, verbose_name='가게')
@@ -23,3 +25,19 @@ class BusinessRegistration(models.Model):
 
     def __str__(self):
         return f'{self.company_name} | {self.partner.name}'
+
+
+class Feedback(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, verbose_name='가게', related_name='feedbacks')
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, verbose_name='답글', related_name='feedbacks')
+    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, verbose_name='파트너', related_name='feedbacks')
+    content = models.CharField('내용', max_length=300)
+    created_at = models.DateTimeField('작성일', auto_now_add=True)
+
+    class Meta:
+        verbose_name = '파드너 피드백'
+        verbose_name_plural = '파트너 피드백'
+        ordering = ['id']
+
+    def __str__(self):
+        return f'{self.store.name} | {self.review.id} | {self.content}'
