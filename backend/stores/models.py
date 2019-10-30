@@ -33,7 +33,7 @@ class Option(models.Model):
 
 class Store(models.Model):
     origin_id = models.CharField('네이버 아이디', max_length=20, unique=True)
-    name = models.CharField('이름', max_length=50)
+    name = models.CharField('이름', max_length=150)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='카테고리')
     description = models.TextField('설명', blank=True, default='')
     lon = models.FloatField('경도', validators=[MaxValueValidator(180), MinValueValidator(-180)])
@@ -41,9 +41,9 @@ class Store(models.Model):
     location = models.PointField('위치', srid=4326)
     thumbnail = models.TextField('대표 사진', blank=True, default='')
     contact = models.CharField('전화번호', max_length=15, blank=True, default='')
-    road_addr = models.CharField('도로명 주소', max_length=50, blank=True)
-    common_addr = models.CharField('시구', max_length=50)
-    addr = models.CharField('지번 주소', max_length=50, blank=True)
+    road_addr = models.CharField('도로명 주소', max_length=150, blank=True)
+    common_addr = models.CharField('시구', max_length=150)
+    addr = models.CharField('지번 주소', max_length=150, blank=True)
     tags = models.TextField('태그', blank=True, default='')
     price_avg = models.IntegerField('가격대', default=0)
     partner = models.ForeignKey(Partner, on_delete=models.SET_NULL, default=None, null=True, blank=True, verbose_name='파트너')
