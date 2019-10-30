@@ -1,13 +1,17 @@
 import csv
+import json
 
 from stores.models import Category, Option, Store
+from menus.models import Menu
 
 def run():
-    with open('/Users/dylan/Desktop/github/s1p1151009/data/store_section18.csv', 'r', encoding='utf8') as f:
+    with open('/Users/dylan/Desktop/github/s1p1151009/data/gangnam_stores.csv', 'r', encoding='utf8') as f:
         reader = csv.DictReader(f)
         fields = ['id', 'name', 'businessCategory', 'category', 'desc', 'x', 'y', 'imageSrc', 'phone',
-                  'roadAddr', 'commonAddr', 'addr', 'tags', 'options', 'totalReviewCount', 'priceCategory']
-        for row in reader:
+                  'roadAddr', 'commonAddr', 'addr', 'tags', 'options', 'totalReviewCount', 'priceCategory', 'menus']
+        for idx, row in enumerate(reader):
+            if idx%10000==0:
+                print(f'{idx}개 음식점 완료!')
             origin_id = row['id']
             name = row['name']
             description = row['description']
@@ -53,4 +57,24 @@ def run():
                 store.options.add(opt)
 
             store.save()
+
+            if row['menus'].strip():
+                for menu in eval(row['menus']):
+                    try:
+                        name = menu['name']
+                        thumbnail=menu['images'][0] if menu['images'] else ''
+                        price = int(menu['price'])
+                        description=menu['description'] if menu['description'] else ''
+                    except:
+                        continue
+
+                    Menu.objects.create(
+                        store=store,
+                        name=name,
+                        thumbnail=thumbnail,
+                        price=price,
+                        description=description
+                    )
+
+            
         

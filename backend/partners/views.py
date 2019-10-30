@@ -11,12 +11,12 @@ from partners.serializers import (
 from partners.models import BusinessRegistration
 from accounts.models import Partner
 from stores.models import Store
-from stores.serializers import StoreSerializer
+from stores.serializers import StoreListSerializer, StoreSerializer
 
 
 class PartnerStoreListAPI(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = StoreSerializer
+    serializer_class = StoreListSerializer
 
     def get_queryset(self):
         partner = Partner.objects.get(user=self.request.user)

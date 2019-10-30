@@ -13,12 +13,13 @@ from stores.serializers import (
     StoreByDistanceSerializer,
     ClientReviewSerializer,
     PartnerFeedbackSerializer,
+    StoreListSerializer,
     StoreSerializer
 )
 from stores.models import Category, Store, ClientReview, PartnerFeedback
 
 
-class StoreListAPI(generics.ListAPIView):
+class StoreByDistanceListAPI(generics.ListAPIView):
     serializer_class = StoreByDistanceSerializer
 
     def get_queryset(self):
@@ -34,7 +35,22 @@ class StoreListAPI(generics.ListAPIView):
             hour = self.request.query_params.get('hour')
             distance = self.request.query_params.get('d')
             queryset = queryset.filter(Q(distance__lte=int(distance))).order_by('distance')
+        return queryset[:100]
+
+
+class StoreListAPI(generics.ListAPIView):
+    queryset = Store.objects.all()
+    serializer_class = StoreListSerializer
+
+    def get_queryset(self):
+        queryset = Store.objects.all()
         return queryset
+
+    def filter_queryset(self, queryset):
+        if self.request.query_params.get('name'):
+            name = self.request.query_params.get('name')
+            queryset = queryset.filter(Q(name__icontains=name))
+        return queryset[:100]
 
 
 class StoreDetailAPI(generics.RetrieveUpdateDestroyAPIView):
@@ -113,14 +129,3 @@ class DeletePartnerFeedbackAPI(generics.RetrieveUpdateDestroyAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, pk=self.kwargs['feedback_id'])
         return obj
-
-
-class SearchStoreAPI(generics.ListAPIView):
-    queryset = Store.objects.all()
-    serializer_class = StoreSerializer
-
-    def filter_queryset(self, queryset):
-        if self.request.query_params.get('name'):
-            name = self.request.query_params.get('name')
-            queryset = queryset.filter(Q(name__icontains=name))
-        return queryset

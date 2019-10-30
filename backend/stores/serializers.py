@@ -3,6 +3,7 @@ from rest_framework import serializers
 from accounts.models import Partner, Client
 from accounts.serializers.client_serializers import ClientSerializer
 from stores.models import Category, Option, Store, ClientReview, PartnerFeedback
+from menus.serializers import MenuSerializer
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -98,15 +99,25 @@ class ClientReviewSerializer(serializers.ModelSerializer):
         return review
 
 
+class StoreListSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
+    class Meta:
+        model = Store
+        fields = ('id', 'name', 'category', 'lon', 'lat', 'contact', 'road_addr', 'common_addr', 'addr',
+                  'view_cnt',)
+
+
 class StoreSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     options = serializers.StringRelatedField(many=True)
     reviews = ClientReviewSerializer(many=True, read_only=True)
+    menus = MenuSerializer(many=True, read_only=True)
 
     class Meta:
         model = Store
         fields = ('id', 'name', 'category', 'description', 'lon', 'lat', 'thumbnail', 'contact',
                   'road_addr', 'common_addr', 'addr', 'tags', 'price_avg', 'partner', 'review_cnt',
-                  'view_cnt', 'reviews', 'options')
+                  'view_cnt', 'menus', 'reviews', 'options')
 
 
