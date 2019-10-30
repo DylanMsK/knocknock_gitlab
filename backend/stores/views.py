@@ -14,7 +14,7 @@ from stores.serializers import (
     ClientReviewSerializer,
     PartnerFeedbackSerializer,
     StoreListSerializer,
-    StoreSerializer
+    StoreDetailSerializer
 )
 from stores.models import Category, Store, ClientReview, PartnerFeedback
 
@@ -55,7 +55,7 @@ class StoreListAPI(generics.ListAPIView):
 
 class StoreDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Store.objects.all()
-    serializer_class = StoreSerializer
+    serializer_class = StoreDetailSerializer
 
     def get_object(self):
         queryset = self.get_queryset()
