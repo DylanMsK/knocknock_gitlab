@@ -14,13 +14,37 @@ from stores.models import (
 
 @admin.register(Store)
 class StoreAdmin(OSMGeoAdmin):
-    pass
+    list_display = ('id', 'name', 'category', 'lon', 'lat', 'road_addr',)
+    list_display_links = ('id', 'name',)
+    list_filter = ('category', 'common_addr',)
+    search_fields = ('name', 'road_addr', 'common_addr', 'addr',)
 
-admin.site.register(Category)
-admin.site.register(Option)
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'main_category', 'sub_category',)
+    list_display_links = ('id', 'main_category', 'sub_category',)
+
+
+@admin.register(Option)
+class OptionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    list_display_links = ('id', 'name')
+
+
+@admin.register(ClientReview)
+class ClientReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'store', 'content', 'created_at')
+    list_display = ('id', 'store',)
+
+
+@admin.register(PartnerFeedback)
+class PartnerFeedbackAdmin(admin.ModelAdmin):
+    list_display = ('id', 'store', 'content', 'created_at',)
+    list_display_links = ('id', 'store',)
+
+
 admin.site.register(BusinessHour)
 admin.site.register(PublicHoliday)
 admin.site.register(HolidayHour)
 admin.site.register(Dayoff)
-admin.site.register(ClientReview)
-admin.site.register(PartnerFeedback)
