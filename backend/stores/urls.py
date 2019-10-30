@@ -1,12 +1,12 @@
 from django.urls import path
 from stores.views import (
+    StoreByDistanceListAPI,
     StoreListAPI,
     StoreDetailAPI,
     RetrieveCreateClientReviewAPI,
     DeleteClientReivewAPI,
     RetrieveCreatePartnerFeedbackAPI,
     DeletePartnerFeedbackAPI,
-    SearchStoreAPI
 )
 from menus.views import (
     RetrieveCreateMenuAPI,
@@ -14,7 +14,7 @@ from menus.views import (
 )
 
 urlpatterns = [
-    path('', StoreListAPI.as_view(), name='store_list'),
+    path('', StoreByDistanceListAPI.as_view(), name='store_list'),
     path('<int:store_id>/', StoreDetailAPI.as_view(), name='store_detail'),
 
     path('<int:store_id>/reviews/', RetrieveCreateClientReviewAPI.as_view(), name='create_client_review'),
@@ -25,5 +25,5 @@ urlpatterns = [
     path('<int:store_id>/menus/', RetrieveCreateMenuAPI.as_view(), name='create_menu'),
     path('<int:store_id>/menus/<int:menu_id>/', RetrieveUpdateDeleteMenuAPI.as_view(), name='edit_menu'),
 
-    path('search/', SearchStoreAPI.as_view(), name='search_store'),
+    path('search/', StoreListAPI.as_view(), name='search_store'),
 ]
