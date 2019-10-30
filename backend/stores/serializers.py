@@ -104,8 +104,8 @@ class StoreListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Store
-        fields = ('id', 'name', 'category', 'lon', 'lat', 'contact', 'road_addr', 'common_addr', 'addr',
-                  'view_cnt',)
+        fields = ('id', 'name', 'category', 'lon', 'lat', 'thumbnail', 'contact', 'road_addr',
+                  'common_addr', 'addr', 'view_cnt',)
 
 
 class StoreSerializer(serializers.ModelSerializer):
