@@ -108,7 +108,7 @@ class StoreListSerializer(serializers.ModelSerializer):
                   'common_addr', 'addr', 'view_cnt',)
 
 
-class StoreSerializer(serializers.ModelSerializer):
+class StoreDetailSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     options = serializers.StringRelatedField(many=True)
     reviews = ClientReviewSerializer(many=True, read_only=True)

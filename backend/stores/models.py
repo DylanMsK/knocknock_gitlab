@@ -15,7 +15,7 @@ class Category(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return f'{self.main_category} | {self.sub_category}'
+        return f'{self.sub_category}'
 
 
 
@@ -135,8 +135,8 @@ class ClientReview(models.Model):
     created_at = models.DateTimeField('작성일', auto_now_add=True)
 
     class Meta:
-        verbose_name = '가게 리뷰'
-        verbose_name_plural = '가게 리뷰'
+        verbose_name = '클라이언트 리뷰'
+        verbose_name_plural = '클라이언트 리뷰'
         ordering = ['id']
 
     def __str__(self):

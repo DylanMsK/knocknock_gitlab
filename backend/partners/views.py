@@ -11,7 +11,7 @@ from partners.serializers import (
 from partners.models import BusinessRegistration
 from accounts.models import Partner
 from stores.models import Store
-from stores.serializers import StoreListSerializer, StoreSerializer
+from stores.serializers import StoreListSerializer, StoreDetailSerializer
 
 
 class PartnerStoreListAPI(generics.ListAPIView):
@@ -26,7 +26,7 @@ class PartnerStoreListAPI(generics.ListAPIView):
 
 class PartnerStoreDetailAPI(generics.RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)         # 자기 자신만 가능한 권한도 추가해야됨
-    serializer_class = StoreSerializer
+    serializer_class = StoreDetailSerializer
 
     def get_queryset(self):
         return Store.objects.all()
